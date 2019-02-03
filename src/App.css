@@ -1,32 +1,49 @@
-.App {
+@import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900");
+
+* {
+  font-family: "Roboto", sans-serif;
+}
+
+.blue {
+  min-width: 100vw;
+  height: 100vh;
+  scroll-snap-align: start;
   text-align: center;
-}
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+  position: relative;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  background-color: lightslategray;
 }
 
-.App-link {
-  color: #61dafb;
+.yellow {
+  min-width: 100vw;
+  height: 100vh;
+  scroll-snap-align: start;
+  background-color: yellowgreen;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.red {
+  min-width: 100vw;
+  height: 100vh;
+  scroll-snap-align: start;
+  text-align: center;
+  background-color: #eb5757;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container {
+  font-family: sans-serif;
+  scroll-snap-type: mandatory;
+  scroll-snap-points-y: repeat(100vw);
+  scroll-snap-type: x mandatory;
+  display: flex;
+  overflow-x: scroll;
+  scroll-behavior: auto;
 }
