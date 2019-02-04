@@ -14,14 +14,21 @@ const Container = styled("div")`
   position: ${props => (props.isOpen ? "fixed" : "")};
 `;
 
+const Animated = styled("div")`
+  transform: ${props =>
+    props.isOpen ? "translateY(-28vh)" : "translateY(0px)"};
+  font-size: ${props => (props.isOpen ? "0.9em" : "1em")};
+  transition: all ${props => props.duration} ease-out;
+`;
+
 const Title = styled("h1")`
-  font-weight: 600;
+  font-weight: 700;
   font-size: ${props => (props.isOpen ? "1.8em" : "2em")};
   color: #ffffff;
   padding: 0 3%;
   transform: ${props =>
-    props.isOpen ? "translateY(-25vh)" : "translateY(0px)"};
-  transition: all 500ms ease-out;
+    props.isOpen ? "translateY(-26vh)" : "translateY(0px)"};
+  transition: all 400ms ease-out;
   letter-spacing: -1px;
 `;
 
@@ -30,14 +37,9 @@ const Details = styled("div")`
   flex-direction: row;
   justify-content: flex-start;
   transform: ${props =>
-    props.isOpen ? "translatey(-25vh)" : "translateY(0px)"};
+    props.isOpen ? "translatey(-27vh)" : "translateY(0px)"};
   padding: 3%;
   transition: all 500ms ease-out;
-`;
-
-const slideIn = keyframes`
-  from {opacity: 0};
-  to { opacity: 1};
 `;
 
 const Detail = styled("div")`
@@ -48,7 +50,9 @@ const Detail = styled("div")`
 `;
 
 const DetailNote = styled("p")`
-  color: #888888;
+  color: #fff;
+  font-weight: 400;
+  opacity: 0.5;
   margin: 0;
 `;
 
@@ -90,20 +94,17 @@ const DateMonth = styled("p")`
 `;
 
 const DescriptionContainer = styled("div")`
-  width: 98vw;
-  border-radius: 5px;
-  display: flex;
-  height: 55vh;
+  width: 100vw;
+  height: 62vh;
+  padding: 12% 3%;
   opacity: ${props => (props.isOpen ? "1" : "0")};
-  justify-content: center;
-  align-items: center;
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.9);
   position: absolute;
-  line-height: 150%;
-  top: 45vh;
-  padding: 5%;
-  margin: 10px;
+  line-height: 180%;
+  font-size: 1em;
+  top: 38vh;
   overflow: auto;
+  clip-path: polygon(0 9%, 100% 0%, 100% 100%, 0% 100%);
   transition: all 500ms ease-out;
   box-sizing: border-box;
   z-index: 1;
@@ -163,27 +164,32 @@ class Single extends React.Component {
           isOpen={isDescriptionOpen}
           dangerouslySetInnerHTML={this.createTitle()}
         />
-        <Details isOpen={isDescriptionOpen}>
-          <DetailsDate>
-            <DateDay>{getDate[0]}</DateDay>
-            <DateDayNumber>{getDate[1]}</DateDayNumber>
-            <DateMonth>{getDate[2]}</DateMonth>
-          </DetailsDate>
-          <Detail>
-            <DetailNote>from</DetailNote>
-            <DetailData>{start_time}</DetailData>
-            <DetailNote>to</DetailNote>
-            <DetailData>{end_time}</DetailData>
-          </Detail>
-          <Detail>
-            <DetailNote>where</DetailNote>
-            <DetailData>{place}</DetailData>
-          </Detail>
+        <Details>
+          <Animated isOpen={isDescriptionOpen} duration="400ms">
+            <DetailsDate>
+              <DateDay>{getDate[0]}</DateDay>
+              <DateDayNumber>{getDate[1]}</DateDayNumber>
+              <DateMonth>{getDate[2]}</DateMonth>
+            </DetailsDate>
+          </Animated>
+          <Animated isOpen={isDescriptionOpen} duration="400ms">
+            <Detail>
+              <DetailNote>from</DetailNote>
+              <DetailData>{start_time}</DetailData>
+              <DetailNote>to</DetailNote>
+              <DetailData>{end_time}</DetailData>
+            </Detail>
+          </Animated>
+          <Animated isOpen={isDescriptionOpen} duration="400ms">
+            <Detail>
+              <DetailNote>where</DetailNote>
+              <DetailData>{place}</DetailData>
+            </Detail>
+          </Animated>
         </Details>
-        <DescriptionContainer
-          isOpen={isDescriptionOpen}
-          dangerouslySetInnerHTML={this.createDescription()}
-        />
+        <DescriptionContainer isOpen={isDescriptionOpen}>
+          <div dangerouslySetInnerHTML={this.createDescription()} />
+        </DescriptionContainer>
       </Container>
     );
   }
