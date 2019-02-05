@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "@emotion/styled";
-import { css, keyframes } from "@emotion/core";
 
 const Container = styled("div")`
   min-width: 100vw;

@@ -2,14 +2,21 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
+import store from "./store";
+import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import "normalize.css";
 import * as serviceWorker from "./serviceWorker";
+import { fetchEvents } from "./actions/eventsActions";
+
+store.dispatch(fetchEvents());
 
 ReactDOM.render(
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>,
+  <Provider store={store}>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </Provider>,
   document.getElementById("root")
 );
 

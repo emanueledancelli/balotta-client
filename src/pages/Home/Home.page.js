@@ -1,5 +1,4 @@
 import React from "react";
-import data from "../../mockData";
 import { getAllEvents } from "../../api";
 import orderBy from "lodash/orderBy";
 import styled from "@emotion/styled";
