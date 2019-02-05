@@ -1,11 +1,12 @@
 import React from "react";
 import styled from "@emotion/styled";
+import { css } from "@emotion/core";
+import { NavLink } from "react-router-dom";
 import HomeOutlineIcon from "mdi-react/HomeOutlineIcon";
 import StarOutlineIcon from "mdi-react/StarOutlineIcon";
-import MapOutlineIcon from "mdi-react/MapOutlineIcon";
-import AccountOutlineIcon from "mdi-react/AccountOutlineIcon";
+import MagnifyIcon from "mdi-react/MagnifyIcon";
 
-const Container = styled("div")`
+const Container = styled.div`
   height: 7vh;
   width: 100vw;
   display: flex;
@@ -19,7 +20,7 @@ const Container = styled("div")`
   border-top: 0.5px solid rgba(255, 255, 255, 0.2);
 `;
 
-const Item = styled("p")`
+const Item = styled.p`
   color: #9a9a9a;
   margin: 0;
 `;
@@ -27,18 +28,21 @@ const Item = styled("p")`
 const Navigation = () => {
   return (
     <Container>
-      <Item>
-        <HomeOutlineIcon />
-      </Item>
-      <Item>
-        <StarOutlineIcon />
-      </Item>
-      <Item>
-        <MapOutlineIcon />
-      </Item>
-      <Item>
-        <AccountOutlineIcon />
-      </Item>
+      <NavLink to="/" activeClassName="active" exact>
+        <Item>
+          <HomeOutlineIcon />
+        </Item>
+      </NavLink>
+      <NavLink to="/search" exact>
+        <Item>
+          <MagnifyIcon />
+        </Item>
+      </NavLink>
+      <NavLink to="/favourites" activeClassName="active" exact>
+        <Item>
+          <StarOutlineIcon />
+        </Item>
+      </NavLink>
     </Container>
   );
 };
