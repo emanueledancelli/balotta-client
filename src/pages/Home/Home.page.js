@@ -3,7 +3,7 @@ import { getAllEvents } from "../../api";
 import orderBy from "lodash/orderBy";
 import styled from "@emotion/styled";
 import { keyframes } from "@emotion/core";
-import Single from "./components/Single";
+import Card from "./components/Card";
 
 const Container = styled("div")`
   scroll-snap-type: mandatory;
@@ -76,7 +76,8 @@ class Home extends React.Component {
     const { isLoading, events } = this.state;
     const eventList = events.map(e => {
       return (
-        <Single
+        <Card
+          id={e.id}
           title={e.title.rendered}
           start_date={e.acf.start_date}
           start_time={e.acf.start_time}

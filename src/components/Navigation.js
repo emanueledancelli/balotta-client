@@ -23,6 +23,7 @@ const Container = styled.div`
   transition: all 500ms ease-out;
   backdrop-filter: blur(10px);
   border-top: 0.5px solid rgba(255, 255, 255, 0.2);
+  z-index: 100;
 `;
 
 const Item = styled.p`
