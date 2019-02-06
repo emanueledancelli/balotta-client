@@ -147,7 +147,7 @@ class Card extends React.Component {
           backgroundSize: "cover"
         }}
         id={id}
-        onClick={this.toggleDescription}
+        /* onClick={this.toggleDescription} */
       >
         <Title
           isOpen={isDescriptionOpen}

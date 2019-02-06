@@ -13,9 +13,35 @@ const Container = styled("div")`
 `;
 
 class List extends React.Component {
+  state = {
+    scrollY: 0,
+    scrollX: 0
+  };
+
+  componentDidMount() {
+    window.addEventListener("scroll", this.handleScroll);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("scroll", this.handleScroll);
+  }
+
+  handleScroll = () => {
+    this.setState({
+      scrollY: window.scrollY,
+      scrollX: window.scrollX
+    });
+    console.log(this.state);
+  };
+
+  handleContainer = arg => {
+    this.focus = arg + 1;
+  };
+
   render() {
     const { match, today, weekEnd, week } = this.props;
     let eventsToMap;
+    let focus = match.params.index;
 
     if (match.params.listname === "week") {
       eventsToMap = week;
@@ -42,7 +68,13 @@ class List extends React.Component {
     });
     return (
       <>
-        {!eventsToMap ? <p>Loading...</p> : <Container>{eventList}</Container>}
+        {!eventsToMap ? (
+          <p>Loading...</p>
+        ) : (
+          <Container onClick={this.handleContainer(focus)}>
+            {eventList[focus]}
+          </Container>
+        )}
       </>
     );
   }

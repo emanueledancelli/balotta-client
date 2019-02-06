@@ -59,6 +59,26 @@ const Square = styled.div`
 `;
 
 class Search extends React.Component {
+  state = {
+    scrollY: 0,
+    scrollX: 0
+  };
+
+  componentDidMount() {
+    window.addEventListener("scroll", this.handleScroll);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("scroll", this.handleScroll);
+  }
+
+  handleScroll = () => {
+    this.setState({
+      scrollY: window.scrollY,
+      scrollX: window.scrollX
+    });
+    console.log(this.state);
+  };
   render() {
     const { today, weekEnd, week } = this.props;
 
