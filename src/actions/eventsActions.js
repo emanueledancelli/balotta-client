@@ -1,5 +1,7 @@
 import { getAllEvents } from "../api";
 import orderBy from "lodash/orderBy";
+import { getDate } from "../utils/getDate";
+import moment from "moment";
 
 export const fetchEvents = () => (dispatch, getState) => {
   const isFetched = getState().events.isFetched;
@@ -8,11 +10,20 @@ export const fetchEvents = () => (dispatch, getState) => {
     dispatch({ type: "FETCH_EVENTS_BEGINS" });
     getAllEvents()
       .then(res => {
-        let ordered = orderBy(res.data, "acf.start_date");
-
+        let today = getDate();
+        let ev = orderBy(res.data, "acf.start_date");
+        let data = {
+          week: ev,
+          today: ev.filter(e => e.acf.start_date === today),
+          weekEnd: ev.filter(e => {
+            let d = moment(e.acf.start_date).format("d");
+            let w = ["5", "6", "0"];
+            return w.includes(d);
+          })
+        };
         dispatch({
           type: "FETCH_EVENTS_SUCCESS",
-          payload: ordered
+          payload: data
         });
       })
       .catch(err =>

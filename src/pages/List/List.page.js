@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "@emotion/styled";
 import Card from "../Home/components/Card";
+import { connect } from "react-redux";
 
 const Container = styled("div")`
   scroll-snap-type: mandatory;
@@ -13,9 +14,18 @@ const Container = styled("div")`
 
 class List extends React.Component {
   render() {
-    const { events } = this.props;
+    const { match, today, weekEnd, week } = this.props;
+    let eventsToMap;
 
-    const eventList = events.map(e => {
+    if (match.params.listname === "week") {
+      eventsToMap = week;
+    } else if (match.params.listname === "today") {
+      eventsToMap = today;
+    } else if (match.params.listname === "weekend") {
+      eventsToMap = weekEnd;
+    }
+
+    const eventList = eventsToMap.map(e => {
       return (
         <Card
           id={e.id}
@@ -31,9 +41,22 @@ class List extends React.Component {
       );
     });
     return (
-      <>{isLoading ? <p>Loading...</p> : <Container>{eventList}</Container>}</>
+      <>
+        {!eventsToMap ? <p>Loading...</p> : <Container>{eventList}</Container>}
+      </>
     );
   }
 }
 
-export default List;
+const mapStateToProps = state => {
+  const { today, weekEnd, week, isLoading } = state.events.data;
+
+  return {
+    isLoading,
+    today,
+    weekEnd,
+    week
+  };
+};
+
+export default connect(mapStateToProps)(List);

@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "@emotion/styled";
+import { withRouter } from "react-router-dom";
 import SortVariantIcon from "mdi-react/SortVariantIcon";
+import ArrowBackIcon from "mdi-react/ArrowBackIcon";
 
 const Container = styled("div")`
   background-color: transparent;
@@ -35,15 +37,27 @@ const FilterIcon = styled("p")`
   padding-right: 3%;
 `;
 
-const Header = props => {
-  return (
-    <Container>
-      <Filter>All events this week</Filter>
-      <FilterIcon>
-        <SortVariantIcon />
-      </FilterIcon>
-    </Container>
-  );
-};
+class Header extends React.Component {
+  render() {
+    const { location } = this.props;
+    let place;
 
-export default Header;
+    if (location.pathname === "/") {
+      place = "All events this week";
+    } else if (location.pathname.startsWith("/list")) {
+      place = <ArrowBackIcon onClick={() => this.props.history.goBack()} />;
+    } else if (location.pathname.startsWith("/eventi")) {
+      place = <ArrowBackIcon onClick={() => this.props.history.goBack()} />;
+    } else {
+      place = "All events this week";
+    }
+
+    return (
+      <Container loc={place}>
+        <Filter>{place}</Filter>
+      </Container>
+    );
+  }
+}
+
+export default withRouter(Header);

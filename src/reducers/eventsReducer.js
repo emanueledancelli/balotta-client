@@ -1,7 +1,11 @@
 const initialState = {
   isLoading: false,
   isFetched: false,
-  data: [],
+  data: {
+    week: [],
+    today: [],
+    weekEnd: []
+  },
   error: null
 };
 
@@ -17,7 +21,11 @@ export default function eventsReducer(state = initialState, action) {
         ...state,
         isLoading: false,
         isFetched: true,
-        data: action.payload
+        data: {
+          week: action.payload.week,
+          today: action.payload.today,
+          weekEnd: action.payload.weekEnd
+        }
       };
     case "FETCH_EVENTS_FAILURE":
       return {

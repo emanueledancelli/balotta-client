@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "@emotion/styled";
-import { css } from "@emotion/core";
 import { NavLink } from "react-router-dom";
 import HomeOutlineIcon from "mdi-react/HomeOutlineIcon";
 import StarOutlineIcon from "mdi-react/StarOutlineIcon";
@@ -15,10 +14,17 @@ const Container = styled.div`
   justify-content: space-around;
   align-items: center;
   flex-direction: row;
-  background-color: ${props =>
-    props.location.pathname !== "/"
-      ? "rgba(255, 255, 255, 0.9)"
-      : "transparent"};
+  background-color: ${props => {
+    if (props.location.pathname === "/") {
+      return "transparent";
+    } else if (props.location.pathname.startsWith("/list")) {
+      return "trasparent";
+    } else if (props.location.pathname.startsWith("/eventi")) {
+      return "transparent";
+    } else {
+      return "rgba(255,255,255,0.9)";
+    }
+  }};
   z-index: 1;
   transition: all 500ms ease-out;
   backdrop-filter: blur(10px);
@@ -31,23 +37,7 @@ const Item = styled.p`
   margin: 0;
 `;
 
-const ItemContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;
-
-const NavHelper = styled.span`
-  font-size: 0.8em;
-  & a,
-  span {
-    text-decoration: none;
-  }
-`;
-
 const Navigation = ({ location }) => {
-  console.log(location);
   return (
     <Container location={location}>
       <NavLink to="/" activeClassName="active" exact>

@@ -1,52 +1,12 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500,600,700,900");
 
-* {
+h1,
+p,
+span,
+h2 {
   font-family: "Roboto", sans-serif;
 }
 
-.blue {
-  min-width: 100vw;
-  height: 100vh;
-  scroll-snap-align: start;
-  text-align: center;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: lightslategray;
-}
-
-.yellow {
-  min-width: 100vw;
-  height: 100vh;
-  scroll-snap-align: start;
-  background-color: yellowgreen;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.red {
-  min-width: 100vw;
-  height: 100vh;
-  scroll-snap-align: start;
-  text-align: center;
-  background-color: #eb5757;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.container {
-  font-family: sans-serif;
-  scroll-snap-type: mandatory;
-  scroll-snap-points-y: repeat(100vw);
-  scroll-snap-type: x mandatory;
-  display: flex;
-  overflow-x: scroll;
-  scroll-behavior: auto;
-}
 .active {
   color: #222222;
 }

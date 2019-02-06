@@ -26,7 +26,6 @@ const Animated = styled.div`
 `;
 
 const Title = styled("h1")`
-  font-weight: 700;
   font-size: ${props => (props.isOpen ? "1.8em" : "2em")};
   color: #ffffff;
   padding: 0 3%;
@@ -117,25 +116,7 @@ const DescriptionContainer = styled("div")`
 
 class Card extends React.Component {
   state = {
-    isDescriptionOpen: false,
-    windowWidth: 0,
-    windowHeight: 0
-  };
-
-  componentDidMount() {
-    this.updateWindowDimensions();
-    window.addEventListener("resize", this.updateWindowDimensions);
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener("resize", this.updateWindowDimensions);
-  }
-
-  updateWindowDimensions = () => {
-    this.setState({
-      windowWidth: window.innerWidth,
-      windowHeight: window.innerHeight
-    });
+    isDescriptionOpen: false
   };
 
   toggleDescription = () =>
@@ -151,7 +132,7 @@ class Card extends React.Component {
 
   render() {
     const { start_date, start_time, end_time, place, image, id } = this.props;
-    const { isDescriptionOpen, windowHeight, windowWidth } = this.state;
+    const { isDescriptionOpen } = this.state;
     const getDate = moment(start_date)
       .format("dddd D MMMM")
       .split(" ");
