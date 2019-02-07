@@ -16,6 +16,11 @@ const Blink = keyframes`
   to { opacity: 0;}
 `;
 
+const FadeAndSlide = keyframes`
+  from { opacity: 0; transform: translateY(-5px)}
+  to {opacity: 1;trasnform: translateY(0) }
+`;
+
 const BlinkingCursor = styled.p`
   color: #222222;
   animation: ${Blink} 800ms linear infinite;
@@ -38,6 +43,12 @@ const Subtitle = styled.h2`
   padding-left: 3%;
 `;
 
+const Numbers = styled.span`
+  color: rgba(0, 0, 0, 0.1);
+  font-weight: 500;
+  font-size: 0.9em;
+`;
+
 const SquareContainer = styled.div`
   padding-left: 3%;
   white-space: nowrap;
@@ -58,29 +69,30 @@ const Square = styled.div`
   display: inline-block;
 `;
 
+const TypeAnimation = styled.h1`
+  color: #888;
+  margin-bottom: -3vh;
+  padding-left: 3%;
+  font-size: 2em;
+  animation: ${FadeAndSlide} 500ms ease-in;
+`;
+
 class Search extends React.Component {
   state = {
-    scrollY: 0,
-    scrollX: 0
+    discoverStuff: ["Bologna", "Events", "Places"],
+    pick: 0
   };
 
   componentDidMount() {
-    window.addEventListener("scroll", this.handleScroll);
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener("scroll", this.handleScroll);
-  }
-
-  handleScroll = () => {
+    let rng = Math.floor(Math.random() * 3);
     this.setState({
-      scrollY: window.scrollY,
-      scrollX: window.scrollX
+      pick: rng
     });
-    console.log(this.state);
-  };
+  }
+
   render() {
     const { today, weekEnd, week } = this.props;
+    const { discoverStuff, pick } = this.state;
 
     const todays = today.map(e => {
       let thumbnail = e.acf.image.sizes.thumbnail;
@@ -127,17 +139,44 @@ class Search extends React.Component {
 
     return (
       <>
-        <Container>
-          <Title>Search:</Title>
+        <Container onClick={this.handleHeroClick}>
+          <Title>Discover</Title>
+          <TypeAnimation>{discoverStuff[pick]}</TypeAnimation>
           <BlinkingCursor>_</BlinkingCursor>
         </Container>
-        <Subtitle>All events today</Subtitle>
+        <Subtitle>
+          All events today <Numbers>&sdot; {todays.length}</Numbers>
+        </Subtitle>
         <SquareContainer>{todays}</SquareContainer>
         <Fix h="5vh" />
-        <Subtitle>All events this weekend</Subtitle>
+        <Subtitle>
+          All events this weekend <Numbers>&sdot; {weekEnds.length}</Numbers>
+        </Subtitle>
         <SquareContainer>{weekEnds}</SquareContainer>
         <Fix h="5vh" />
-        <Subtitle>All events this week</Subtitle>
+        <Subtitle>
+          All events this week <Numbers>&sdot; {weekly.length}</Numbers>
+        </Subtitle>
+        <SquareContainer>{weekly}</SquareContainer>
+        <Fix h="5vh" />
+        <Subtitle>
+          Clubbing <Numbers>&sdot; {weekly.length}</Numbers>
+        </Subtitle>
+        <SquareContainer>{weekly}</SquareContainer>
+        <Fix h="5vh" />
+        <Subtitle>
+          Concerts <Numbers>&sdot; {weekly.length}</Numbers>
+        </Subtitle>
+        <SquareContainer>{weekly}</SquareContainer>
+        <Fix h="5vh" />
+        <Subtitle>
+          Culture <Numbers>&sdot; {weekly.length}</Numbers>
+        </Subtitle>
+        <SquareContainer>{weekly}</SquareContainer>
+        <Fix h="5vh" />
+        <Subtitle>
+          Shows <Numbers>&sdot; {weekly.length}</Numbers>
+        </Subtitle>
         <SquareContainer>{weekly}</SquareContainer>
         <Fix h="20vh" />
       </>
