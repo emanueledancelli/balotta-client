@@ -4,6 +4,7 @@ import orderBy from "lodash/orderBy";
 import styled from "@emotion/styled";
 import { keyframes } from "@emotion/core";
 import Card from "./components/Card";
+import { connect } from "react-redux";
 
 const Container = styled("div")`
   scroll-snap-type: mandatory;
@@ -56,25 +57,9 @@ const Loader = () => {
 };
 
 class Home extends React.Component {
-  state = {
-    events: [],
-    isLoading: false
-  };
-
-  componentDidMount() {
-    this.setState({ isLoading: true });
-    getAllEvents().then(res => {
-      let ordered = orderBy(res.data, "acf.start_date");
-      this.setState({
-        events: ordered,
-        isLoading: false
-      });
-      console.log(this.state.events);
-    });
-  }
   render() {
-    const { isLoading, events } = this.state;
-    const eventList = events.map(e => {
+    const { isLoading, shows } = this.props;
+    const eventList = shows.map(e => {
       return (
         <Card
           id={e.id}
@@ -93,4 +78,16 @@ class Home extends React.Component {
   }
 }
 
-export default Home;
+const mapStateToProps = state => {
+  const { isLoading } = state.events;
+  const { today } = state.events.data;
+
+  return {
+    isLoading,
+    shows: today.filter(e =>
+      e.acf.tags.includes("Concert" || "Clubbing" || "Culture")
+    )
+  };
+};
+
+export default connect(mapStateToProps)(Home);

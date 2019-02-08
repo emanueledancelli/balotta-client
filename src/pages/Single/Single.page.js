@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "@emotion/styled";
-import Card from "../Home/components/Card";
+import Details from "../../components/Details";
 import { connect } from "react-redux";
 
 const Container = styled.div`
@@ -14,14 +14,13 @@ const Container = styled.div`
 
 class Single extends React.Component {
   render() {
-    const { singleEvent } = this.props;
-
+    const { singleEvent, match, location } = this.props;
     return (
       <Container>
         {!singleEvent ? (
           <p>Loading....</p>
         ) : (
-          <Card
+          <Details
             id={singleEvent.id}
             title={singleEvent.title.rendered}
             start_date={singleEvent.acf.start_date}
@@ -31,6 +30,8 @@ class Single extends React.Component {
             image={singleEvent.acf.image.url}
             key={singleEvent.id}
             description={singleEvent.acf.description}
+            match={match}
+            location={location}
           />
         )}
       </Container>

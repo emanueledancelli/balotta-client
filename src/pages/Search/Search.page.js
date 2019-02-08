@@ -91,10 +91,18 @@ class Search extends React.Component {
   }
 
   render() {
-    const { today, weekEnd, week } = this.props;
+    const {
+      today,
+      weekEnd,
+      week,
+      concert,
+      clubbing,
+      shows,
+      culture
+    } = this.props;
     const { discoverStuff, pick } = this.state;
 
-    const todays = today.map(e => {
+    const showConcerts = concert.map(e => {
       let thumbnail = e.acf.image.sizes.thumbnail;
       return (
         <React.Fragment key={e.id}>
@@ -108,11 +116,53 @@ class Search extends React.Component {
       );
     });
 
-    const weekly = week.map((e, index) => {
+    const showClubbing = clubbing.map(e => {
       let thumbnail = e.acf.image.sizes.thumbnail;
-      let listName = "week";
       return (
-        <Link to={`/list/${listName}/${e.id}/${index}`} key={e.id}>
+        <React.Fragment key={e.id}>
+          <Square
+            style={{
+              background: `url(${thumbnail})`,
+              backgroundSize: "cover"
+            }}
+          />
+        </React.Fragment>
+      );
+    });
+
+    const showCulture = culture.map(e => {
+      let thumbnail = e.acf.image.sizes.thumbnail;
+      return (
+        <React.Fragment key={e.id}>
+          <Square
+            style={{
+              background: `url(${thumbnail})`,
+              backgroundSize: "cover"
+            }}
+          />
+        </React.Fragment>
+      );
+    });
+
+    const showShows = shows.map(e => {
+      let thumbnail = e.acf.image.sizes.thumbnail;
+      return (
+        <React.Fragment key={e.id}>
+          <Square
+            style={{
+              background: `url(${thumbnail})`,
+              backgroundSize: "cover"
+            }}
+          />
+        </React.Fragment>
+      );
+    });
+
+    const todays = today.map((e, index) => {
+      let thumbnail = e.acf.image.sizes.thumbnail;
+      let listName = "today";
+      return (
+        <Link to={`/eventi/${listName}/${e.id}/${index}`} key={e.id}>
           <Square
             style={{
               background: `url(${thumbnail})`,
@@ -123,10 +173,26 @@ class Search extends React.Component {
       );
     });
 
-    const weekEnds = weekEnd.map(e => {
+    const weekly = week.map((e, index) => {
       let thumbnail = e.acf.image.sizes.thumbnail;
+      let listName = "week";
       return (
-        <Link to={`/eventi/${e.id}/${e.title.rendered}`} key={e.id}>
+        <Link to={`/eventi/${listName}/${e.id}/${index}`} key={e.id}>
+          <Square
+            style={{
+              background: `url(${thumbnail})`,
+              backgroundSize: "cover"
+            }}
+          />
+        </Link>
+      );
+    });
+
+    const weekEnds = weekEnd.map((e, index) => {
+      let thumbnail = e.acf.image.sizes.thumbnail;
+      let listName = "weekend";
+      return (
+        <Link to={`/eventi/${listName}/${e.id}/${index}`} key={e.id}>
           <Square
             style={{
               background: `url(${thumbnail})`,
@@ -145,39 +211,40 @@ class Search extends React.Component {
           <BlinkingCursor>_</BlinkingCursor>
         </Container>
         <Subtitle>
-          All events today <Numbers>&sdot; {todays.length}</Numbers>
+          Today <Numbers>&sdot; {todays.length}</Numbers>
         </Subtitle>
-        <SquareContainer>{todays}</SquareContainer>
+        {today && <SquareContainer>{todays}</SquareContainer>}
         <Fix h="5vh" />
         <Subtitle>
-          All events this weekend <Numbers>&sdot; {weekEnds.length}</Numbers>
+          On the weekend <Numbers>&sdot; {weekEnds.length}</Numbers>
         </Subtitle>
         <SquareContainer>{weekEnds}</SquareContainer>
         <Fix h="5vh" />
         <Subtitle>
-          All events this week <Numbers>&sdot; {weekly.length}</Numbers>
+          Everything this week <Numbers>&sdot; {weekly.length}</Numbers>
         </Subtitle>
         <SquareContainer>{weekly}</SquareContainer>
         <Fix h="5vh" />
         <Subtitle>
-          Clubbing <Numbers>&sdot; {weekly.length}</Numbers>
+          Clubbing{" "}
+          {showClubbing && <Numbers>&sdot; {showClubbing.length}</Numbers>}
         </Subtitle>
-        <SquareContainer>{weekly}</SquareContainer>
+        {showClubbing && <SquareContainer>{showClubbing}</SquareContainer>}
         <Fix h="5vh" />
         <Subtitle>
-          Concerts <Numbers>&sdot; {weekly.length}</Numbers>
+          Concerts <Numbers>&sdot; {showConcerts.length}</Numbers>
         </Subtitle>
-        <SquareContainer>{weekly}</SquareContainer>
+        <SquareContainer>{showConcerts}</SquareContainer>
         <Fix h="5vh" />
         <Subtitle>
-          Culture <Numbers>&sdot; {weekly.length}</Numbers>
+          Culture <Numbers>&sdot; {showCulture.length}</Numbers>
         </Subtitle>
-        <SquareContainer>{weekly}</SquareContainer>
+        <SquareContainer>{showCulture}</SquareContainer>
         <Fix h="5vh" />
         <Subtitle>
-          Shows <Numbers>&sdot; {weekly.length}</Numbers>
+          Shows <Numbers>&sdot; {showShows.length}</Numbers>
         </Subtitle>
-        <SquareContainer>{weekly}</SquareContainer>
+        <SquareContainer>{showShows}</SquareContainer>
         <Fix h="20vh" />
       </>
     );
@@ -192,7 +259,11 @@ const mapStateToProps = state => {
     isLoading,
     today,
     weekEnd,
-    week
+    week,
+    concert: week.filter(e => e.acf.tags.includes("Concert")),
+    culture: week.filter(e => e.acf.tags.includes("Culture")),
+    clubbing: week.filter(e => e.acf.tags.includes("Clubbing")),
+    shows: week.filter(e => e.acf.tags.includes("Shows"))
   };
 };
 

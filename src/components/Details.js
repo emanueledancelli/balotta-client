@@ -1,8 +1,6 @@
 import React from "react";
 import styled from "@emotion/styled";
 import moment from "moment";
-import { connect } from "react-redux";
-import { setUi } from "../../../actions/uiActions";
 
 const Container = styled("div")`
   min-width: 100vw;
@@ -13,35 +11,35 @@ const Container = styled("div")`
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
-  overflow: ${props => (props.isOpen ? "hidden" : "scroll")};
+  overflow: ${props => (props.animation ? "auto" : "hidden")};
 `;
 
 const Animated = styled.div`
   transform: ${props =>
-    props.isOpen ? "translateY(-18vh)" : "translateY(0px)"};
+    props.animation ? "translateY(-18vh)" : "translateY(0px)"};
   font-size: 1em;
   transition: all ${props => props.duration} ease-out;
   & p {
-    color: ${props => (props.isOpen ? "#222222" : "white")};
+    color: ${props => (props.animation ? "#222222" : "white")};
   }
 `;
 
 const Title = styled("h1")`
-  font-size: ${props => (props.isOpen ? "1.8em" : "2em")};
+  font-size: ${props => (props.animation ? "1.8em" : "2em")};
   color: #ffffff;
   padding: 0 3%;
   transform: ${props =>
-    props.isOpen ? "translateY(-24vh)" : "translateY(0px)"};
+    props.animation ? "translateY(-24vh)" : "translateY(0px)"};
   transition: all 200ms ease-out;
   letter-spacing: -1px;
 `;
 
-const Details = styled("div")`
+const DetailsContainer = styled("div")`
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   transform: ${props =>
-    props.isOpen ? "translatey(-35vh)" : "translateY(0px)"};
+    props.animation ? "translatey(-35vh)" : "translateY(0px)"};
   padding: 3%;
   transition: all 200ms ease-out;
   z-index: 10;
@@ -100,10 +98,9 @@ const DateMonth = styled("p")`
 
 const DescriptionContainer = styled("div")`
   width: 100vw;
-  min-height: 70vh;
+  height: 70vh;
   padding: 22vh 3% 12%;
-  display: ${props => (props.isOpen ? "flex" : "none")};
-  opacity: ${props => (props.isOpen ? "1" : "0")};
+  opacity: ${props => (props.animation ? "1" : "0")};
   background-color: white;
   position: absolute;
   line-height: 180%;
@@ -114,7 +111,26 @@ const DescriptionContainer = styled("div")`
   z-index: 9;
 `;
 
-class Card extends React.Component {
+class Details extends React.Component {
+  state = {
+    isSingle: false
+  };
+
+  componentDidMount() {
+    if (this.props.location.pathname.startsWith("/eventi/single")) {
+      this.setState({
+        isSingle: true
+      });
+    }
+  }
+
+  componentWillUnmount() {
+    if (this.props.location.pathname.startsWith("/eventi/single")) {
+      this.setState({
+        isSingle: false
+      });
+    }
+  }
   createTitle = () => {
     return { __html: this.props.title };
   };
@@ -131,9 +147,10 @@ class Card extends React.Component {
       place,
       image,
       id,
-      uiActive,
-      setUi
+      location,
+      match
     } = this.props;
+    const { isSingle } = this.state;
     const getDate = moment(start_date)
       .format("dddd D MMMM")
       .split(" ");
@@ -148,18 +165,21 @@ class Card extends React.Component {
           backgroundSize: "cover"
         }}
         id={id}
-        onClick={() => setUi(id)}
+        animation={isSingle}
       >
-        <Title isOpen={uiActive} dangerouslySetInnerHTML={this.createTitle()} />
-        <Details>
-          <Animated isOpen={uiActive} duration="300ms">
+        <Title
+          animation={isSingle}
+          dangerouslySetInnerHTML={this.createTitle()}
+        />
+        <DetailsContainer animation={isSingle}>
+          <Animated animation={isSingle} duration="300ms">
             <DetailsDate>
               <DateDay>{getDate[0]}</DateDay>
               <DateDayNumber>{getDate[1]}</DateDayNumber>
               <DateMonth>{getDate[2]}</DateMonth>
             </DetailsDate>
           </Animated>
-          <Animated isOpen={uiActive} duration="300ms">
+          <Animated animation={isSingle} duration="300ms">
             <Detail>
               <DetailNote>from</DetailNote>
               <DetailData>{start_time}</DetailData>
@@ -167,14 +187,14 @@ class Card extends React.Component {
               <DetailData>{end_time}</DetailData>
             </Detail>
           </Animated>
-          <Animated isOpen={uiActive} duration="300ms">
+          <Animated animation={isSingle} duration="300ms">
             <Detail>
               <DetailNote>where</DetailNote>
               <DetailData>{place}</DetailData>
             </Detail>
           </Animated>
-        </Details>
-        <DescriptionContainer isOpen={uiActive}>
+        </DetailsContainer>
+        <DescriptionContainer animation={isSingle}>
           <div dangerouslySetInnerHTML={this.createDescription()} />
         </DescriptionContainer>
       </Container>
@@ -182,17 +202,4 @@ class Card extends React.Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    uiActive: state.ui.isEventOnFocus
-  };
-};
-
-const mapDispatchToProps = {
-  setUi
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Card);
+export default Details;

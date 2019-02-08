@@ -12,10 +12,11 @@ export const fetchEvents = () => (dispatch, getState) => {
       .then(res => {
         let today = getDate();
         let ev = orderBy(res.data, "acf.start_date");
+        let kp = ev.filter(e => e.acf.start_date >= today);
         let data = {
-          week: ev,
-          today: ev.filter(e => e.acf.start_date === today),
-          weekEnd: ev.filter(e => {
+          week: kp,
+          today: kp.filter(e => e.acf.start_date === today),
+          weekEnd: kp.filter(e => {
             let d = moment(e.acf.start_date).format("d");
             let w = ["5", "6", "0"];
             return w.includes(d);

@@ -1,8 +1,6 @@
 import React from "react";
 import styled from "@emotion/styled";
 import { withRouter } from "react-router-dom";
-import SortVariantIcon from "mdi-react/SortVariantIcon";
-import ArrowBackIcon from "mdi-react/ArrowBackIcon";
 
 const Container = styled("div")`
   background-color: transparent;
@@ -20,11 +18,12 @@ const Container = styled("div")`
 `;
 
 const Filter = styled("p")`
-  color: #ffffff;
+  color: rgba(255, 255, 255, 0.8);
   width: 50%;
   padding-top: 2%;
   padding-bottom: 2%;
   padding-left: 3%;
+  font-weight: 500;
 `;
 
 const FilterIcon = styled("p")`
@@ -43,13 +42,21 @@ class Header extends React.Component {
     let place;
 
     if (location.pathname === "/") {
-      place = "All events this week";
-    } else if (location.pathname.startsWith("/list")) {
-      place = <ArrowBackIcon onClick={() => this.props.history.goBack()} />;
-    } else if (location.pathname.startsWith("/eventi")) {
-      place = <ArrowBackIcon onClick={() => this.props.history.goBack()} />;
-    } else {
-      place = "All events this week";
+      place = "Best today";
+    } else if (location.pathname.startsWith("/eventi/today")) {
+      place = "Today";
+    } else if (location.pathname.startsWith("/eventi/week")) {
+      place = "Everything this week";
+    } else if (location.pathname.startsWith("/eventi/weekend")) {
+      place = "On the weekend";
+    } else if (location.pathname.startsWith("/eventi/clubbing")) {
+      place = "Clubbing";
+    } else if (location.pathname.startsWith("/eventi/concerts")) {
+      place = "Concerts";
+    } else if (location.pathname.startsWith("/eventi/culture")) {
+      place = "Culture";
+    } else if (location.pathname.startsWith("/eventi/shows")) {
+      place = "Shows";
     }
 
     return (
