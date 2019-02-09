@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "@emotion/styled";
 import { connect } from "react-redux";
-/* import Card from "../Home/components/Card";
- */ import Details from "../../components/Details";
+import Card from "../Home/components/Card";
+import Details from "../../components/Details";
 import { Link } from "react-router-dom";
 
 const Container = styled("div")`
@@ -15,16 +15,13 @@ const Container = styled("div")`
 `;
 
 class List extends React.Component {
-  state = {
-    cardplace: ""
-  };
   componentDidMount() {
-    /*    if (document === null) {
-      return;
-    } else {
+    /*    if (document !== null && document) {
       document
         .getElementById(this.props.match.params.id)
         .scrollIntoView({ behavior: "auto" });
+    } else {
+      return;
     } */
   }
   render() {
@@ -60,7 +57,7 @@ class List extends React.Component {
             end_time={e.acf.end_time}
             place={e.acf.place.post_title}
             image={e.acf.image.url}
-            ref={this.cardPlace}
+            ref={e.id}
             description={e.acf.description}
             location={location}
             match={match}
