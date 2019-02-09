@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "@emotion/styled";
-import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 
 const Container = styled("div")`
   background-color: transparent;
@@ -36,15 +36,13 @@ const Index = styled.p`
 
 class Header extends React.Component {
   render() {
-    const { location, today } = this.props;
+    const { location } = this.props;
     let place;
-    let num;
 
     if (location.pathname === "/") {
       place = "Best today";
     } else if (location.pathname.startsWith("/eventi/today")) {
       place = "Today";
-      num = today.length;
     } else if (location.pathname.startsWith("/eventi/week")) {
       place = "Everything this week";
     } else if (location.pathname.startsWith("/eventi/weekend")) {
@@ -63,18 +61,14 @@ class Header extends React.Component {
 
     return (
       <Container loc={place}>
-        <Filter>{place}</Filter>
-        <Index>{num}</Index>
+        {location.pathname.startsWith("/single") ? (
+          <Filter onClick={() => this.props.history.goBack()}>back</Filter>
+        ) : (
+          <Filter>{place}</Filter>
+        )}
       </Container>
     );
   }
 }
 
-const mapStateToProps = state => {
-  const { today } = state.events.data;
-  return {
-    today
-  };
-};
-
-export default connect(mapStateToProps)(Header);
+export default withRouter(Header);

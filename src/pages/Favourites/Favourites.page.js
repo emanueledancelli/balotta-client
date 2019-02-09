@@ -66,14 +66,10 @@ class Favourites extends React.Component {
     let favEv;
 
     if (eventsToShow.length >= 1) {
-      favEv = eventsToShow.map((e, index) => {
+      favEv = eventsToShow.map(e => {
         let thumbnail = e.data.acf.image.sizes.thumbnail;
-        let listName = "favourites";
         return (
-          <Link
-            to={`/eventi/${listName}/${e.data.id}/${index}`}
-            key={e.data.id}
-          >
+          <Link to={`/single/${e.data.id}`} key={e.data.id}>
             <Square
               style={{
                 background: `url(${thumbnail})`,
