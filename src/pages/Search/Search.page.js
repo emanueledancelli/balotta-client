@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 import { keyframes } from "@emotion/core";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import _ from "lodash";
 
 const Container = styled.div`
   height: 32vh;
@@ -102,17 +103,18 @@ class Search extends React.Component {
     } = this.props;
     const { discoverStuff, pick } = this.state;
 
-    const showConcerts = concert.map(e => {
+    const showConcerts = concert.map((e, index) => {
       let thumbnail = e.acf.image.sizes.thumbnail;
+      let listName = "concerts";
       return (
-        <React.Fragment key={e.id}>
+        <Link to={`/eventi/${listName}/${e.id}/${index}`} key={e.id}>
           <Square
             style={{
               background: `url(${thumbnail})`,
               backgroundSize: "cover"
             }}
           />
-        </React.Fragment>
+        </Link>
       );
     });
 
@@ -131,35 +133,37 @@ class Search extends React.Component {
       );
     });
 
-    const showCulture = culture.map(e => {
+    const showCulture = culture.map((e, index) => {
       let thumbnail = e.acf.image.sizes.thumbnail;
+      let listName = "culture";
       return (
-        <React.Fragment key={e.id}>
+        <Link to={`/eventi/${listName}/${e.id}/${index}`} key={e.id}>
           <Square
             style={{
               background: `url(${thumbnail})`,
               backgroundSize: "cover"
             }}
           />
-        </React.Fragment>
+        </Link>
       );
     });
 
-    const showShows = shows.map(e => {
+    const showShows = shows.map((e, index) => {
       let thumbnail = e.acf.image.sizes.thumbnail;
+      let listName = "shows";
       return (
-        <React.Fragment key={e.id}>
+        <Link to={`/eventi/${listName}/${e.id}/${index}`} key={e.id}>
           <Square
             style={{
               background: `url(${thumbnail})`,
               backgroundSize: "cover"
             }}
           />
-        </React.Fragment>
+        </Link>
       );
     });
 
-    const todays = today.map((e, index) => {
+    const todays = _.shuffle(today).map((e, index) => {
       let thumbnail = e.acf.image.sizes.thumbnail;
       let listName = "today";
       return (
@@ -220,11 +224,7 @@ class Search extends React.Component {
           On the weekend <Numbers>&sdot; {weekEnds.length}</Numbers>
         </Subtitle>
         <SquareContainer>{weekEnds}</SquareContainer>
-        <Fix h="5vh" />
-        <Subtitle>
-          Everything this week <Numbers>&sdot; {weekly.length}</Numbers>
-        </Subtitle>
-        <SquareContainer>{weekly}</SquareContainer>
+
         <Fix h="5vh" />
         <Subtitle>
           Clubbing{" "}
@@ -246,6 +246,11 @@ class Search extends React.Component {
           Shows <Numbers>&sdot; {showShows.length}</Numbers>
         </Subtitle>
         <SquareContainer>{showShows}</SquareContainer>
+        <Fix h="5vh" />
+        <Subtitle>
+          Everything this week <Numbers>&sdot; {weekly.length}</Numbers>
+        </Subtitle>
+        <SquareContainer>{weekly}</SquareContainer>
         <Fix h="20vh" />
       </>
     );
@@ -261,10 +266,10 @@ const mapStateToProps = state => {
     today,
     weekEnd,
     week,
-    concert: week.filter(e => e.acf.tags.includes("Concert")),
-    culture: week.filter(e => e.acf.tags.includes("Culture")),
-    clubbing: week.filter(e => e.acf.tags.includes("Clubbing")),
-    shows: week.filter(e => e.acf.tags.includes("Shows"))
+    concert: _.shuffle(week.filter(e => e.acf.tags.includes("Concert"))),
+    culture: _.shuffle(week.filter(e => e.acf.tags.includes("Culture"))),
+    clubbing: _.shuffle(week.filter(e => e.acf.tags.includes("Clubbing"))),
+    shows: _.shuffle(week.filter(e => e.acf.tags.includes("Shows")))
   };
 };
 

@@ -2,7 +2,6 @@ import React from "react";
 import styled from "@emotion/styled";
 import { connect } from "react-redux";
 import Card from "../Home/components/Card";
-import Details from "../../components/Details";
 import { Link } from "react-router-dom";
 
 const Container = styled("div")`
@@ -10,19 +9,18 @@ const Container = styled("div")`
   scroll-snap-points-y: repeat(100vw);
   scroll-snap-type: x mandatory;
   display: flex;
-  scroll-behavior: smooth;
   overflow-x: ${props => (props.open ? "hidden" : "scroll")};
 `;
 
 class List extends React.Component {
   componentDidMount() {
-    /*    if (document !== null && document) {
+    if (document !== null && document) {
       document
         .getElementById(this.props.match.params.id)
         .scrollIntoView({ behavior: "auto" });
     } else {
       return;
-    } */
+    }
   }
   render() {
     const {
@@ -32,11 +30,14 @@ class List extends React.Component {
       location,
       match,
       isOpen,
-      clubbing
+      clubbing,
+      shows,
+      culture,
+      concert
     } = this.props;
+
     let eventsToMap;
     let eventsList;
-    console.log(clubbing);
 
     if (match.params.listname === "week") {
       eventsToMap = week;
@@ -44,12 +45,20 @@ class List extends React.Component {
       eventsToMap = today;
     } else if (match.params.listname === "weekend") {
       eventsToMap = weekEnd;
+    } else if (match.params.listname === "clubbing") {
+      eventsToMap = clubbing;
+    } else if (match.params.listname === "shows") {
+      eventsToMap = shows;
+    } else if (match.params.listname === "culture") {
+      eventsToMap = culture;
+    } else if (match.params.listname === "concerts") {
+      eventsToMap = concert;
     }
 
     eventsList = eventsToMap.map(e => {
       return (
-        <Link to={`/single/${e.id}`} key={e.id}>
-          <Details
+        <React.Fragment key={e.id}>
+          <Card
             id={e.id}
             title={e.title.rendered}
             start_date={e.acf.start_date}
@@ -57,12 +66,11 @@ class List extends React.Component {
             end_time={e.acf.end_time}
             place={e.acf.place.post_title}
             image={e.acf.image.url}
-            ref={e.id}
             description={e.acf.description}
             location={location}
             match={match}
           />
-        </Link>
+        </React.Fragment>
       );
     });
 

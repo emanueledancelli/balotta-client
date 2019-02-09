@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "@emotion/styled";
-import { getSingleEvent, getFavEvents } from "../../api/index";
+import { getFavEvents } from "../../api/index";
 import { Link } from "react-router-dom";
 
 const Container = styled.div`
@@ -24,7 +24,6 @@ const Subtitle = styled.h2`
 
 const SquareContainer = styled.div`
   padding-left: 3%;
-  width: 100%;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -35,7 +34,7 @@ const Fix = styled.div`
 `;
 
 const Square = styled.div`
-  width: 150px;
+  width: 45vw;
   height: 150px;
   margin-right: 10px;
   margin-bottom: 10px;
@@ -50,7 +49,6 @@ class Favourites extends React.Component {
   componentDidMount() {
     this.setState({ isLoading: true });
     let names = JSON.parse(localStorage.getItem("fav"));
-    console.log(names);
     getFavEvents(names).then(res => {
       this.setState({
         eventsToShow: res,
@@ -64,7 +62,7 @@ class Favourites extends React.Component {
     console.log(eventsToShow);
     const favEv = eventsToShow.map((e, index) => {
       let thumbnail = e.data.acf.image.sizes.thumbnail;
-      let listName = "Favourites";
+      let listName = "favourites";
       return (
         <Link to={`/eventi/${listName}/${e.data.id}/${index}`} key={e.data.id}>
           <Square

@@ -87,14 +87,27 @@ class Navigation extends React.Component {
             <WhiteContainer>
               <ArrowBackIcon onClick={() => setUi()} />
               {canFavourite ? (
-                <StarOutlineIcon
+                <p
                   onClick={() => {
                     this.addToFavorities(eventId);
                     setFav();
                   }}
-                />
+                  style={{
+                    fontWeight: "700",
+                    color: "#eb5757"
+                  }}
+                >
+                  SAVE
+                </p>
               ) : (
-                <StarIcon />
+                <p
+                  style={{
+                    fontWeight: "700",
+                    color: "#eb5757"
+                  }}
+                >
+                  SAVED!
+                </p>
               )}
             </WhiteContainer>
           </>
