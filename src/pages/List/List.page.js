@@ -15,10 +15,11 @@ class List extends React.Component {
   componentDidMount() {
     if (document === null) {
       return;
-    } else if (document === null) {
-      document
-        .getElementById(this.props.match.params.id)
-        .scrollIntoView({ behavior: "auto" });
+    } else if (document !== null) {
+      let el = document.getElementById(this.props.match.params.id);
+      if (el) {
+        el.scrollIntoView({ behavior: "auto" });
+      }
     }
   }
   render() {
@@ -60,6 +61,7 @@ class List extends React.Component {
           <Card
             id={e.id}
             title={e.title.rendered}
+            ref={e.id}
             start_date={e.acf.start_date}
             start_time={e.acf.start_time}
             end_time={e.acf.end_time}
