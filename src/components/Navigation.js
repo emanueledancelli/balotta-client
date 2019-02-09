@@ -3,8 +3,8 @@ import styled from "@emotion/styled";
 import { NavLink } from "react-router-dom";
 import HomeOutlineIcon from "mdi-react/HomeOutlineIcon";
 import StarOutlineIcon from "mdi-react/StarOutlineIcon";
-import StarIcon from "mdi-react/StarIcon";
-import MagnifyIcon from "mdi-react/MagnifyIcon";
+import WhatshotIcon from "mdi-react/WhatshotIcon";
+import FavoriteOutlineIcon from "mdi-react/FavoriteOutlineIcon";
 import ArrowBackIcon from "mdi-react/ArrowBackIcon";
 import { connect } from "react-redux";
 import { setUi, setFav } from "../actions/uiActions";
@@ -115,17 +115,17 @@ class Navigation extends React.Component {
           <>
             <NavLink to="/" activeClassName="active" exact>
               <Item>
-                <HomeOutlineIcon />
+                <WhatshotIcon />
               </Item>
             </NavLink>
             <NavLink to="/search" exact>
               <Item>
-                <MagnifyIcon />
+                <HomeOutlineIcon size={26} />
               </Item>
             </NavLink>
             <NavLink to="/favourites" activeClassName="active" exact>
               <Item>
-                <StarOutlineIcon />
+                <FavoriteOutlineIcon size={22} />
               </Item>
             </NavLink>
           </>

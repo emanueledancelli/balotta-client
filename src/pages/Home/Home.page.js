@@ -11,8 +11,7 @@ const Container = styled("div")`
   scroll-snap-points-y: repeat(100vw);
   scroll-snap-type: x mandatory;
   display: flex;
-  overflow-x: scroll;
-  scroll-behavior: smooth;
+  overflow-x: ${props => (props.open ? "hidden" : "scroll")};
 `;
 
 const LoaderContainer = styled("div")`
@@ -58,7 +57,7 @@ const Loader = () => {
 
 class Home extends React.Component {
   render() {
-    const { isLoading, shows } = this.props;
+    const { isLoading, shows, isOpen } = this.props;
     const eventList = shows.map(e => {
       return (
         <Card
@@ -74,7 +73,15 @@ class Home extends React.Component {
         />
       );
     });
-    return <>{isLoading ? <Loader /> : <Container>{eventList}</Container>}</>;
+    return (
+      <>
+        {isLoading ? (
+          <Loader />
+        ) : (
+          <Container open={isOpen}>{eventList}</Container>
+        )}
+      </>
+    );
   }
 }
 
@@ -86,7 +93,8 @@ const mapStateToProps = state => {
     isLoading,
     shows: today.filter(e =>
       e.acf.tags.includes("Concert" || "Clubbing" || "Culture")
-    )
+    ),
+    isOpen: state.ui.isEventOnFocus
   };
 };
 

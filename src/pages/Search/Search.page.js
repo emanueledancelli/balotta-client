@@ -193,7 +193,7 @@ class Search extends React.Component {
       );
     });
 
-    const weekEnds = weekEnd.map((e, index) => {
+    const weekEnds = _.shuffle(weekEnd).map((e, index) => {
       let thumbnail = e.acf.image.sizes.thumbnail;
       let listName = "weekend";
       return (

@@ -2,7 +2,6 @@ import React from "react";
 import styled from "@emotion/styled";
 import { connect } from "react-redux";
 import Card from "../Home/components/Card";
-import { Link } from "react-router-dom";
 
 const Container = styled("div")`
   scroll-snap-type: mandatory;
@@ -14,11 +13,11 @@ const Container = styled("div")`
 
 class List extends React.Component {
   componentDidMount() {
-    if (document !== null && document) {
+    if (document !== null) {
       document
         .getElementById(this.props.match.params.id)
         .scrollIntoView({ behavior: "auto" });
-    } else {
+    } else if (document === null) {
       return;
     }
   }
