@@ -49,38 +49,49 @@ class Favourites extends React.Component {
   componentDidMount() {
     this.setState({ isLoading: true });
     let names = JSON.parse(localStorage.getItem("fav"));
-    getFavEvents(names).then(res => {
-      this.setState({
-        eventsToShow: res,
-        isLoading: false
+    if (names !== null) {
+      getFavEvents(names).then(res => {
+        this.setState({
+          eventsToShow: res,
+          isLoading: false
+        });
+        console.log(this.state);
       });
-      console.log(this.state);
-    });
+    } else {
+      this.setState({ isLoading: false });
+    }
   }
   render() {
     const { eventsToShow, isLoading } = this.state;
-    console.log(eventsToShow);
-    const favEv = eventsToShow.map((e, index) => {
-      let thumbnail = e.data.acf.image.sizes.thumbnail;
-      let listName = "favourites";
-      return (
-        <Link to={`/eventi/${listName}/${e.data.id}/${index}`} key={e.data.id}>
-          <Square
-            style={{
-              background: `url(${thumbnail})`,
-              backgroundSize: "cover"
-            }}
-          />
-        </Link>
-      );
-    });
+    let favEv;
+
+    if (eventsToShow.length >= 1) {
+      favEv = eventsToShow.map((e, index) => {
+        let thumbnail = e.data.acf.image.sizes.thumbnail;
+        let listName = "favourites";
+        return (
+          <Link
+            to={`/eventi/${listName}/${e.data.id}/${index}`}
+            key={e.data.id}
+          >
+            <Square
+              style={{
+                background: `url(${thumbnail})`,
+                backgroundSize: "cover"
+              }}
+            />
+          </Link>
+        );
+      });
+    } else {
+      favEv = <p style={{ color: "#888" }}>Save some events already</p>;
+    }
 
     return (
       <>
         <Container>
-          <Title>Your events</Title>
+          <Title>Your saved events</Title>
         </Container>
-        <Subtitle>Upcoming</Subtitle>
         <SquareContainer>
           {isLoading ? <p>Loading...</p> : favEv}
         </SquareContainer>
