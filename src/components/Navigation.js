@@ -25,6 +25,8 @@ const Container = styled.div`
       return "trasparent";
     } else if (props.location.pathname.startsWith("/eventi")) {
       return "transparent";
+    } else if (props.location.pathname.startsWith("/single")) {
+      return "transparent";
     } else {
       return "rgba(255,255,255,0.9)";
     }

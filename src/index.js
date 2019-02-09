@@ -4,18 +4,20 @@ import "./index.css";
 import App from "./App";
 import store from "./store";
 import { Provider } from "react-redux";
-import { BrowserRouter } from "react-router-dom";
+import { Router } from "react-router-dom";
 import "normalize.css";
 import * as serviceWorker from "./serviceWorker";
 import { fetchEvents } from "./actions/eventsActions";
+import createBrowserHistory from "history/createBrowserHistory";
+export const history = createBrowserHistory();
 
 store.dispatch(fetchEvents());
 
 ReactDOM.render(
   <Provider store={store}>
-    <BrowserRouter>
+    <Router history={history}>
       <App />
-    </BrowserRouter>
+    </Router>
   </Provider>,
   document.getElementById("root")
 );

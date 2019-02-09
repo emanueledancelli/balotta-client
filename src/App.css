@@ -19,3 +19,21 @@ h2 {
 a {
   text-decoration: none;
 }
+
+.fade-enter {
+  opacity: 1;
+}
+
+.fade-enter.fade-enter-active {
+  opacity: 1;
+  transition: opacity 300ms ease-in;
+}
+
+.fade-exit {
+  opacity: 1;
+}
+
+.fade-exit.fade-exit-active {
+  opacity: 1;
+  transition: opacity 300ms ease-in;
+}

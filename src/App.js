@@ -6,6 +6,7 @@ import Home from "./pages/Home/Home.page";
 import Favourites from "./pages/Favourites/Favourites.page";
 import Search from "./pages/Search/Search.page";
 import List from "./pages/List/List.page";
+import Single from "./pages/Single/Single.page";
 import Header from "./components/Header";
 import Navigation from "./components/Navigation";
 
@@ -19,6 +20,11 @@ const Routes = location => {
         exact
         path="/eventi/:listname/:id?/:index?"
         render={routeProps => <List {...routeProps} />}
+      />
+      <Route
+        exact
+        path="/single/:id"
+        render={routeProps => <Single {...routeProps} />}
       />
     </Switch>
   );

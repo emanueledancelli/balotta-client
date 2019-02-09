@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "@emotion/styled";
-import { withRouter } from "react-router-dom";
+import { connect } from "react-redux";
 
 const Container = styled("div")`
   background-color: transparent;
@@ -26,25 +26,25 @@ const Filter = styled("p")`
   font-weight: 500;
 `;
 
-const FilterIcon = styled("p")`
-  color: #ffffff;
-  display: flex;
-  justify-content: flex-end;
-  width: 50%;
-  font-weight: 300;
+const Index = styled.p`
   padding-top: 2%;
+  padding-bottom: 2%;
   padding-right: 3%;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.8);
 `;
 
 class Header extends React.Component {
   render() {
-    const { location } = this.props;
+    const { location, today } = this.props;
     let place;
+    let num;
 
     if (location.pathname === "/") {
       place = "Best today";
     } else if (location.pathname.startsWith("/eventi/today")) {
       place = "Today";
+      num = today.length;
     } else if (location.pathname.startsWith("/eventi/week")) {
       place = "Everything this week";
     } else if (location.pathname.startsWith("/eventi/weekend")) {
@@ -57,14 +57,24 @@ class Header extends React.Component {
       place = "Culture";
     } else if (location.pathname.startsWith("/eventi/shows")) {
       place = "Shows";
+    } else if (location.pathname.startsWith("/eventi/favourites")) {
+      place = "Favourite";
     }
 
     return (
       <Container loc={place}>
         <Filter>{place}</Filter>
+        <Index>{num}</Index>
       </Container>
     );
   }
 }
 
-export default withRouter(Header);
+const mapStateToProps = state => {
+  const { today } = state.events.data;
+  return {
+    today
+  };
+};
+
+export default connect(mapStateToProps)(Header);

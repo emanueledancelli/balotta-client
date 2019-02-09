@@ -116,17 +116,18 @@ class Search extends React.Component {
       );
     });
 
-    const showClubbing = clubbing.map(e => {
+    const showClubbing = clubbing.map((e, index) => {
       let thumbnail = e.acf.image.sizes.thumbnail;
+      let listName = "clubbing";
       return (
-        <React.Fragment key={e.id}>
+        <Link to={`/eventi/${listName}/${e.id}/${index}`} key={e.id}>
           <Square
             style={{
               background: `url(${thumbnail})`,
               backgroundSize: "cover"
             }}
           />
-        </React.Fragment>
+        </Link>
       );
     });
 

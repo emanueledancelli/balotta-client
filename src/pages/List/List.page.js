@@ -2,12 +2,15 @@ import React from "react";
 import styled from "@emotion/styled";
 import { connect } from "react-redux";
 import Card from "../Home/components/Card";
+import Details from "../../components/Details";
+import { Link } from "react-router-dom";
 
 const Container = styled("div")`
   scroll-snap-type: mandatory;
   scroll-snap-points-y: repeat(100vw);
   scroll-snap-type: x mandatory;
   display: flex;
+  scroll-behavior: smooth;
   overflow-x: ${props => (props.open ? "hidden" : "scroll")};
 `;
 
@@ -22,9 +25,18 @@ class List extends React.Component {
     } */
   }
   render() {
-    const { today, weekEnd, week, location, match, isOpen } = this.props;
+    const {
+      today,
+      weekEnd,
+      week,
+      location,
+      match,
+      isOpen,
+      clubbing
+    } = this.props;
     let eventsToMap;
     let eventsList;
+    console.log(clubbing);
 
     if (match.params.listname === "week") {
       eventsToMap = week;
@@ -33,10 +45,11 @@ class List extends React.Component {
     } else if (match.params.listname === "weekend") {
       eventsToMap = weekEnd;
     }
+
     eventsList = eventsToMap.map(e => {
       return (
-        <React.Fragment key={e.id}>
-          <Card
+        <Link to={`/single/${e.id}`} key={e.id}>
+          <Details
             id={e.id}
             title={e.title.rendered}
             start_date={e.acf.start_date}
@@ -49,7 +62,7 @@ class List extends React.Component {
             location={location}
             match={match}
           />
-        </React.Fragment>
+        </Link>
       );
     });
 

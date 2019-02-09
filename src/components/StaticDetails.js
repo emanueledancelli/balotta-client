@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "@emotion/styled";
+import { keyframes, withEmotionCache } from "@emotion/core";
 import moment from "moment";
+import { history } from "../index";
 
 const Container = styled("div")`
   min-width: 100vw;
@@ -11,25 +13,13 @@ const Container = styled("div")`
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
-  overflow: ${props => (props.animation ? "auto" : "hidden")};
-`;
-
-const Animated = styled.div`
-  transform: ${props =>
-    props.animation ? "translateY(-18vh)" : "translateY(0px)"};
-  font-size: 1em;
-  transition: all ${props => props.duration} ease-out;
-  & p {
-    color: ${props => (props.animation ? "#222222" : "white")};
-  }
+  overflow: auto;
 `;
 
 const Title = styled("h1")`
-  font-size: ${props => (props.animation ? "1.8em" : "2em")};
+  font-size: 2em;
   color: #ffffff;
   padding: 0 3%;
-  transform: ${props =>
-    props.animation ? "translateY(-24vh)" : "translateY(0px)"};
   transition: all 200ms ease-out;
   letter-spacing: -1px;
 `;
@@ -38,10 +28,8 @@ const DetailsContainer = styled("div")`
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  transform: ${props =>
-    props.animation ? "translatey(-35vh)" : "translateY(0px)"};
   padding: 3%;
-  transition: all 200ms ease-out;
+  transition: all 500ms ease-out;
   z-index: 10;
 `;
 
@@ -53,7 +41,6 @@ const Detail = styled("div")`
 `;
 
 const DetailNote = styled("p")`
-  color: #fff;
   font-weight: 400;
   opacity: 0.5;
   margin: 0;
@@ -68,41 +55,34 @@ const DetailsDate = styled("div")`
 `;
 
 const DetailData = styled("p")`
-  color: #ffffff;
   margin: 0;
   font-weight: 500;
 `;
 
 const DateDay = styled("p")`
-  color: #ffffff;
   margin: 0;
   font-weight: 500;
   text-transform: capitalize;
-  color: #f8f8f8;
 `;
 
 const DateDayNumber = styled("p")`
-  color: #ffffff;
   margin: 1px;
   font-size: 1.8em;
   font-weight: 700;
-  color: #f8f8f8;
 `;
 
 const DateMonth = styled("p")`
-  color: #ffffff;
   margin: 0;
   font-weight: 500;
-  color: #f8f8f8;
 `;
 
 const DescriptionContainer = styled("div")`
   width: 100vw;
-  height: 70vh;
+  min-height: 70vh;
   padding: 22vh 3% 12%;
-  opacity: ${props => (props.animation ? "1" : "0")};
   background-color: white;
   position: absolute;
+  opacity: 0;
   line-height: 180%;
   font-size: 1em;
   top: 30vh;
@@ -113,24 +93,58 @@ const DescriptionContainer = styled("div")`
 
 class Details extends React.Component {
   state = {
-    isSingle: false
+    isSingle: false,
+    show: true,
+    doingAnimation: true,
+    //base component styles
+    style: {
+      title: {
+        fontSize: "2em",
+        transform: "translateY(0px)",
+        transition: "all 300ms ease-out"
+      },
+      description: {
+        opacity: 0,
+        transition: "all 300ms ease-out"
+      },
+      details: {
+        transform: "translateY(0px)",
+        color: "white",
+        transition: "all 300ms ease-out"
+      }
+    }
   };
 
   componentDidMount() {
-    if (this.props.location.pathname.startsWith("/single")) {
-      this.setState({
-        isSingle: true
-      });
-    }
+    setTimeout(this.mountAnimation, 20);
   }
 
-  componentWillUnmount() {
-    if (this.props.location.pathname.startsWith("/eventi")) {
-      this.setState({
-        isSingle: false
-      });
-    }
-  }
+  mountAnimation = () => {
+    this.setState({
+      style: {
+        title: {
+          fontSize: "1.8em",
+          transform: "translateY(-24vh)"
+        },
+        description: {
+          opacity: 1
+        },
+        details: {
+          transform: "translateY(-20vh)",
+          color: "#222"
+        }
+      }
+    });
+  };
+
+  /*   unMountAnimation = () => {
+    this.setState({
+      style: {
+        fontSize: "2em"
+      }
+    });
+  };
+ */
   createTitle = () => {
     return { __html: this.props.title };
   };
@@ -150,7 +164,7 @@ class Details extends React.Component {
       location,
       match
     } = this.props;
-    const { isSingle } = this.state;
+    const { style } = this.state;
     const getDate = moment(start_date)
       .format("dddd D MMMM")
       .split(" ");
@@ -166,8 +180,11 @@ class Details extends React.Component {
         }}
         id={id}
       >
-        <Title dangerouslySetInnerHTML={this.createTitle()} />
-        <DetailsContainer>
+        <Title
+          style={style.title}
+          dangerouslySetInnerHTML={this.createTitle()}
+        />
+        <DetailsContainer style={style.details}>
           <DetailsDate>
             <DateDay>{getDate[0]}</DateDay>
             <DateDayNumber>{getDate[1]}</DateDayNumber>
@@ -184,7 +201,7 @@ class Details extends React.Component {
             <DetailData>{place}</DetailData>
           </Detail>
         </DetailsContainer>
-        <DescriptionContainer>
+        <DescriptionContainer style={style.description}>
           <div dangerouslySetInnerHTML={this.createDescription()} />
         </DescriptionContainer>
       </Container>

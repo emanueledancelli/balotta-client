@@ -1,7 +1,8 @@
 import React from "react";
 import styled from "@emotion/styled";
-import Details from "../../components/Details";
+import StaticDetails from "../../components/StaticDetails";
 import { connect } from "react-redux";
+import { history } from "../../index";
 
 const Container = styled.div`
   scroll-snap-type: mandatory;
@@ -20,7 +21,7 @@ class Single extends React.Component {
         {!singleEvent ? (
           <p>Loading....</p>
         ) : (
-          <Details
+          <StaticDetails
             id={singleEvent.id}
             title={singleEvent.title.rendered}
             start_date={singleEvent.acf.start_date}

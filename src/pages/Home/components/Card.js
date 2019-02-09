@@ -13,6 +13,7 @@ const Container = styled("div")`
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
+  scroll-behavior: smooth;
   overflow: ${props => (props.isOpen ? "hidden" : "scroll")};
 `;
 
