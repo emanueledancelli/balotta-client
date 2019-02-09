@@ -20,15 +20,3 @@ export const setUi = id => (dispatch, getState) => {
 export const setFav = () => dispatch => {
   dispatch({ type: "IS_FAVOURITE" });
 };
-
-export const getRef = id => (dispatch, getState) => {
-  const isUpdated = getState().ui.isEventOnFocus.id;
-  if (isUpdated === id) {
-    return;
-  } else if (isUpdated !== id) {
-    dispatch({
-      type: "GET_REF",
-      payload: id
-    });
-  }
-};

@@ -33,13 +33,6 @@ export default function eventsReducer(state = initialState, action) {
           canFavourite: false
         }
       };
-    case "GET_REF":
-      return {
-        ...state,
-        eventOnFocusProps: {
-          id: action.payload
-        }
-      };
     default:
       return state;
   }

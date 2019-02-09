@@ -18,12 +18,7 @@ class List extends React.Component {
   state = {
     cardplace: ""
   };
-  componentWillMount() {
-    let aim = this.props.id;
-  }
-
   componentDidMount() {
-    console.log(this.refs);
     /*    if (document === null) {
       return;
     } else {
@@ -44,6 +39,7 @@ class List extends React.Component {
     } = this.props;
     let eventsToMap;
     let eventsList;
+    console.log(clubbing);
 
     if (match.params.listname === "week") {
       eventsToMap = week;
@@ -64,7 +60,7 @@ class List extends React.Component {
             end_time={e.acf.end_time}
             place={e.acf.place.post_title}
             image={e.acf.image.url}
-            ref={React.createRef(e.id)}
+            ref={this.cardPlace}
             description={e.acf.description}
             location={location}
             match={match}
@@ -96,8 +92,7 @@ const mapStateToProps = state => {
     culture: week.filter(e => e.acf.tags.includes("Culture")),
     clubbing: week.filter(e => e.acf.tags.includes("Clubbing")),
     shows: week.filter(e => e.acf.tags.includes("Shows")),
-    isOpen: state.ui.isEventOnFocus,
-    id: state.ui.eventOnFocusProps.id
+    isOpen: state.ui.isEventOnFocus
   };
 };
 

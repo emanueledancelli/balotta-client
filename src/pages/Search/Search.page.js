@@ -2,7 +2,6 @@ import React from "react";
 import styled from "@emotion/styled";
 import { keyframes } from "@emotion/core";
 import { connect } from "react-redux";
-import { getRef } from "../../actions/uiActions";
 import { Link } from "react-router-dom";
 
 const Container = styled.div`
@@ -99,8 +98,7 @@ class Search extends React.Component {
       concert,
       clubbing,
       shows,
-      culture,
-      getRef
+      culture
     } = this.props;
     const { discoverStuff, pick } = this.state;
 
@@ -167,7 +165,6 @@ class Search extends React.Component {
       return (
         <Link to={`/eventi/${listName}/${e.id}/${index}`} key={e.id}>
           <Square
-            onClick={() => getRef(e.id)}
             style={{
               background: `url(${thumbnail})`,
               backgroundSize: "cover"
@@ -271,11 +268,4 @@ const mapStateToProps = state => {
   };
 };
 
-const mapDispatchToProps = {
-  getRef
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Search);
+export default connect(mapStateToProps)(Search);
