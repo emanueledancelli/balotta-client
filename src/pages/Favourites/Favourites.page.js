@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "@emotion/styled";
-import { getSingleEvent, getFavEvents } from "../../api/index";
+import { getFavEvents } from "../../api/index";
 import { Link } from "react-router-dom";
 
 const Container = styled.div`

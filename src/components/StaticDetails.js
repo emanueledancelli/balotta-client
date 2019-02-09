@@ -1,8 +1,6 @@
 import React from "react";
 import styled from "@emotion/styled";
-import { keyframes, withEmotionCache } from "@emotion/core";
 import moment from "moment";
-import { history } from "../index";
 
 const Container = styled("div")`
   min-width: 100vw;
@@ -93,10 +91,7 @@ const DescriptionContainer = styled("div")`
 
 class Details extends React.Component {
   state = {
-    isSingle: false,
     show: true,
-    doingAnimation: true,
-    //base component styles
     style: {
       title: {
         fontSize: "2em",
@@ -154,16 +149,7 @@ class Details extends React.Component {
   };
 
   render() {
-    const {
-      start_date,
-      start_time,
-      end_time,
-      place,
-      image,
-      id,
-      location,
-      match
-    } = this.props;
+    const { start_date, start_time, end_time, place, image, id } = this.props;
     const { style } = this.state;
     const getDate = moment(start_date)
       .format("dddd D MMMM")

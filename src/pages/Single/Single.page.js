@@ -2,8 +2,8 @@ import React from "react";
 import styled from "@emotion/styled";
 import StaticDetails from "../../components/StaticDetails";
 import { connect } from "react-redux";
-import { history } from "../../index";
-
+/* import { history } from "../../index";
+ */
 const Container = styled.div`
   scroll-snap-type: mandatory;
   scroll-snap-points-y: repeat(100vw);

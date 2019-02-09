@@ -7,7 +7,8 @@ import StarIcon from "mdi-react/StarIcon";
 import MagnifyIcon from "mdi-react/MagnifyIcon";
 import ArrowBackIcon from "mdi-react/ArrowBackIcon";
 import { connect } from "react-redux";
-import { setUi, setFav } from "../actions/uiActions";
+import { setFav } from "../actions/uiActions";
+import { withRouter } from "react-router-dom";
 
 const Container = styled.div`
   height: 8vh;
@@ -71,21 +72,14 @@ class Navigation extends React.Component {
   };
 
   render() {
-    const {
-      isSelected,
-      location,
-      setUi,
-      eventId,
-      canFavourite,
-      setFav
-    } = this.props;
+    const { isSelected, location, eventId, canFavourite, setFav } = this.props;
 
     return (
       <Container location={location}>
-        {isSelected ? (
+        {isSelected || location.pathname.startsWith("/single") ? (
           <>
             <WhiteContainer>
-              <ArrowBackIcon onClick={() => setUi()} />
+              <ArrowBackIcon onClick={() => this.props.history.goBack()} />
               {canFavourite ? (
                 <StarOutlineIcon
                   onClick={() => {
@@ -131,11 +125,12 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = {
-  setUi,
   setFav
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Navigation);
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(Navigation)
+);
