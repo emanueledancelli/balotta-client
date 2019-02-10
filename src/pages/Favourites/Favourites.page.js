@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "@emotion/styled";
 import { getFavEvents } from "../../api/index";
+import { getDate } from "../../utils/getDate";
 import { Link } from "react-router-dom";
 
 const Container = styled.div`
@@ -51,6 +52,7 @@ class Favourites extends React.Component {
     let names = JSON.parse(localStorage.getItem("fav"));
     if (names !== null) {
       getFavEvents(names).then(res => {
+        console.log(res);
         this.setState({
           eventsToShow: res,
           isLoading: false

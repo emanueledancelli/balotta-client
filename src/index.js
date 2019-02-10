@@ -8,10 +8,12 @@ import { Router } from "react-router-dom";
 import "normalize.css";
 import * as serviceWorker from "./serviceWorker";
 import { fetchEvents } from "./actions/eventsActions";
+import { resetFav } from "./utils/resetFavourites";
 import createBrowserHistory from "history/createBrowserHistory";
 export const history = createBrowserHistory();
 
 store.dispatch(fetchEvents());
+resetFav();
 
 ReactDOM.render(
   <Provider store={store}>
