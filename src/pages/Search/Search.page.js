@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import _ from "lodash";
 import { mq } from "../../style/mediaQueries";
-import SquaredCard from "../../components/SquaredCard";
+import SquaredList from "../../components/SquaredList";
 
 const Container = styled.div`
   height: 32vh;
@@ -121,19 +121,8 @@ class Search extends React.Component {
     } = this.props;
     const { discoverStuff, pick } = this.state;
 
-    const todays = _.shuffle(today).map((e, index) => {
-      let thumbnail = e.acf.image.sizes.thumbnail;
-      let medium = e.acf.image.sizes.medium_large;
-      let listName = "today";
-      return (
-        <SquaredCard
-          url={`/eventi/${listName}/${e.id}/${index}`}
-          thumbnail={thumbnail}
-          medium={medium}
-          title={e.title.rendered}
-        />
-      );
-    });
+    const shuffledDay = _.shuffle(today);
+    const shuffledWe = _.shuffle(weekEnd);
 
     const showConcerts = concert.map((e, index) => {
       let thumbnail = e.acf.image.sizes.thumbnail;
@@ -210,21 +199,6 @@ class Search extends React.Component {
       );
     });
 
-    const weekEnds = _.shuffle(weekEnd).map((e, index) => {
-      let thumbnail = e.acf.image.sizes.thumbnail;
-      let listName = "weekend";
-      return (
-        <Link to={`/eventi/${listName}/${e.id}/${index}`} key={e.id}>
-          <Square
-            style={{
-              background: `url(${thumbnail})`,
-              backgroundSize: "cover"
-            }}
-          />
-        </Link>
-      );
-    });
-
     return (
       <>
         <Container onClick={this.handleHeroClick}>
@@ -233,41 +207,47 @@ class Search extends React.Component {
           <BlinkingCursor>_</BlinkingCursor>
         </Container>
         <Subtitle>
-          TODAY <Numbers>&sdot; {todays.length}</Numbers>
+          Today <Numbers>&sdot; {today.length}</Numbers>
         </Subtitle>
-        {today && <SquareContainer>{todays}</SquareContainer>}
+        {today && <SquaredList hasTags list={shuffledDay} name="today" />}
         <Fix h="5vh" />
         <Subtitle>
-          On the weekend <Numbers>&sdot; {weekEnds.length}</Numbers>
+          On the weekend <Numbers>&sdot; {weekEnd.length}</Numbers>
         </Subtitle>
-        <SquareContainer>{weekEnds}</SquareContainer>
+
+        {weekEnd && <SquaredList hasTags list={shuffledWe} name="weekend" />}
+
+        <Fix h="5vh" />
+
+        <Subtitle>
+          Clubbing {clubbing && <Numbers>&sdot; {clubbing.length}</Numbers>}
+        </Subtitle>
+        {clubbing && <SquaredList list={clubbing} name="clubbing" />}
+
+        <Fix h="5vh" />
+
+        <Subtitle>
+          Concerts <Numbers>&sdot; {concert.length}</Numbers>
+        </Subtitle>
+        {concert && <SquaredList list={concert} name="concert" />}
+
+        <Fix h="5vh" />
+
+        <Subtitle>
+          Culture <Numbers>&sdot; {culture.length}</Numbers>
+        </Subtitle>
+        {culture && <SquaredList list={culture} name="culture" />}
 
         <Fix h="5vh" />
         <Subtitle>
-          Clubbing{" "}
-          {showClubbing && <Numbers>&sdot; {showClubbing.length}</Numbers>}
+          Shows <Numbers>&sdot; {shows.length}</Numbers>
         </Subtitle>
-        {showClubbing && <SquareContainer>{showClubbing}</SquareContainer>}
+        {shows && <SquaredList list={shows} name="culture" />}
         <Fix h="5vh" />
         <Subtitle>
-          Concerts <Numbers>&sdot; {showConcerts.length}</Numbers>
+          Everything this week <Numbers>&sdot; {week.length}</Numbers>
         </Subtitle>
-        <SquareContainer>{showConcerts}</SquareContainer>
-        <Fix h="5vh" />
-        <Subtitle>
-          Culture <Numbers>&sdot; {showCulture.length}</Numbers>
-        </Subtitle>
-        <SquareContainer>{showCulture}</SquareContainer>
-        <Fix h="5vh" />
-        <Subtitle>
-          Shows <Numbers>&sdot; {showShows.length}</Numbers>
-        </Subtitle>
-        <SquareContainer>{showShows}</SquareContainer>
-        <Fix h="5vh" />
-        <Subtitle>
-          Everything this week <Numbers>&sdot; {weekly.length}</Numbers>
-        </Subtitle>
-        <SquareContainer>{weekly}</SquareContainer>
+        {week && <SquaredList list={week} name="week" hasTags />}
         <Fix h="20vh" />
       </>
     );
