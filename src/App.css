@@ -16,6 +16,10 @@ h2 {
   opacity: 1;
 }
 
+.active span {
+  color: #222;
+}
+
 a {
   text-decoration: none;
 }

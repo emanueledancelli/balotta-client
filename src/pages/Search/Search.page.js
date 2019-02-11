@@ -53,35 +53,8 @@ const Numbers = styled.span`
   font-size: 0.9em;
 `;
 
-const SquareContainer = styled.div`
-  padding-left: 3%;
-  white-space: nowrap;
-  position: relative;
-  overflow-x: auto;
-  overflow-y: hidden;
-  -webkit-overflow-scrolling: touch;
-  &::-webkit-scrollbar {
-    display: none;
-  }
-`;
-
 const Fix = styled.div`
   height: ${props => props.h};
-`;
-
-const Square = styled.div`
-  height: 160px;
-  width: 160px;
-  margin-right: 5px;
-  display: inline-block;
-  background: url(${props => props.thumb});
-  background-size: cover;
-  ${mq[2]} {
-    height: 350px;
-    width: 350px;
-    margin-right: 25px;
-    background: url(${props => props.medium});
-  }
 `;
 
 const TypeAnimation = styled.h1`
@@ -124,81 +97,6 @@ class Search extends React.Component {
     const shuffledDay = _.shuffle(today);
     const shuffledWe = _.shuffle(weekEnd);
 
-    const showConcerts = concert.map((e, index) => {
-      let thumbnail = e.acf.image.sizes.thumbnail;
-      let listName = "concerts";
-      return (
-        <Link to={`/eventi/${listName}/${e.id}/${index}`} key={e.id}>
-          <Square
-            style={{
-              background: `url(${thumbnail})`,
-              backgroundSize: "cover"
-            }}
-          />
-        </Link>
-      );
-    });
-
-    const showClubbing = clubbing.map((e, index) => {
-      let thumbnail = e.acf.image.sizes.thumbnail;
-      let listName = "clubbing";
-      return (
-        <Link to={`/eventi/${listName}/${e.id}/${index}`} key={e.id}>
-          <Square
-            style={{
-              background: `url(${thumbnail})`,
-              backgroundSize: "cover"
-            }}
-          />
-        </Link>
-      );
-    });
-
-    const showCulture = culture.map((e, index) => {
-      let thumbnail = e.acf.image.sizes.thumbnail;
-      let listName = "culture";
-      return (
-        <Link to={`/eventi/${listName}/${e.id}/${index}`} key={e.id}>
-          <Square
-            style={{
-              background: `url(${thumbnail})`,
-              backgroundSize: "cover"
-            }}
-          />
-        </Link>
-      );
-    });
-
-    const showShows = shows.map((e, index) => {
-      let thumbnail = e.acf.image.sizes.thumbnail;
-      let listName = "shows";
-      return (
-        <Link to={`/eventi/${listName}/${e.id}/${index}`} key={e.id}>
-          <Square
-            style={{
-              background: `url(${thumbnail})`,
-              backgroundSize: "cover"
-            }}
-          />
-        </Link>
-      );
-    });
-
-    const weekly = week.map((e, index) => {
-      let thumbnail = e.acf.image.sizes.thumbnail;
-      let listName = "week";
-      return (
-        <Link to={`/eventi/${listName}/${e.id}/${index}`} key={e.id}>
-          <Square
-            style={{
-              background: `url(${thumbnail})`,
-              backgroundSize: "cover"
-            }}
-          />
-        </Link>
-      );
-    });
-
     return (
       <>
         <Container onClick={this.handleHeroClick}>
@@ -206,6 +104,7 @@ class Search extends React.Component {
           <TypeAnimation>{discoverStuff[pick]}</TypeAnimation>
           <BlinkingCursor>_</BlinkingCursor>
         </Container>
+
         <Subtitle>
           Today <Numbers>&sdot; {today.length}</Numbers>
         </Subtitle>
@@ -214,30 +113,22 @@ class Search extends React.Component {
         <Subtitle>
           On the weekend <Numbers>&sdot; {weekEnd.length}</Numbers>
         </Subtitle>
-
         {weekEnd && <SquaredList hasTags list={shuffledWe} name="weekend" />}
-
         <Fix h="5vh" />
-
         <Subtitle>
           Clubbing {clubbing && <Numbers>&sdot; {clubbing.length}</Numbers>}
         </Subtitle>
         {clubbing && <SquaredList list={clubbing} name="clubbing" />}
-
         <Fix h="5vh" />
-
         <Subtitle>
           Concerts <Numbers>&sdot; {concert.length}</Numbers>
         </Subtitle>
         {concert && <SquaredList list={concert} name="concert" />}
-
         <Fix h="5vh" />
-
         <Subtitle>
           Culture <Numbers>&sdot; {culture.length}</Numbers>
         </Subtitle>
         {culture && <SquaredList list={culture} name="culture" />}
-
         <Fix h="5vh" />
         <Subtitle>
           Shows <Numbers>&sdot; {shows.length}</Numbers>
