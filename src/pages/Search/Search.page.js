@@ -4,6 +4,8 @@ import { keyframes } from "@emotion/core";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import _ from "lodash";
+import { mq } from "../../style/mediaQueries";
+import SquaredCard from "../../components/SquaredCard";
 
 const Container = styled.div`
   height: 32vh;
@@ -40,7 +42,8 @@ const Title = styled.h1`
 `;
 
 const Subtitle = styled.h2`
-  color: #888;
+  color: #222;
+  font-size: 1.2em;
   padding-left: 3%;
 `;
 
@@ -54,9 +57,12 @@ const SquareContainer = styled.div`
   padding-left: 3%;
   white-space: nowrap;
   position: relative;
-  overflow-x: scroll;
+  overflow-x: auto;
   overflow-y: hidden;
   -webkit-overflow-scrolling: touch;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 const Fix = styled.div`
@@ -64,10 +70,18 @@ const Fix = styled.div`
 `;
 
 const Square = styled.div`
-  height: 150px;
-  width: 150px;
+  height: 160px;
+  width: 160px;
   margin-right: 5px;
   display: inline-block;
+  background: url(${props => props.thumb});
+  background-size: cover;
+  ${mq[2]} {
+    height: 350px;
+    width: 350px;
+    margin-right: 25px;
+    background: url(${props => props.medium});
+  }
 `;
 
 const TypeAnimation = styled.h1`
@@ -91,6 +105,10 @@ class Search extends React.Component {
     });
   }
 
+  createTitle = title => {
+    return { __html: title };
+  };
+
   render() {
     const {
       today,
@@ -102,6 +120,20 @@ class Search extends React.Component {
       culture
     } = this.props;
     const { discoverStuff, pick } = this.state;
+
+    const todays = _.shuffle(today).map((e, index) => {
+      let thumbnail = e.acf.image.sizes.thumbnail;
+      let medium = e.acf.image.sizes.medium_large;
+      let listName = "today";
+      return (
+        <SquaredCard
+          url={`/eventi/${listName}/${e.id}/${index}`}
+          thumbnail={thumbnail}
+          medium={medium}
+          title={e.title.rendered}
+        />
+      );
+    });
 
     const showConcerts = concert.map((e, index) => {
       let thumbnail = e.acf.image.sizes.thumbnail;
@@ -163,21 +195,6 @@ class Search extends React.Component {
       );
     });
 
-    const todays = _.shuffle(today).map((e, index) => {
-      let thumbnail = e.acf.image.sizes.thumbnail;
-      let listName = "today";
-      return (
-        <Link to={`/eventi/${listName}/${e.id}/${index}`} key={e.id}>
-          <Square
-            style={{
-              background: `url(${thumbnail})`,
-              backgroundSize: "cover"
-            }}
-          />
-        </Link>
-      );
-    });
-
     const weekly = week.map((e, index) => {
       let thumbnail = e.acf.image.sizes.thumbnail;
       let listName = "week";
@@ -216,7 +233,7 @@ class Search extends React.Component {
           <BlinkingCursor>_</BlinkingCursor>
         </Container>
         <Subtitle>
-          Today <Numbers>&sdot; {todays.length}</Numbers>
+          TODAY <Numbers>&sdot; {todays.length}</Numbers>
         </Subtitle>
         {today && <SquareContainer>{todays}</SquareContainer>}
         <Fix h="5vh" />
