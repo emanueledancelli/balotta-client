@@ -43,15 +43,14 @@ const Title = styled.h1`
 
 const Subtitle = styled.h2`
   color: #222;
-  font-size: 1.8em;
+  font-size: 1.2em;
   padding-left: 3%;
-  margin: 0;
 `;
 
 const Numbers = styled.span`
   color: rgba(0, 0, 0, 0.1);
   font-weight: 500;
-  font-size: 2em;
+  font-size: 0.9em;
 `;
 
 const Fix = styled.div`
@@ -66,44 +65,6 @@ const TypeAnimation = styled.h1`
   animation: ${FadeAndSlide} 500ms ease-in;
 `;
 
-const SectionContainer = styled.div`
-  width: 100vw;
-  height: 25vh;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-`;
-
-const SectionLeft = styled.div`
-  width: 30%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-`;
-
-const Square = styled.div`
-  height: ${props => props.dimension}px;
-  width: ${props => props.dimension}px;
-  background: url(${props => props.image});
-  background-size: cover;
-  position: absolute;
-  right: ${props => props.right}vh;
-  margin-top: ${props => props.top}vh;
-  box-shadow: -10px 0px 25px -8px #000;
-  opacity: ${props => props.op};
-  overflow: auto;
-`;
-
-const SectionRight = styled.div`
-  width: 70%;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  align-items: center;
-`;
-
 class Search extends React.Component {
   state = {
     discoverStuff: ["Bologna", "Events", "Places"],
@@ -116,14 +77,6 @@ class Search extends React.Component {
       pick: rng
     });
   }
-
-  randomGenR = () => Math.floor(Math.random() * 15);
-
-  randomGenT = () => {
-    let n = Math.floor(Math.random() * 5);
-    let s = Math.random() < 0.5 ? -1 : 1;
-    return n * s;
-  };
 
   createTitle = title => {
     return { __html: title };
@@ -140,21 +93,9 @@ class Search extends React.Component {
       culture
     } = this.props;
     const { discoverStuff, pick } = this.state;
-    let three = today.slice(2);
-    console.log(three[0]);
 
-    const squared = _.shuffle(three).map(e => {
-      return (
-        <Square
-          dimension="150"
-          right={this.randomGenR}
-          top={this.randomGenT}
-          image={e.acf.image.sizes.thumbnail}
-          color="black"
-          op="1"
-        />
-      );
-    });
+    const shuffledDay = _.shuffle(today);
+    const shuffledWe = _.shuffle(weekEnd);
 
     return (
       <>
@@ -163,25 +104,41 @@ class Search extends React.Component {
           <TypeAnimation>{discoverStuff[pick]}</TypeAnimation>
           <BlinkingCursor>_</BlinkingCursor>
         </Container>
-        <Fix h="5vh" />
 
-        <SectionContainer>
-          <SectionLeft>
-            <Subtitle>Today</Subtitle>
-          </SectionLeft>
-          <SectionRight>{squared}</SectionRight>
-        </SectionContainer>
-        <Fix h="20vh" />
-        <SectionContainer>
-          <SectionLeft>
-            <Subtitle>Weekend</Subtitle>
-          </SectionLeft>
-          <SectionRight>
-            <Square dimension="120" right="5vh" top="3vh" color="red" />
-            <Square dimension="120" right="7vh" top="0vh" color="blue" />
-            <Square dimension="120" right="3vh" top="-3vh" color="black" />
-          </SectionRight>
-        </SectionContainer>
+        <Subtitle>
+          Today <Numbers>&sdot; {today.length}</Numbers>
+        </Subtitle>
+        {today && <SquaredList hasTags list={shuffledDay} name="today" />}
+        <Fix h="5vh" />
+        <Subtitle>
+          On the weekend <Numbers>&sdot; {weekEnd.length}</Numbers>
+        </Subtitle>
+        {weekEnd && <SquaredList hasTags list={shuffledWe} name="weekend" />}
+        <Fix h="5vh" />
+        <Subtitle>
+          Clubbing {clubbing && <Numbers>&sdot; {clubbing.length}</Numbers>}
+        </Subtitle>
+        {clubbing && <SquaredList list={clubbing} name="clubbing" />}
+        <Fix h="5vh" />
+        <Subtitle>
+          Concerts <Numbers>&sdot; {concert.length}</Numbers>
+        </Subtitle>
+        {concert && <SquaredList list={concert} name="concerts" />}
+        <Fix h="5vh" />
+        <Subtitle>
+          Culture <Numbers>&sdot; {culture.length}</Numbers>
+        </Subtitle>
+        {culture && <SquaredList list={culture} name="culture" />}
+        <Fix h="5vh" />
+        <Subtitle>
+          Shows <Numbers>&sdot; {shows.length}</Numbers>
+        </Subtitle>
+        {shows && <SquaredList list={shows} name="shows" />}
+        <Fix h="5vh" />
+        <Subtitle>
+          Everything this week <Numbers>&sdot; {week.length}</Numbers>
+        </Subtitle>
+        {week && <SquaredList list={week} name="week" hasTags />}
         <Fix h="20vh" />
       </>
     );
@@ -197,10 +154,10 @@ const mapStateToProps = state => {
     today,
     weekEnd,
     week,
-    concert: week.filter(e => e.acf.tags.includes("Concert")),
-    culture: week.filter(e => e.acf.tags.includes("Culture")),
-    clubbing: week.filter(e => e.acf.tags.includes("Clubbing")),
-    shows: week.filter(e => e.acf.tags.includes("Shows"))
+    concert: _.shuffle(week.filter(e => e.acf.tags.includes("Concert"))),
+    culture: _.shuffle(week.filter(e => e.acf.tags.includes("Culture"))),
+    clubbing: _.shuffle(week.filter(e => e.acf.tags.includes("Clubbing"))),
+    shows: _.shuffle(week.filter(e => e.acf.tags.includes("Shows")))
   };
 };
 
