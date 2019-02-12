@@ -88,6 +88,10 @@ class Home extends React.Component {
 const mapStateToProps = state => {
   const { isLoading } = state.events;
   const { today } = state.events.data;
+  let tod = today.filter(e =>
+    e.acf.tags.includes("Concert" || "Clubbing" || "Culture")
+  );
+  console.log(tod);
 
   return {
     isLoading,

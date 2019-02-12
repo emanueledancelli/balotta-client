@@ -13,6 +13,7 @@ const Container = styled("div")`
 
 class List extends React.Component {
   componentDidMount() {
+    console.log(this.props);
     if (document === null) {
       return;
     } else if (document !== null) {
@@ -21,6 +22,10 @@ class List extends React.Component {
         el.scrollIntoView({ behavior: "auto" });
       }
     }
+  }
+
+  componentWillReceiveProps() {
+    console.log(this.props);
   }
   render() {
     const {

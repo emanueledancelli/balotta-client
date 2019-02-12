@@ -67,6 +67,7 @@ const SquaredList = ({ name, list, hasTags }) => {
       <Link
         style={{ display: "inline-block" }}
         to={`/eventi/${listName}/${e.id}/${index}`}
+        key={e.id}
       >
         <Container>
           <Image thumb={thumbnail} medium={medium}>

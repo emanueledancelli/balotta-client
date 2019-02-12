@@ -1,11 +1,12 @@
 import React from "react";
 import styled from "@emotion/styled";
-import { withRouter } from "react-router-dom";
+import ChevronLeftIcon from "mdi-react/ChevronLeftIcon";
+import { withRouter, Link } from "react-router-dom";
 
-const Container = styled("div")`
+const Container = styled.div`
   background-color: transparent;
   position: absolute;
-  height: 7vh;
+  height: 10vh;
   min-width: 100vw;
   z-index: 1;
   top: 0;
@@ -14,60 +15,68 @@ const Container = styled("div")`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 0.5px solid rgba(255, 255, 255, 0.2);
 `;
 
-const Filter = styled("p")`
+const Item = styled.p`
   color: rgba(255, 255, 255, 0.8);
   width: 50%;
-  padding-top: 2%;
+  padding-top: 5%;
   padding-bottom: 2%;
-  padding-left: 3%;
-  font-weight: 500;
+  & a {
+    color: white;
+  }
 `;
 
-const Index = styled.p`
-  padding-top: 2%;
-  padding-bottom: 2%;
-  padding-right: 3%;
-  font-weight: 500;
+const ItemKind = styled.p`
   color: rgba(255, 255, 255, 0.8);
+  width: 50%;
+  padding-top: 5%;
+  padding-bottom: 2%;
+  margin-right: 3%;
+  display: flex;
+  text-transform: capitalize;
+  font-weight: 500;
+  font-size: 0.9em;
+  justify-content: flex-end;
+  align-items: center;
+  & a {
+    color: white;
+  }
 `;
 
 class Header extends React.Component {
   render() {
-    const { location } = this.props;
-    let place;
-
+    const { location, match } = this.props;
+    let path = location.pathname.split("/");
+    console.log(path);
     if (location.pathname === "/") {
-      place = "Best today";
-    } else if (location.pathname.startsWith("/eventi/today")) {
-      place = "Today";
-    } else if (location.pathname.startsWith("/eventi/week")) {
-      place = "Everything this week";
-    } else if (location.pathname.startsWith("/eventi/weekend")) {
-      place = "On the weekend";
-    } else if (location.pathname.startsWith("/eventi/clubbing")) {
-      place = "Clubbing";
-    } else if (location.pathname.startsWith("/eventi/concerts")) {
-      place = "Concerts";
-    } else if (location.pathname.startsWith("/eventi/culture")) {
-      place = "Culture";
-    } else if (location.pathname.startsWith("/eventi/shows")) {
-      place = "Shows";
-    } else if (location.pathname.startsWith("/eventi/favourites")) {
-      place = "Favourite";
+      return (
+        <Container>
+          <Item>Best Today</Item>
+        </Container>
+      );
     }
-
-    return (
-      <Container loc={place}>
-        {location.pathname.startsWith("/single") ? (
-          <Filter onClick={() => this.props.history.goBack()}>back</Filter>
-        ) : (
-          <Filter>{place}</Filter>
-        )}
-      </Container>
-    );
+    if (location.pathname.startsWith("/eventi")) {
+      return (
+        <Container>
+          <Item>
+            <Link to="/search">
+              <ChevronLeftIcon size={45} />
+            </Link>
+          </Item>
+          <ItemKind>{path[2]}</ItemKind>
+        </Container>
+      );
+    }
+    if (location.pathname.startsWith("/single")) {
+      return (
+        <Container>
+          <Item onClick={() => this.props.history.goBack()}>back</Item>
+        </Container>
+      );
+    } else {
+      return null;
+    }
   }
 }
 

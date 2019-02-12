@@ -20,6 +20,19 @@ h2 {
   color: #222;
 }
 
+.active-home {
+  color: #fff;
+}
+
+.active-home svg {
+  color: #fff;
+  opacity: 1;
+}
+
+.active-home span {
+  color: #fff;
+}
+
 a {
   text-decoration: none;
 }

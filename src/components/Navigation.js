@@ -89,59 +89,67 @@ class Navigation extends React.Component {
     } = this.props;
 
     return (
-      <Container location={location}>
-        {isSelected ? (
-          <>
-            <WhiteContainer>
-              <ArrowBackIcon onClick={() => setUi()} />
-              {canFavourite ? (
-                <p
-                  onClick={() => {
-                    this.addToFavorities(eventId);
-                    setFav();
-                  }}
-                  style={{
-                    fontWeight: "700",
-                    color: "#eb5757"
-                  }}
-                >
-                  SAVE
-                </p>
-              ) : (
-                <p
-                  style={{
-                    fontWeight: "700",
-                    color: "#eb5757"
-                  }}
-                >
-                  SAVED!
-                </p>
-              )}
-            </WhiteContainer>
-          </>
-        ) : (
-          <>
-            <NavLink to="/" activeClassName="active" exact>
-              <Item>
-                <WhatshotIcon />
-                <NavHelper>Hot</NavHelper>
-              </Item>
-            </NavLink>
-            <NavLink to="/search" exact>
-              <Item>
-                <HomeOutlineIcon size={26} />
-                <NavHelper>Home</NavHelper>
-              </Item>
-            </NavLink>
-            <NavLink to="/favourites" activeClassName="active" exact>
-              <Item>
-                <FavoriteOutlineIcon size={22} />
-                <NavHelper>Saved</NavHelper>
-              </Item>
-            </NavLink>
-          </>
-        )}
-      </Container>
+      <>
+        <Container location={location}>
+          {isSelected ? (
+            <>
+              <WhiteContainer>
+                <ArrowBackIcon onClick={() => setUi()} />
+                {canFavourite ? (
+                  <p
+                    onClick={() => {
+                      this.addToFavorities(eventId);
+                      setFav();
+                    }}
+                    style={{
+                      fontWeight: "700",
+                      color: "#eb5757"
+                    }}
+                  >
+                    SAVE
+                  </p>
+                ) : (
+                  <p
+                    style={{
+                      fontWeight: "700",
+                      color: "#eb5757"
+                    }}
+                  >
+                    SAVED!
+                  </p>
+                )}
+              </WhiteContainer>
+            </>
+          ) : (
+            <>
+              <NavLink
+                to="/"
+                activeClassName={
+                  location.pathname === "/" ? "active-home" : "active"
+                }
+                exact
+              >
+                <Item>
+                  <WhatshotIcon />
+                  <NavHelper>Hot</NavHelper>
+                </Item>
+              </NavLink>
+              <NavLink to="/search" exact>
+                <Item>
+                  <HomeOutlineIcon size={26} />
+                  <NavHelper>Home</NavHelper>
+                </Item>
+              </NavLink>
+              <NavLink to="/favourites" activeClassName="active" exact>
+                <Item>
+                  <FavoriteOutlineIcon size={22} />
+                  <NavHelper>Saved</NavHelper>
+                </Item>
+              </NavLink>
+            </>
+          )}
+        </Container>
+      </>
     );
   }
 }

@@ -123,7 +123,7 @@ class Search extends React.Component {
         <Subtitle>
           Concerts <Numbers>&sdot; {concert.length}</Numbers>
         </Subtitle>
-        {concert && <SquaredList list={concert} name="concert" />}
+        {concert && <SquaredList list={concert} name="concerts" />}
         <Fix h="5vh" />
         <Subtitle>
           Culture <Numbers>&sdot; {culture.length}</Numbers>
@@ -133,7 +133,7 @@ class Search extends React.Component {
         <Subtitle>
           Shows <Numbers>&sdot; {shows.length}</Numbers>
         </Subtitle>
-        {shows && <SquaredList list={shows} name="culture" />}
+        {shows && <SquaredList list={shows} name="shows" />}
         <Fix h="5vh" />
         <Subtitle>
           Everything this week <Numbers>&sdot; {week.length}</Numbers>

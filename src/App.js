@@ -38,7 +38,8 @@ class App extends Component {
           <div className="App">
             <Header location={location} />
             {Routes(location)}
-            {location.pathname.startsWith("/single") ? null : (
+            {location.pathname.startsWith("/single") ||
+            location.pathname.startsWith("/eventi") ? null : (
               <Navigation location={location} />
             )}
           </div>
