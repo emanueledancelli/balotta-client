@@ -188,10 +188,6 @@ class Card extends React.Component {
               </Detail>
             </Animated>
           </Details>
-          <ActionsContainer>
-            <FavoriteOutlineIcon size={36} />
-            <FavoriteOutlineIcon size={36} />
-          </ActionsContainer>
           <DescriptionContainer isOpen={uiActive}>
             <div dangerouslySetInnerHTML={this.createDescription()} />
           </DescriptionContainer>

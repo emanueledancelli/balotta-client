@@ -48,7 +48,6 @@ class Header extends React.Component {
   render() {
     const { location, match } = this.props;
     let path = location.pathname.split("/");
-    console.log(path);
     if (location.pathname === "/") {
       return (
         <Container>
