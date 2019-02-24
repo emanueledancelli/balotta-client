@@ -11,7 +11,7 @@ const Container = styled.div`
   z-index: 1;
   top: 0;
   left: 0;
-  display: flex;
+  display: none;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;

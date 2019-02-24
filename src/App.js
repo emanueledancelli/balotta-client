@@ -9,11 +9,15 @@ import List from "./pages/List/List.page";
 import Single from "./pages/Single/Single.page";
 import Header from "./components/Header";
 import Navigation from "./components/Navigation";
+import Slider from "./pages/SingleScrolling/Slider";
+import SingleScrolling from "./pages/SingleScrolling/SingleScrolling";
 
 const Routes = location => {
   return (
     <Switch location={location}>
-      <Route exact path="/" component={Home} />
+      <Route exact path="/" component={Slider} />
+      <Route exact path="/singlescrolling" component={SingleScrolling} />
+
       <Route exact path="/favourites" component={Favourites} />
       <Route exact path="/search" component={Search} />
       <Route

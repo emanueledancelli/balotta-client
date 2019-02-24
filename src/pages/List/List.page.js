@@ -1,46 +1,47 @@
 import React from "react";
-import styled from "@emotion/styled";
 import { connect } from "react-redux";
-import Card from "../Home/components/Card";
-
-const Container = styled("div")`
-  scroll-snap-type: mandatory;
-  scroll-snap-points-y: repeat(100vw);
-  scroll-snap-type: x mandatory;
-  display: flex;
-  overflow-x: ${props => (props.open ? "hidden" : "scroll")};
-`;
+import SingleScrolling from "../SingleScrolling/SingleScrolling";
+import SwipeableViews from "react-swipeable-views";
 
 class List extends React.Component {
-  /* componentDidMount() {
-    if (document === null) {
-      return;
-    } else if (document !== null) {
-      let el = document.getElementById(this.props.match.params.id);
-      if (el) {
-        el.scrollIntoView({ behavior: "auto" });
-      }
-    }
-    window.addEventListener("scroll", this.handleScroll);
+  state = {
+    windowHeight: Number,
+    index: 0
+  };
+
+  componentDidMount() {
+    var iHeight = window.screen.height;
+    this.setState({
+      windowHeight: iHeight
+    });
   }
 
-  handleScroll = () => {
-    console.log(window.scrollY);
-  }; */
+  handleChangeIndex = index => {
+    this.setState({
+      index
+    });
+  };
 
   render() {
+    const { windowHeight, index } = this.state;
+
     const {
       today,
       weekEnd,
       week,
-      location,
       match,
-      isOpen,
       clubbing,
       shows,
       culture,
       concert
     } = this.props;
+
+    const styles = {
+      slide: {
+        minHeight: windowHeight,
+        color: "#fff"
+      }
+    };
 
     let eventsToMap;
     let eventsList;
@@ -63,21 +64,17 @@ class List extends React.Component {
 
     eventsList = eventsToMap.map(e => {
       return (
-        <React.Fragment key={e.id}>
-          <Card
-            id={e.id}
+        <div style={styles.slide} key={e.key}>
+          <SingleScrolling
             title={e.title.rendered}
-            ref={e.id}
-            start_date={e.acf.start_date}
-            start_time={e.acf.start_time}
-            end_time={e.acf.end_time}
+            startDate={e.acf.start_date}
+            startTime={e.acf.start_time}
+            endTime={e.acf.end_time}
             place={e.acf.place.post_title}
-            image={e.acf.image.url}
+            imageUrl={e.acf.image.url}
             description={e.acf.description}
-            location={location}
-            match={match}
           />
-        </React.Fragment>
+        </div>
       );
     });
 
@@ -86,7 +83,9 @@ class List extends React.Component {
         {!eventsToMap ? (
           <p>Loading...</p>
         ) : (
-          <Container open={isOpen}>{eventsList}</Container>
+          <SwipeableViews ignoreNativeScroll={true}>
+            {eventsList}
+          </SwipeableViews>
         )}
       </>
     );
@@ -94,16 +93,26 @@ class List extends React.Component {
 }
 
 const mapStateToProps = state => {
-  const { today, weekEnd, week, isLoading } = state.events.data;
+  const {
+    today,
+    weekEnd,
+    week,
+    culture,
+    concert,
+    shows,
+    clubbing,
+    isLoading
+  } = state.events.data;
+
   return {
     isLoading,
     today,
     weekEnd,
     week,
-    concert: week.filter(e => e.acf.tags.includes("Concert")),
-    culture: week.filter(e => e.acf.tags.includes("Culture")),
-    clubbing: week.filter(e => e.acf.tags.includes("Clubbing")),
-    shows: week.filter(e => e.acf.tags.includes("Shows")),
+    concert,
+    culture,
+    clubbing,
+    shows,
     isOpen: state.ui.isEventOnFocus
   };
 };

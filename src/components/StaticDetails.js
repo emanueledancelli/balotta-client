@@ -2,12 +2,13 @@ import React from "react";
 import styled from "@emotion/styled";
 import { keyframes, withEmotionCache } from "@emotion/core";
 import moment from "moment";
+
+import { useSwipeable, Swipeable } from "react-swipeable";
 import { history } from "../index";
 
 const Container = styled("div")`
   min-width: 100vw;
   height: 100vh;
-  scroll-snap-align: start;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -115,7 +116,7 @@ class Details extends React.Component {
     }
   };
 
-  componentDidMount() {
+  /*   componentDidMount() {
     setTimeout(this.mountAnimation, 20);
   }
 
@@ -135,7 +136,7 @@ class Details extends React.Component {
         }
       }
     });
-  };
+  }; */
 
   /*   unMountAnimation = () => {
     this.setState({
@@ -180,30 +181,29 @@ class Details extends React.Component {
         }}
         id={id}
       >
-        <Title
-          style={style.title}
-          dangerouslySetInnerHTML={this.createTitle()}
-        />
-        <DetailsContainer style={style.details}>
-          <DetailsDate>
-            <DateDay>{getDate[0]}</DateDay>
-            <DateDayNumber>{getDate[1]}</DateDayNumber>
-            <DateMonth>{getDate[2]}</DateMonth>
-          </DetailsDate>
-          <Detail>
-            <DetailNote>from</DetailNote>
-            <DetailData>{start_time}</DetailData>
-            <DetailNote>to</DetailNote>
-            <DetailData>{end_time}</DetailData>
-          </Detail>
-          <Detail>
-            <DetailNote>where</DetailNote>
-            <DetailData>{place}</DetailData>
-          </Detail>
-        </DetailsContainer>
-        <DescriptionContainer style={style.description}>
-          <div dangerouslySetInnerHTML={this.createDescription()} />
-        </DescriptionContainer>
+        <Swipeable onSwipedRight={alert("swiped down")}>
+          <Title
+            style={style.title}
+            dangerouslySetInnerHTML={this.createTitle()}
+          />
+          <DetailsContainer style={style.details}>
+            <DetailsDate>
+              <DateDay>{getDate[0]}</DateDay>
+              <DateDayNumber>{getDate[1]}</DateDayNumber>
+              <DateMonth>{getDate[2]}</DateMonth>
+            </DetailsDate>
+            <Detail>
+              <DetailNote>from</DetailNote>
+              <DetailData>{start_time}</DetailData>
+              <DetailNote>to</DetailNote>
+              <DetailData>{end_time}</DetailData>
+            </Detail>
+            <Detail>
+              <DetailNote>where</DetailNote>
+              <DetailData>{place}</DetailData>
+            </Detail>
+          </DetailsContainer>
+        </Swipeable>
       </Container>
     );
   }

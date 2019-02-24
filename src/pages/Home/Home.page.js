@@ -7,9 +7,6 @@ import Card from "./components/Card";
 import { connect } from "react-redux";
 
 const Container = styled("div")`
-  scroll-snap-type: mandatory;
-  scroll-snap-points-y: repeat(100vw);
-  scroll-snap-type: x mandatory;
   display: flex;
   overflow-x: ${props => (props.open ? "hidden" : "scroll")};
 `;
@@ -58,6 +55,7 @@ const Loader = () => {
 class Home extends React.Component {
   render() {
     const { isLoading, shows, isOpen } = this.props;
+    const singleShow = shows.slice(0);
     const eventList = shows.map(e => {
       return (
         <Card

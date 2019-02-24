@@ -4,7 +4,7 @@ import moment from "moment";
 import FavoriteOutlineIcon from "mdi-react/FavoriteOutlineIcon";
 import { connect } from "react-redux";
 import { setUi } from "../../../actions/uiActions";
-import { Swipeable } from "react-touch";
+import { useSwipeable, Swipeable } from "react-swipeable";
 
 const Container = styled("div")`
   min-width: 100vw;
@@ -29,7 +29,7 @@ const Animated = styled.div`
   }
 `;
 
-const Title = styled("h1")`
+const Title = styled.h1`
   font-size: ${props => (props.isOpen ? "1.5em" : "1.8em")};
   color: #ffffff;
   padding: 0 3%;
@@ -39,7 +39,7 @@ const Title = styled("h1")`
   letter-spacing: -1px;
 `;
 
-const Details = styled("div")`
+const Details = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -149,7 +149,7 @@ class Card extends React.Component {
       .split(" ");
 
     return (
-      <Swipeable onSwipeDown={console.log("it works")}>
+      <Swipeable onSwiped={console.log("swiped")}>
         <Container
           style={{
             background:
@@ -188,6 +188,7 @@ class Card extends React.Component {
               </Detail>
             </Animated>
           </Details>
+          <button>slide to bottom</button>
           <DescriptionContainer isOpen={uiActive}>
             <div dangerouslySetInnerHTML={this.createDescription()} />
           </DescriptionContainer>
