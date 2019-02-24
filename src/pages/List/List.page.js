@@ -10,21 +10,16 @@ class List extends React.Component {
   };
 
   componentDidMount() {
-    var iHeight = window.screen.height;
-    this.setState({
-      windowHeight: iHeight
-    });
+    let h = window.screen.height;
+    this.setWindowHeight(h);
   }
 
-  handleChangeIndex = index => {
-    this.setState({
-      index
-    });
-  };
+  setWindowHeight = h => this.setState({ windowHeight: h });
+
+  handleChangeIndex = i => this.setState({ index: i });
 
   render() {
     const { windowHeight, index } = this.state;
-
     const {
       today,
       weekEnd,
@@ -36,35 +31,38 @@ class List extends React.Component {
       concert
     } = this.props;
 
-    const styles = {
-      slide: {
-        minHeight: windowHeight,
-        color: "#fff"
-      }
-    };
-
     let eventsToMap;
-    let eventsList;
+    let eventsToShow;
 
-    if (match.params.listname === "week") {
-      eventsToMap = week;
-    } else if (match.params.listname === "today") {
-      eventsToMap = today;
-    } else if (match.params.listname === "weekend") {
-      eventsToMap = weekEnd;
-    } else if (match.params.listname === "clubbing") {
-      eventsToMap = clubbing;
-    } else if (match.params.listname === "shows") {
-      eventsToMap = shows;
-    } else if (match.params.listname === "culture") {
-      eventsToMap = culture;
-    } else if (match.params.listname === "concerts") {
-      eventsToMap = concert;
+    switch (match.params.listname) {
+      case "week":
+        eventsToMap = week;
+        break;
+      case "today":
+        eventsToMap = today;
+        break;
+      case "weekend":
+        eventsToMap = weekEnd;
+        break;
+      case "culture":
+        eventsToMap = culture;
+        break;
+      case "concert":
+        eventsToMap = concert;
+        break;
+      case "clubbing":
+        eventsToMap = clubbing;
+        break;
+      case "shows":
+        eventsToMap = shows;
+        break;
+      default:
+        break;
     }
 
-    eventsList = eventsToMap.map(e => {
+    eventsToShow = eventsToMap.map(e => {
       return (
-        <div style={styles.slide} key={e.key}>
+        <div style={{ minHeight: windowHeight, color: "#FFFFFF" }} key={e.key}>
           <SingleScrolling
             title={e.title.rendered}
             startDate={e.acf.start_date}
@@ -84,7 +82,7 @@ class List extends React.Component {
           <p>Loading...</p>
         ) : (
           <SwipeableViews ignoreNativeScroll={true}>
-            {eventsList}
+            {eventsToShow}
           </SwipeableViews>
         )}
       </>
@@ -112,8 +110,7 @@ const mapStateToProps = state => {
     concert,
     culture,
     clubbing,
-    shows,
-    isOpen: state.ui.isEventOnFocus
+    shows
   };
 };
 
