@@ -110,7 +110,7 @@ class SingleScrolling extends React.Component {
     const { windowHeight } = this.state;
     const {
       title,
-      startDate,
+      //startDate,
       startTime,
       endTime,
       place,

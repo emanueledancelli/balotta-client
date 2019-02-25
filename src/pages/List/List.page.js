@@ -19,7 +19,7 @@ class List extends React.Component {
   handleChangeIndex = i => this.setState({ index: i });
 
   render() {
-    const { windowHeight, index } = this.state;
+    const { windowHeight } = this.state;
     const {
       today,
       weekEnd,

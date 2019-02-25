@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "@emotion/styled";
 import { getFavEvents } from "../../api/index";
-import { getDate } from "../../utils/getDate";
 import { Link } from "react-router-dom";
 
 const Container = styled.div`
@@ -17,12 +16,6 @@ const Title = styled.h1`
   padding-left: 3%;
   font-size: 2em;
 `;
-
-const Subtitle = styled.h2`
-  color: #888;
-  padding-left: 3%;
-`;
-
 const SquareContainer = styled.div`
   padding-left: 3%;
   display: flex;

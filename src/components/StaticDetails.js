@@ -1,10 +1,6 @@
 import React from "react";
 import styled from "@emotion/styled";
-import { keyframes, withEmotionCache } from "@emotion/core";
 import moment from "moment";
-
-import { useSwipeable, Swipeable } from "react-swipeable";
-import { history } from "../index";
 
 const Container = styled("div")`
   min-width: 100vw;
@@ -77,21 +73,6 @@ const DateMonth = styled("p")`
   font-weight: 500;
 `;
 
-const DescriptionContainer = styled("div")`
-  width: 100vw;
-  min-height: 70vh;
-  padding: 22vh 3% 12%;
-  background-color: white;
-  position: absolute;
-  opacity: 0;
-  line-height: 180%;
-  font-size: 1em;
-  top: 30vh;
-  transition: all 200ms ease-out;
-  box-sizing: border-box;
-  z-index: 9;
-`;
-
 class Details extends React.Component {
   state = {
     isSingle: false,
@@ -116,36 +97,6 @@ class Details extends React.Component {
     }
   };
 
-  /*   componentDidMount() {
-    setTimeout(this.mountAnimation, 20);
-  }
-
-  mountAnimation = () => {
-    this.setState({
-      style: {
-        title: {
-          fontSize: "1.8em",
-          transform: "translateY(-24vh)"
-        },
-        description: {
-          opacity: 1
-        },
-        details: {
-          transform: "translateY(-20vh)",
-          color: "#222"
-        }
-      }
-    });
-  }; */
-
-  /*   unMountAnimation = () => {
-    this.setState({
-      style: {
-        fontSize: "2em"
-      }
-    });
-  };
- */
   createTitle = () => {
     return { __html: this.props.title };
   };
@@ -161,9 +112,9 @@ class Details extends React.Component {
       end_time,
       place,
       image,
-      id,
-      location,
-      match
+      id
+      //location,
+      //match
     } = this.props;
     const { style } = this.state;
     const getDate = moment(start_date)
@@ -181,29 +132,27 @@ class Details extends React.Component {
         }}
         id={id}
       >
-        <Swipeable onSwipedRight={alert("swiped down")}>
-          <Title
-            style={style.title}
-            dangerouslySetInnerHTML={this.createTitle()}
-          />
-          <DetailsContainer style={style.details}>
-            <DetailsDate>
-              <DateDay>{getDate[0]}</DateDay>
-              <DateDayNumber>{getDate[1]}</DateDayNumber>
-              <DateMonth>{getDate[2]}</DateMonth>
-            </DetailsDate>
-            <Detail>
-              <DetailNote>from</DetailNote>
-              <DetailData>{start_time}</DetailData>
-              <DetailNote>to</DetailNote>
-              <DetailData>{end_time}</DetailData>
-            </Detail>
-            <Detail>
-              <DetailNote>where</DetailNote>
-              <DetailData>{place}</DetailData>
-            </Detail>
-          </DetailsContainer>
-        </Swipeable>
+        <Title
+          style={style.title}
+          dangerouslySetInnerHTML={this.createTitle()}
+        />
+        <DetailsContainer style={style.details}>
+          <DetailsDate>
+            <DateDay>{getDate[0]}</DateDay>
+            <DateDayNumber>{getDate[1]}</DateDayNumber>
+            <DateMonth>{getDate[2]}</DateMonth>
+          </DetailsDate>
+          <Detail>
+            <DetailNote>from</DetailNote>
+            <DetailData>{start_time}</DetailData>
+            <DetailNote>to</DetailNote>
+            <DetailData>{end_time}</DetailData>
+          </Detail>
+          <Detail>
+            <DetailNote>where</DetailNote>
+            <DetailData>{place}</DetailData>
+          </Detail>
+        </DetailsContainer>
       </Container>
     );
   }

@@ -2,8 +2,6 @@ import React from "react";
 import styled from "@emotion/styled";
 import StaticDetails from "../../components/StaticDetails";
 import { connect } from "react-redux";
-import { history } from "../../index";
-import { Swipeable } from "react-swipeable";
 
 const Container = styled.div`
   display: flex;

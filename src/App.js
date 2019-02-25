@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "./App.css";
 import { Route, Switch } from "react-router-dom";
 
-import Home from "./pages/Home/Home.page";
+//import Home from "./pages/Home/Home.page";
 import Favourites from "./pages/Favourites/Favourites.page";
 import Search from "./pages/Search/Search.page";
 import List from "./pages/List/List.page";

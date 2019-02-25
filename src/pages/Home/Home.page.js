@@ -1,6 +1,4 @@
 import React from "react";
-import { getAllEvents } from "../../api";
-import orderBy from "lodash/orderBy";
 import styled from "@emotion/styled";
 import { keyframes } from "@emotion/core";
 import Card from "./components/Card";
@@ -55,7 +53,6 @@ const Loader = () => {
 class Home extends React.Component {
   render() {
     const { isLoading, shows, isOpen } = this.props;
-    const singleShow = shows.slice(0);
     const eventList = shows.map(e => {
       return (
         <Card

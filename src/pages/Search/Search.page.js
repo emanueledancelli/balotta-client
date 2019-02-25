@@ -2,9 +2,7 @@ import React from "react";
 import styled from "@emotion/styled";
 import { keyframes } from "@emotion/core";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
 import _ from "lodash";
-import { mq } from "../../style/mediaQueries";
 import SquaredList from "../../components/SquaredList";
 
 const Container = styled.div`
