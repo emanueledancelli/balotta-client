@@ -32,7 +32,7 @@ class List extends React.Component {
     } = this.props;
 
     let eventsToMap;
-    let eventsToShow;
+    let listContent;
 
     switch (match.params.listname) {
       case "week":
@@ -60,7 +60,7 @@ class List extends React.Component {
         break;
     }
 
-    eventsToShow = eventsToMap.map(e => {
+    listContent = eventsToMap.map(e => {
       return (
         <div style={{ minHeight: windowHeight, color: "#FFFFFF" }} key={e.key}>
           <SingleScrolling
@@ -81,9 +81,7 @@ class List extends React.Component {
         {!eventsToMap ? (
           <p>Loading...</p>
         ) : (
-          <SwipeableViews ignoreNativeScroll={true}>
-            {eventsToShow}
-          </SwipeableViews>
+          <SwipeableViews>{listContent}</SwipeableViews>
         )}
       </>
     );
