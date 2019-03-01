@@ -1,54 +1,13 @@
 import React from "react";
 import styled from "@emotion/styled";
-import { keyframes } from "@emotion/core";
 import Card from "./components/Card";
 import { connect } from "react-redux";
+import { Loader } from "components/Loader";
 
-const Container = styled("div")`
+const Container = styled.div`
   display: flex;
   overflow-x: ${props => (props.open ? "hidden" : "scroll")};
 `;
-
-const LoaderContainer = styled("div")`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  width: 100vw;
-`;
-
-const flipY = keyframes`
-    0% { transform: rotateY(0deg); }
-    25% { transform: rotateY(360deg); }
-`;
-
-const flipX = keyframes`
-    from { transform: rotateX(0deg); }
-    to { transform: rotateX(360deg); }
-`;
-
-const fadeOut = keyframes`
-  from { opacity: 1; transform: scale(1)}
-  to { opacity: 0; transform: scale(0.5)}
-`;
-
-const LoaderIcon = styled("p")`
-  font-weight: 900;
-  letter-spacing: -1px;
-  color: #222222;
-  font-size: 2em;
-  animation: ${flipY} 800ms ease-out, ${flipX} 800ms ease-out,
-    ${fadeOut} 800ms ease-out;
-  animation-delay: 0s, 800ms, 1600ms;
-`;
-
-const Loader = () => {
-  return (
-    <LoaderContainer>
-      <LoaderIcon>Balotta</LoaderIcon>
-    </LoaderContainer>
-  );
-};
 
 class Home extends React.Component {
   render() {

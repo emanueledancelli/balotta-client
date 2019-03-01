@@ -1,21 +1,39 @@
 import React, { Component } from "react";
 import { Route, Switch } from "react-router-dom";
+import { Loader } from "components/Loader";
+import Loadable from "react-loadable";
+import Header from "components/Header";
+import Navigation from "components/Navigation";
 
-//import Home from "./pages/Home/Home.page";
-import Favourites from "./pages/Favourites/Favourites.page";
-import Search from "./pages/Search/Search.page";
-import List from "./pages/List/List.page";
-import Single from "./pages/Single/Single.page";
-import Header from "./components/Header";
-import Navigation from "./components/Navigation";
-import Slider from "./pages/SingleScrolling/Slider";
-import SingleScrolling from "./pages/SingleScrolling/SingleScrolling";
+const Search = Loadable({
+  loader: () => import("views/Search"),
+  loading: Loader
+});
+
+const List = Loadable({
+  loader: () => import("views/List"),
+  loading: Loader
+});
+
+const Single = Loadable({
+  loader: () => import("views/Single"),
+  loading: Loader
+});
+
+const Home = Loadable({
+  loader: () => import("views/Home"),
+  loading: Loader
+});
+
+const Favourites = Loadable({
+  loader: () => import("views/Favourites"),
+  loading: Loader
+});
 
 const Routes = location => {
   return (
     <Switch location={location}>
-      <Route exact path="/" component={Slider} />
-      <Route exact path="/singlescrolling" component={SingleScrolling} />
+      <Route exact path="/" component={Home} />
       <Route exact path="/favourites" component={Favourites} />
       <Route exact path="/search" component={Search} />
       <Route

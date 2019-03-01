@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "@emotion/styled";
 import SwipeableViews from "react-swipeable-views";
-import { Title } from "../../components/Title";
+import { Title } from "components/Title";
 //import moment from "moment";
 
 const Container = styled.div`

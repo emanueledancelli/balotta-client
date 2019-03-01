@@ -46,10 +46,7 @@ const ItemKind = styled.p`
 
 class Header extends React.Component {
   render() {
-    const {
-      location
-      //match
-    } = this.props;
+    const { location } = this.props;
     let path = location.pathname.split("/");
     if (location.pathname === "/") {
       return (
