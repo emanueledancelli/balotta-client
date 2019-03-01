@@ -10,7 +10,7 @@ import { fetchEvents } from "./actions/eventsActions";
 import createBrowserHistory from "history/createBrowserHistory";
 
 import { Global } from "@emotion/core";
-import { globalStyles } from "styles/globalStyles";
+import { globalStyles } from "styles";
 export const history = createBrowserHistory();
 
 store.dispatch(fetchEvents());
