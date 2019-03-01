@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import "./App.css";
 import { Route, Switch } from "react-router-dom";
 
 //import Home from "./pages/Home/Home.page";
@@ -17,7 +16,6 @@ const Routes = location => {
     <Switch location={location}>
       <Route exact path="/" component={Slider} />
       <Route exact path="/singlescrolling" component={SingleScrolling} />
-
       <Route exact path="/favourites" component={Favourites} />
       <Route exact path="/search" component={Search} />
       <Route

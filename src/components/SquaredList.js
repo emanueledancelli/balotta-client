@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "@emotion/styled";
 import { Link } from "react-router-dom";
-import { mq } from "../style/mediaQueries";
+import { mq } from "../styles/mediaQueries";
 
 const Image = styled.div`
   height: 150px;
