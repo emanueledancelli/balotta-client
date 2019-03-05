@@ -1,5 +1,9 @@
 import React from "react";
 import styled from "@emotion/styled";
+import ChevronRightIcon from "mdi-react/ChevronRightIcon";
+import ChevronLeftIcon from "mdi-react/ChevronLeftIcon";
+import FavoriteOutlineIcon from "mdi-react/FavoriteOutlineIcon";
+import ChevronDownIcon from "mdi-react/ChevronDownIcon";
 
 /**
  * TODO:
@@ -9,24 +13,33 @@ import styled from "@emotion/styled";
 
 const Container = styled.div`
   width: 100vw;
-  padding: 3%;
   box-sizing: border-box;
   display: flex;
-  border: 2px solid red;
   align-content: center;
-  justify-content: space-around;
+  color: rgba(255, 255, 255, 0.1);
+  justify-content: ${props => props.justify};
+  flex-direction: ${props => props.direction};
+`;
+
+const Flex = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 const Commands = () => {
   return (
     <>
-      <Container>
-        <p>left</p>
-        <p>favourite</p>
-        <p>right</p>
-      </Container>
-      <Container>
-        <p>info</p>
+      <Container justify="space-between">
+        <Flex>
+          <ChevronLeftIcon size={55} />
+        </Flex>
+        <Flex>
+          <ChevronDownIcon size={55} />
+        </Flex>
+        <Flex>
+          <ChevronRightIcon size={55} />
+        </Flex>
       </Container>
     </>
   );

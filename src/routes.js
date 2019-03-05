@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Route, Switch } from "react-router-dom";
 import { Loader } from "components/Loader";
 import Loadable from "react-loadable";
-import Header from "components/Header";
+import Header from "./components/Header";
 import Navigation from "components/Navigation";
 
 const Search = Loadable({
