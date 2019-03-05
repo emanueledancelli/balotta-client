@@ -11,7 +11,7 @@ const Container = styled.div`
   z-index: 1;
   top: 0;
   left: 0;
-  display: none;
+  display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
@@ -64,6 +64,7 @@ class Header extends React.Component {
             </Link>
           </Item>
           <ItemKind>{path[2]}</ItemKind>
+          <div> </div>
         </Container>
       );
     }

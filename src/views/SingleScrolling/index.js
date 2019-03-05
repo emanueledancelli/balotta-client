@@ -2,7 +2,14 @@ import React from "react";
 import styled from "@emotion/styled";
 import SwipeableViews from "react-swipeable-views";
 import { Title } from "components/Title";
-//import moment from "moment";
+import Loadable from "react-loadable";
+import { Loader } from "components/Loader";
+import Commands from "./components/Commands";
+
+const Description = Loadable({
+  loader: () => import("./components/Description"),
+  loading: Loader
+});
 
 const Container = styled.div`
   height: 100vh;
@@ -72,24 +79,6 @@ const DateMonth = styled.p`
   margin: 0;
   font-weight: 500;
   color: #f8f8f8;
-`;
-
-const DescriptionContainer = styled("div")`
-  width: 100vw;
-  min-height: 100vh;
-  padding: 3%;
-  color: #222;
-  background-color: white;
-  line-height: 160%;
-  font-size: 0.9em;
-  transition: all 200ms ease-out;
-  box-sizing: border-box;
-  word-break: break-word;
-  z-index: 9;
-  & a {
-    color: #666;
-    text-decoration: underline;
-  }
 `;
 
 class SingleScrolling extends React.Component {
@@ -176,19 +165,12 @@ class SingleScrolling extends React.Component {
                   <DetailData>{place}</DetailData>
                 </Detail>
               </Details>
+              <Commands />
             </Container>
           </div>
           <div style={style.scroll}>
             <div style={style.slide2}>
-              <Container>
-                <DescriptionContainer>
-                  <div
-                    dangerouslySetInnerHTML={this.createDescription(
-                      description
-                    )}
-                  />
-                </DescriptionContainer>
-              </Container>
+              <Description description={description} />
             </div>
           </div>
         </SwipeableViews>

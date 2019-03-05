@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import SingleScrolling from "../SingleScrolling/SingleScrolling";
+import SingleScrolling from "../SingleScrolling";
 import SwipeableViews from "react-swipeable-views";
 
 class List extends React.Component {
@@ -47,7 +47,7 @@ class List extends React.Component {
       case "culture":
         eventsToMap = culture;
         break;
-      case "concert":
+      case "concerts":
         eventsToMap = concert;
         break;
       case "clubbing":
@@ -62,7 +62,7 @@ class List extends React.Component {
 
     listContent = eventsToMap.map(e => {
       return (
-        <div style={{ minHeight: windowHeight, color: "#FFFFFF" }} key={e.key}>
+        <div style={{ minHeight: windowHeight, color: "#FFFFFF" }} key={e.id}>
           <SingleScrolling
             title={e.title.rendered}
             startDate={e.acf.start_date}
