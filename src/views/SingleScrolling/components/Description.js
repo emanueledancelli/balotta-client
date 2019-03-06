@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "@emotion/styled";
 import { Title } from "components/Title";
+import { Flex } from "components/Flex";
+import { colors } from "styles/colors";
 
 /**
  * TODO:
@@ -15,24 +17,13 @@ import { Title } from "components/Title";
  * then shows them, gets called with a loadable.
  */
 
-const Container = styled.div`
-  height: 100vh;
-  position: relative;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-`;
-
-const DescriptionContainer = styled("div")`
+const DescriptionContainer = styled.div`
   width: 100vw;
   min-height: 100vh;
-  padding: 3%;
+  padding: 10vh 3%;
   color: #222;
   background-color: white;
-  line-height: 160%;
-  font-size: 0.9em;
+
   transition: all 200ms ease-out;
   box-sizing: border-box;
   word-break: break-word;
@@ -49,19 +40,36 @@ const createDescription = description => {
 
 const Description = ({
   title,
-  // place,
-  // start_time,
-  // start_date,
-  // end_time,
+  place,
+  startTime,
+  startDate,
+  endTime,
   description
 }) => {
   const descr = createDescription(description);
   return (
-    <Container>
+    <Flex
+      height="100vh"
+      position="relative"
+      direction="column"
+      align="flex-start"
+      justify="center"
+    >
       <DescriptionContainer>
-        <div dangerouslySetInnerHTML={descr} />
+        <Title color={colors.black} padding="0">
+          {title}
+        </Title>
+        <Flex>{startTime}</Flex>
+        <Flex>{startDate}</Flex>
+        <Flex>{endTime}</Flex>
+        <Flex>{place}</Flex>
+        <div
+          style={{ lineHeight: "160%", fontSize: "0.9rem" }}
+          dangerouslySetInnerHTML={descr}
+        />
+        <div style={{ height: "5vh", backgroundColor: "black" }} />
       </DescriptionContainer>
-    </Container>
+    </Flex>
   );
 };
 

@@ -5,9 +5,9 @@ import FilterIcon from "mdi-react/FilterIcon";
 import { withRouter, Link } from "react-router-dom";
 
 const Container = styled.div`
-  background-color: transparent;
+  background-color: rgba(0, 0, 0, 0.3);
   position: absolute;
-  height: 10vh;
+  height: 8vh;
   width: 100vw;
   box-sizing: border-box;
   z-index: 1;

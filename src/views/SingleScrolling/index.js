@@ -38,10 +38,6 @@ class SingleScrolling extends React.Component {
       slide: {
         minHeight: windowHeight
       },
-      slide2: {
-        minHeight: windowHeight,
-        marginBottom: 100
-      },
       scroll: {
         overflowY: "scroll",
         minHeight: windowHeight
@@ -54,8 +50,8 @@ class SingleScrolling extends React.Component {
           <Hero {...this.props} />
         </div>
         <div style={style.scroll}>
-          <div style={style.slide2}>
-            <Description description={description} title={this.props.title} />
+          <div style={style.slide}>
+            <Description {...this.props} />
           </div>
         </div>
       </SwipeableViews>

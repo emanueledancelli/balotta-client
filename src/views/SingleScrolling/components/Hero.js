@@ -1,8 +1,13 @@
 import React from "react";
 import styled from "@emotion/styled";
 import { Title } from "components/Title";
+import { Flex } from "components/Flex";
+import { colors } from "styles/colors";
 import Commands from "./Commands";
+import Sharer from "./Sharer";
 import moment from "moment";
+import FavoriteOutlineIcon from "mdi-react/FavoriteOutlineIcon";
+import ShareVariantIcon from "mdi-react/ShareVariantIcon";
 
 /**
  * hero component showing all info for event
@@ -33,7 +38,6 @@ const Details = styled.div`
   justify-content: flex-start;
   padding: 3%;
   transition: all 200ms ease-out;
-  z-index: 10;
 `;
 
 const Detail = styled.div`
@@ -87,46 +91,75 @@ const DateMonth = styled.p`
   color: #f8f8f8;
 `;
 
-const Hero = ({ imageUrl, title, startDate, startTime, endTime, place }) => {
-  const getDate = moment(startDate)
-    .format("dddd D MMMM")
-    .split(" ");
+class Hero extends React.Component {
+  state = {
+    isShareOpen: false
+  };
 
-  return (
-    <Container
-      style={{
-        background:
-          "linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(" +
-          imageUrl +
-          ") center",
-        backgroundSize: "cover"
-      }}
-    >
-      <FlexItem flex={5} justify="center" align="flex-end">
-        <Title>{title}</Title>
-        <Details>
-          <DetailsDate>
-            <DateDay>{getDate[0]}</DateDay>
-            <DateDayNumber>{getDate[1]}</DateDayNumber>
-            <DateMonth>{getDate[2]}</DateMonth>
-          </DetailsDate>
-          <Detail>
-            <DetailNote>from</DetailNote>
-            <DetailData>{startTime}</DetailData>
-            <DetailNote>to</DetailNote>
-            <DetailData>{endTime}</DetailData>
-          </Detail>
-          <Detail>
-            <DetailNote>where</DetailNote>
-            <DetailData>{place}</DetailData>
-          </Detail>
-        </Details>
-      </FlexItem>
-      <FlexItem flex={1} justify="flex-end" align="flex-end">
-        <Commands />
-      </FlexItem>
-    </Container>
-  );
-};
+  render() {
+    const {
+      imageUrl,
+      title,
+      startDate,
+      startTime,
+      endTime,
+      place
+    } = this.props;
+
+    const getDate = moment(startDate)
+      .format("dddd D MMMM")
+      .split(" ");
+
+    return (
+      <Container
+        style={{
+          background:
+            "linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(" +
+            imageUrl +
+            ") center",
+          backgroundSize: "cover"
+        }}
+      >
+        <FlexItem flex={3} justify="flex-end" align="flex-end">
+          <Title>{title}</Title>
+          <Details>
+            <DetailsDate>
+              <DateDay>{getDate[0]}</DateDay>
+              <DateDayNumber>{getDate[1]}</DateDayNumber>
+              <DateMonth>{getDate[2]}</DateMonth>
+            </DetailsDate>
+            <Detail>
+              <DetailNote>from</DetailNote>
+              <DetailData>{startTime}</DetailData>
+              <DetailNote>to</DetailNote>
+              <DetailData>{endTime}</DetailData>
+            </Detail>
+            <Detail>
+              <DetailNote>where</DetailNote>
+              <DetailData>{place}</DetailData>
+            </Detail>
+          </Details>
+        </FlexItem>
+        <Flex flex={1} justify="space-around" align="flex-end">
+          <Flex
+            justify="center"
+            align="center"
+            padding="2%"
+            margin="0 5px 0"
+            style={{
+              borderRadius: "20px",
+              color: `${colors.red}`
+            }}
+          >
+            <FavoriteOutlineIcon size={30} />
+          </Flex>
+        </Flex>
+        <FlexItem flex={1} justify="flex-end" align="flex-end">
+          <Commands />
+        </FlexItem>
+      </Container>
+    );
+  }
+}
 
 export default Hero;
