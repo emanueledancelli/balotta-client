@@ -3,6 +3,8 @@ import styled from "@emotion/styled";
 import { Title } from "components/Title";
 import { Flex } from "components/Flex";
 import { colors } from "styles/colors";
+import { addToFavorities } from "utils/saveFavourites";
+import Sharer from "./Sharer";
 import Commands from "./Commands";
 import moment from "moment";
 import FavoriteOutlineIcon from "mdi-react/FavoriteOutlineIcon";
@@ -95,6 +97,14 @@ class Hero extends React.Component {
     isShareOpen: false
   };
 
+  handleShareButton = () => {
+    this.setState({ isShareOpen: !this.state.isShareOpen });
+  };
+
+  handleShadowAction = () => {
+    this.setState({ isShareOpen: false });
+  };
+
   render() {
     const {
       imageUrl,
@@ -104,6 +114,8 @@ class Hero extends React.Component {
       endTime,
       place
     } = this.props;
+    const { isShareOpen } = this.state;
+    console.log(this.props);
 
     const getDate = moment(startDate)
       .format("dddd D MMMM")
@@ -119,6 +131,13 @@ class Hero extends React.Component {
           backgroundSize: "cover"
         }}
       >
+        {isShareOpen && (
+          <Sharer
+            title={title}
+            id={this.props.id}
+            handleClick={this.handleShadowAction}
+          />
+        )}
         <FlexItem flex={3} justify="flex-end" align="flex-end">
           <Title>{title}</Title>
           <Details>
@@ -151,6 +170,7 @@ class Hero extends React.Component {
               color: `${colors.red}`,
               backgroundColor: "rgba(0, 0, 0, 0.3)"
             }}
+            onClick={this.handleShareButton}
           >
             <ShareVariantIcon size={20} />
 
@@ -176,8 +196,9 @@ class Hero extends React.Component {
               color: `${colors.red}`,
               backgroundColor: "rgba(0, 0, 0, 0.3)"
             }}
+            onClick={() => addToFavorities(this.props.id)}
           >
-            <FavoriteOutlineIcon size={20} />
+            <FavoriteOutlineIcon osize={20} />
             <span
               style={{
                 color: "white",

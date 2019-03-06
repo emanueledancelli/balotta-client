@@ -68,6 +68,7 @@ class List extends React.Component {
           <SingleScrolling
             length={l}
             i={i}
+            id={e.id}
             title={e.title.rendered}
             startDate={e.acf.start_date}
             startTime={e.acf.start_time}

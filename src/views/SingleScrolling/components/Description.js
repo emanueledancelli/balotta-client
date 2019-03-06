@@ -13,7 +13,6 @@ import { colors } from "styles/colors";
  * start_time,
  * end_time,
  * description
- *
  * then shows them, gets called with a loadable.
  */
 
