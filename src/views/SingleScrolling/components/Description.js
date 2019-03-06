@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "@emotion/styled";
+import { Title } from "components/Title";
 
 /**
  * TODO:
@@ -47,7 +48,7 @@ const createDescription = description => {
 };
 
 const Description = ({
-  // title,
+  title,
   // place,
   // start_time,
   // start_date,

@@ -17,8 +17,8 @@ const Container = styled.div`
 `;
 
 const FlexItem = styled.div`
-  width: ${props => props.width || "100vw"};
   display: flex;
+  width: ${props => props.width || "100vw"};
   flex-direction: ${props => props.direction || "column"};
   flex: ${props => props.flex || 1};
   align-content: ${props => props.align || "auto"};
@@ -96,7 +96,7 @@ const Hero = ({ imageUrl, title, startDate, startTime, endTime, place }) => {
     <Container
       style={{
         background:
-          "linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.6)), url(" +
+          "linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(" +
           imageUrl +
           ") center",
         backgroundSize: "cover"

@@ -55,7 +55,7 @@ class SingleScrolling extends React.Component {
         </div>
         <div style={style.scroll}>
           <div style={style.slide2}>
-            <Description description={description} />
+            <Description description={description} title={this.props.title} />
           </div>
         </div>
       </SwipeableViews>
