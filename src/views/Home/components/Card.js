@@ -1,10 +1,8 @@
 import React from "react";
 import styled from "@emotion/styled";
 import moment from "moment";
-import FavoriteOutlineIcon from "mdi-react/FavoriteOutlineIcon";
 import { connect } from "react-redux";
 import { setUi } from "../../../actions/uiActions";
-import { Swipeable } from "react-touch";
 
 const Container = styled("div")`
   min-width: 100vw;
@@ -29,7 +27,7 @@ const Animated = styled.div`
   }
 `;
 
-const Title = styled("h1")`
+const Title = styled.h1`
   font-size: ${props => (props.isOpen ? "1.5em" : "1.8em")};
   color: #ffffff;
   padding: 0 3%;
@@ -39,7 +37,7 @@ const Title = styled("h1")`
   letter-spacing: -1px;
 `;
 
-const Details = styled("div")`
+const Details = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -117,13 +115,6 @@ const DescriptionContainer = styled("div")`
   z-index: 9;
 `;
 
-const ActionsContainer = styled.div`
-  border: 1px solid red;
-  & svg {
-    color: #eb5757;
-  }
-`;
-
 class Card extends React.Component {
   createTitle = () => {
     return { __html: this.props.title };
@@ -149,50 +140,46 @@ class Card extends React.Component {
       .split(" ");
 
     return (
-      <Swipeable onSwipeDown={console.log("it works")}>
-        <Container
-          style={{
-            background:
-              "linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(" +
-              image +
-              ") center",
-            backgroundSize: "cover"
-          }}
-          id={id}
-          onClick={() => setUi(id)}
-        >
-          <Title
-            isOpen={uiActive}
-            dangerouslySetInnerHTML={this.createTitle()}
-          />
-          <Details>
-            <Animated isOpen={uiActive} duration="300ms">
-              <DetailsDate>
-                <DateDay>{getDate[0]}</DateDay>
-                <DateDayNumber>{getDate[1]}</DateDayNumber>
-                <DateMonth>{getDate[2]}</DateMonth>
-              </DetailsDate>
-            </Animated>
-            <Animated isOpen={uiActive} duration="300ms">
-              <Detail>
-                <DetailNote>from</DetailNote>
-                <DetailData>{start_time}</DetailData>
-                <DetailNote>to</DetailNote>
-                <DetailData>{end_time}</DetailData>
-              </Detail>
-            </Animated>
-            <Animated isOpen={uiActive} duration="300ms">
-              <Detail>
-                <DetailNote>where</DetailNote>
-                <DetailData>{place}</DetailData>
-              </Detail>
-            </Animated>
-          </Details>
-          <DescriptionContainer isOpen={uiActive}>
-            <div dangerouslySetInnerHTML={this.createDescription()} />
-          </DescriptionContainer>
-        </Container>
-      </Swipeable>
+      <Container
+        style={{
+          background:
+            "linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(" +
+            image +
+            ") center",
+          backgroundSize: "cover"
+        }}
+        id={id}
+        onClick={() => setUi(id)}
+      >
+        <Title isOpen={uiActive} dangerouslySetInnerHTML={this.createTitle()} />
+        <Details>
+          <Animated isOpen={uiActive} duration="300ms">
+            <DetailsDate>
+              <DateDay>{getDate[0]}</DateDay>
+              <DateDayNumber>{getDate[1]}</DateDayNumber>
+              <DateMonth>{getDate[2]}</DateMonth>
+            </DetailsDate>
+          </Animated>
+          <Animated isOpen={uiActive} duration="300ms">
+            <Detail>
+              <DetailNote>from</DetailNote>
+              <DetailData>{start_time}</DetailData>
+              <DetailNote>to</DetailNote>
+              <DetailData>{end_time}</DetailData>
+            </Detail>
+          </Animated>
+          <Animated isOpen={uiActive} duration="300ms">
+            <Detail>
+              <DetailNote>where</DetailNote>
+              <DetailData>{place}</DetailData>
+            </Detail>
+          </Animated>
+        </Details>
+        <button>slide to bottom</button>
+        <DescriptionContainer isOpen={uiActive}>
+          <div dangerouslySetInnerHTML={this.createDescription()} />
+        </DescriptionContainer>
+      </Container>
     );
   }
 }

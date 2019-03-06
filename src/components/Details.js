@@ -14,16 +14,6 @@ const Container = styled("div")`
   overflow: ${props => (props.animation ? "auto" : "hidden")};
 `;
 
-const Animated = styled.div`
-  transform: ${props =>
-    props.animation ? "translateY(-18vh)" : "translateY(0px)"};
-  font-size: 1em;
-  transition: all ${props => props.duration} ease-out;
-  & p {
-    color: ${props => (props.animation ? "#222222" : "white")};
-  }
-`;
-
 const Title = styled("h1")`
   font-size: ${props => (props.animation ? "1.8em" : "2em")};
   color: #ffffff;

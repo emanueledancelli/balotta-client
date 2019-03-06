@@ -1,7 +1,8 @@
 import React from "react";
 import styled from "@emotion/styled";
 import { getFavEvents } from "../../api/index";
-import { getDate } from "../../utils/getDate";
+import DeleteOutlineIcon from "mdi-react/DeleteOutlineIcon";
+import { Flex } from "components/Flex";
 import { Link } from "react-router-dom";
 
 const Container = styled.div`
@@ -17,14 +18,9 @@ const Title = styled.h1`
   padding-left: 3%;
   font-size: 2em;
 `;
-
-const Subtitle = styled.h2`
-  color: #888;
-  padding-left: 3%;
-`;
-
 const SquareContainer = styled.div`
   padding-left: 3%;
+  margin-top: 25px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -48,21 +44,26 @@ class Favourites extends React.Component {
     isLoading: false
   };
   componentDidMount() {
+    console.log(this.props);
     this.setState({ isLoading: true });
     let names = JSON.parse(localStorage.getItem("fav"));
     if (names !== null) {
       getFavEvents(names).then(res => {
-        console.log(res);
         this.setState({
           eventsToShow: res,
           isLoading: false
         });
-        console.log(this.state);
       });
     } else {
       this.setState({ isLoading: false });
     }
   }
+
+  clearSavedEvents = () => {
+    localStorage.clear();
+    window.location.reload();
+  };
+
   render() {
     const { eventsToShow, isLoading } = this.state;
     let favEv;
@@ -71,7 +72,7 @@ class Favourites extends React.Component {
       favEv = eventsToShow.map(e => {
         let thumbnail = e.data.acf.image.sizes.thumbnail;
         return (
-          <Link to={`/single/${e.data.id}`} key={e.data.id}>
+          <Link to={`saved/single/${e.data.id}`} key={e.data.id}>
             <Square
               style={{
                 background: `url(${thumbnail})`,
@@ -90,6 +91,22 @@ class Favourites extends React.Component {
         <Container>
           <Title>Your saved events</Title>
         </Container>
+        <Flex
+          justify="center"
+          align="center"
+          padding="2%"
+          width="20%"
+          margin="0 5px 0"
+          style={{ borderRadius: "20px", border: "1px solid #222222" }}
+        >
+          <DeleteOutlineIcon />
+          <span
+            style={{ fontSize: "0.8rem", fontWeight: "500" }}
+            onClick={this.clearSavedEvents}
+          >
+            clear
+          </span>
+        </Flex>
         <SquareContainer>
           {isLoading ? <p>Loading...</p> : favEv}
         </SquareContainer>

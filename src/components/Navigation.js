@@ -131,7 +131,7 @@ class Navigation extends React.Component {
               >
                 <Item>
                   <WhatshotIcon />
-                  <NavHelper>Hot</NavHelper>
+                  <NavHelper>Best</NavHelper>
                 </Item>
               </NavLink>
               <NavLink to="/search" exact>

@@ -1,14 +1,34 @@
 import React, { Component } from "react";
-import "./App.css";
 import { Route, Switch } from "react-router-dom";
-
-import Home from "./pages/Home/Home.page";
-import Favourites from "./pages/Favourites/Favourites.page";
-import Search from "./pages/Search/Search.page";
-import List from "./pages/List/List.page";
-import Single from "./pages/Single/Single.page";
+import { Loader } from "components/Loader";
+import Loadable from "react-loadable";
 import Header from "./components/Header";
-import Navigation from "./components/Navigation";
+import Navigation from "components/Navigation";
+
+const Search = Loadable({
+  loader: () => import("views/Search"),
+  loading: Loader
+});
+
+const List = Loadable({
+  loader: () => import("views/List"),
+  loading: Loader
+});
+
+const Single = Loadable({
+  loader: () => import("views/Single"),
+  loading: Loader
+});
+
+const Home = Loadable({
+  loader: () => import("views/Home"),
+  loading: Loader
+});
+
+const Favourites = Loadable({
+  loader: () => import("views/Favourites"),
+  loading: Loader
+});
 
 const Routes = location => {
   return (
@@ -23,7 +43,7 @@ const Routes = location => {
       />
       <Route
         exact
-        path="/single/:id"
+        path="/:origin/single/:id/"
         render={routeProps => <Single {...routeProps} />}
       />
     </Switch>
@@ -38,8 +58,9 @@ class App extends Component {
           <div className="App">
             <Header location={location} />
             {Routes(location)}
-            {location.pathname.startsWith("/single") ||
-            location.pathname.startsWith("/eventi") ? null : (
+            {location.pathname.startsWith("/saved") ||
+            location.pathname.startsWith("/eventi") ||
+            location.pathname.startsWith("/shared") ? null : (
               <Navigation location={location} />
             )}
           </div>

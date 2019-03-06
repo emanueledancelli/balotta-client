@@ -4,7 +4,11 @@ const initialState = {
   data: {
     week: [],
     today: [],
-    weekEnd: []
+    weekEnd: [],
+    clubbing: [],
+    shows: [],
+    concert: [],
+    culture: []
   },
   error: null
 };
@@ -24,7 +28,11 @@ export default function eventsReducer(state = initialState, action) {
         data: {
           week: action.payload.week,
           today: action.payload.today,
-          weekEnd: action.payload.weekEnd
+          weekEnd: action.payload.weekEnd,
+          clubbing: action.payload.clubbing,
+          shows: action.payload.shows,
+          concert: action.payload.concert,
+          culture: action.payload.culture
         }
       };
     case "FETCH_EVENTS_FAILURE":

@@ -1,44 +1,14 @@
 import React from "react";
 import styled from "@emotion/styled";
-import { keyframes } from "@emotion/core";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import _ from "lodash";
-import { mq } from "../../style/mediaQueries";
 import SquaredList from "../../components/SquaredList";
+import { Title } from "components/Title";
 
 const Container = styled.div`
   height: 32vh;
   display: flex;
   justify-content: flex-start;
   align-items: center;
-`;
-
-const Blink = keyframes`
-  from { opacity: 1;}
-  to { opacity: 0;}
-`;
-
-const FadeAndSlide = keyframes`
-  from { opacity: 0; transform: translateY(-5px)}
-  to {opacity: 1;trasnform: translateY(0) }
-`;
-
-const BlinkingCursor = styled.p`
-  color: #222222;
-  animation: ${Blink} 800ms linear infinite;
-  transition: all 800ms linear;
-  margin-bottom: -1vh;
-  margin-left: 5px;
-  font-weight: 700;
-  font-size: 2em;
-`;
-
-const Title = styled.h1`
-  color: #222;
-  margin-bottom: -3vh;
-  padding-left: 3%;
-  font-size: 2em;
 `;
 
 const Subtitle = styled.h2`
@@ -57,27 +27,7 @@ const Fix = styled.div`
   height: ${props => props.h};
 `;
 
-const TypeAnimation = styled.h1`
-  color: #888;
-  margin-bottom: -3vh;
-  padding-left: 3%;
-  font-size: 2em;
-  animation: ${FadeAndSlide} 500ms ease-in;
-`;
-
 class Search extends React.Component {
-  state = {
-    discoverStuff: ["Bologna", "Events", "Places"],
-    pick: 0
-  };
-
-  componentDidMount() {
-    let rng = Math.floor(Math.random() * 3);
-    this.setState({
-      pick: rng
-    });
-  }
-
   createTitle = title => {
     return { __html: title };
   };
@@ -92,17 +42,15 @@ class Search extends React.Component {
       shows,
       culture
     } = this.props;
-    const { discoverStuff, pick } = this.state;
 
-    const shuffledDay = _.shuffle(today);
-    const shuffledWe = _.shuffle(weekEnd);
+    const shuffledDay = today;
+    const shuffledWe = weekEnd;
 
     return (
       <>
         <Container onClick={this.handleHeroClick}>
-          <Title>Discover</Title>
-          <TypeAnimation>{discoverStuff[pick]}</TypeAnimation>
-          <BlinkingCursor>_</BlinkingCursor>
+          <Title color="#222222">Events</Title>
+          <Title color="rgba(0, 0, 0, 0.2)">Places</Title>
         </Container>
 
         <Subtitle>
@@ -147,17 +95,25 @@ class Search extends React.Component {
 
 const mapStateToProps = state => {
   const { isLoading } = state.events;
-  const { today, weekEnd, week } = state.events.data;
+  const {
+    today,
+    weekEnd,
+    week,
+    concert,
+    culture,
+    clubbing,
+    shows
+  } = state.events.data;
 
   return {
     isLoading,
     today,
     weekEnd,
     week,
-    concert: _.shuffle(week.filter(e => e.acf.tags.includes("Concert"))),
-    culture: _.shuffle(week.filter(e => e.acf.tags.includes("Culture"))),
-    clubbing: _.shuffle(week.filter(e => e.acf.tags.includes("Clubbing"))),
-    shows: _.shuffle(week.filter(e => e.acf.tags.includes("Shows")))
+    concert,
+    culture,
+    clubbing,
+    shows
   };
 };
 
