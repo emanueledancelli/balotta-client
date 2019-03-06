@@ -3,11 +3,12 @@ import styled from "@emotion/styled";
 import ChevronLeftIcon from "mdi-react/ChevronLeftIcon";
 import FilterIcon from "mdi-react/FilterIcon";
 import { withRouter, Link } from "react-router-dom";
+import { Flex } from "components/Flex";
 
 const Container = styled.div`
   background-color: rgba(0, 0, 0, 0.3);
   position: absolute;
-  height: 8vh;
+  height: 6vh;
   width: 100vw;
   box-sizing: border-box;
   z-index: 1;
@@ -15,7 +16,7 @@ const Container = styled.div`
   left: 0;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: ${props => props.justify || "space-between"};
   align-items: center;
 `;
 
@@ -42,11 +43,12 @@ const ItemKind = styled.p`
 class Header extends React.Component {
   render() {
     const { location } = this.props;
+
     let path = location.pathname.split("/");
     if (location.pathname === "/") {
       return (
-        <Container>
-          <Item>Best Today</Item>
+        <Container justify="center">
+          <ItemKind>Best Today</ItemKind>
         </Container>
       );
     }
@@ -55,22 +57,49 @@ class Header extends React.Component {
         <Container>
           <ItemKind>
             <Link style={{ color: "rgba(255,255,255, 0.5)" }} to="/search">
-              <ChevronLeftIcon size={55} />
+              <ChevronLeftIcon size={45} />
             </Link>
           </ItemKind>
           <ItemKind>{path[2]}</ItemKind>
           <ItemKind>
             <Link style={{ opacity: 0 }} to="/search">
-              <FilterIcon size={55} />
+              <FilterIcon size={45} />
             </Link>
           </ItemKind>
         </Container>
       );
     }
-    if (location.pathname.startsWith("/single")) {
+    if (location.pathname.startsWith("/saved")) {
       return (
         <Container>
-          <Item onClick={() => this.props.history.goBack()}>back</Item>
+          <ItemKind>
+            <Link style={{ color: "rgba(255,255,255, 0.5)" }} to="/favourites">
+              <ChevronLeftIcon size={45} />
+            </Link>
+          </ItemKind>
+          <ItemKind>{path[1]}</ItemKind>
+          <ItemKind>
+            <Link style={{ opacity: 0 }} to="/search">
+              <FilterIcon size={45} />
+            </Link>
+          </ItemKind>
+        </Container>
+      );
+    }
+    if (location.pathname.startsWith("/shared")) {
+      return (
+        <Container>
+          <ItemKind>
+            <Link style={{ color: "rgba(255,255,255, 0.5)" }} to="/search">
+              <ChevronLeftIcon size={45} />
+            </Link>
+          </ItemKind>
+          <ItemKind>{path[1]}</ItemKind>
+          <ItemKind>
+            <Link style={{ opacity: 0 }} to="/search">
+              <FilterIcon size={45} />
+            </Link>
+          </ItemKind>
         </Container>
       );
     } else {

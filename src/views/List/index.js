@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import SingleScrolling from "../SingleScrolling";
 import SwipeableViews from "react-swipeable-views";
+import { Loader } from "components/Loader";
 
 class List extends React.Component {
   state = {
@@ -60,10 +61,13 @@ class List extends React.Component {
         break;
     }
 
-    listContent = eventsToMap.map(e => {
+    listContent = eventsToMap.map((e, i) => {
+      let l = eventsToMap.length;
       return (
         <div style={{ minHeight: windowHeight, color: "#FFFFFF" }} key={e.id}>
           <SingleScrolling
+            length={l}
+            i={i}
             title={e.title.rendered}
             startDate={e.acf.start_date}
             startTime={e.acf.start_time}
@@ -79,9 +83,11 @@ class List extends React.Component {
     return (
       <>
         {!eventsToMap ? (
-          <p>Loading...</p>
+          <Loader />
         ) : (
-          <SwipeableViews>{listContent}</SwipeableViews>
+          <SwipeableViews index={match.params.index} enableMouseEvents>
+            {listContent}
+          </SwipeableViews>
         )}
       </>
     );

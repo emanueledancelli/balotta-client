@@ -1,48 +1,41 @@
 import React from "react";
-import styled from "@emotion/styled";
-import StaticDetails from "../../components/StaticDetails";
-import { connect } from "react-redux";
-
-const Container = styled.div`
-  display: flex;
-`;
+import { getSingleEvent } from "api";
+import { Loader } from "components/Loader";
+import SingleScrolling from "views/SingleScrolling";
 
 class Single extends React.Component {
+  state = {
+    e: ""
+  };
+
+  componentDidMount() {
+    getSingleEvent(this.props.match.params.id).then(res =>
+      this.setState({ e: res.data })
+    );
+  }
+
   render() {
-    const { singleEvent, match, location } = this.props;
+    const { e } = this.state;
     return (
-      <Container>
-        {!singleEvent ? (
-          <p>Loading....</p>
+      <>
+        {!e ? (
+          <Loader />
         ) : (
-          <StaticDetails
-            id={singleEvent.id}
-            title={singleEvent.title.rendered}
-            start_date={singleEvent.acf.start_date}
-            start_time={singleEvent.acf.start_time}
-            end_time={singleEvent.acf.end_time}
-            place={singleEvent.acf.place.post_title}
-            image={singleEvent.acf.image.url}
-            key={singleEvent.id}
-            description={singleEvent.acf.description}
-            match={match}
-            location={location}
+          <SingleScrolling
+            id={e.id}
+            title={e.title.rendered}
+            startDate={e.acf.start_date}
+            startTime={e.acf.start_time}
+            endTime={e.acf.end_time}
+            place={e.acf.place.post_title}
+            imageUrl={e.acf.image.url}
+            key={e.id}
+            description={e.acf.description}
           />
         )}
-      </Container>
+      </>
     );
   }
 }
 
-const mapStateToProps = (state, ownProps) => {
-  const { week, isLoading } = state.events.data;
-
-  return {
-    isLoading,
-    singleEvent: week.filter(
-      e => e.id === parseInt(ownProps.match.params.id)
-    )[0]
-  };
-};
-
-export default connect(mapStateToProps)(Single);
+export default Single;

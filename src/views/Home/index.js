@@ -1,30 +1,25 @@
 import React from "react";
-import styled from "@emotion/styled";
-import Card from "./components/Card";
 import { connect } from "react-redux";
 import { Loader } from "components/Loader";
-
-const Container = styled.div`
-  display: flex;
-  overflow-x: ${props => (props.open ? "hidden" : "scroll")};
-`;
+import SingleScrolling from "views/SingleScrolling";
+import SwipeableViews from "react-swipeable-views";
 
 class Home extends React.Component {
   render() {
-    const { isLoading, shows, isOpen } = this.props;
+    const { isLoading, shows } = this.props;
     const eventList = shows.map(e => {
       return (
-        <Card
-          id={e.id}
-          title={e.title.rendered}
-          start_date={e.acf.start_date}
-          start_time={e.acf.start_time}
-          end_time={e.acf.end_time}
-          place={e.acf.place.post_title}
-          image={e.acf.image.url}
-          key={e.id}
-          description={e.acf.description}
-        />
+        <div style={{ minHeight: "100vh", color: "#FFFFFF" }} key={e.id}>
+          <SingleScrolling
+            title={e.title.rendered}
+            startDate={e.acf.start_date}
+            startTime={e.acf.start_time}
+            endTime={e.acf.end_time}
+            place={e.acf.place.post_title}
+            imageUrl={e.acf.image.url}
+            description={e.acf.description}
+          />
+        </div>
       );
     });
     return (
@@ -32,7 +27,7 @@ class Home extends React.Component {
         {isLoading ? (
           <Loader />
         ) : (
-          <Container open={isOpen}>{eventList}</Container>
+          <SwipeableViews enableMouseEvents>{eventList}</SwipeableViews>
         )}
       </>
     );

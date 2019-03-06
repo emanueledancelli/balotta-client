@@ -5,7 +5,7 @@ import { Flex } from "components/Flex";
 import { colors } from "styles/colors";
 
 /**
- * TODO:
+ * DESCR:
  * get props from parent (SingleScrolling/Card)
  * title,
  * place,
@@ -20,7 +20,7 @@ import { colors } from "styles/colors";
 const DescriptionContainer = styled.div`
   width: 100vw;
   min-height: 100vh;
-  padding: 10vh 3%;
+  padding: 0 3%;
   color: #222;
   background-color: white;
 
@@ -56,6 +56,7 @@ const Description = ({
       justify="center"
     >
       <DescriptionContainer>
+        <div style={{ height: "6vh", display: "block" }} />
         <Title color={colors.black} padding="0">
           {title}
         </Title>

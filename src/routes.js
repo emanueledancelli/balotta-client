@@ -43,7 +43,7 @@ const Routes = location => {
       />
       <Route
         exact
-        path="/single/:id"
+        path="/:origin/single/:id/"
         render={routeProps => <Single {...routeProps} />}
       />
     </Switch>
@@ -58,8 +58,9 @@ class App extends Component {
           <div className="App">
             <Header location={location} />
             {Routes(location)}
-            {location.pathname.startsWith("/single") ||
-            location.pathname.startsWith("/eventi") ? null : (
+            {location.pathname.startsWith("/saved") ||
+            location.pathname.startsWith("/eventi") ||
+            location.pathname.startsWith("/shared") ? null : (
               <Navigation location={location} />
             )}
           </div>

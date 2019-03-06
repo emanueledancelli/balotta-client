@@ -4,7 +4,6 @@ import { Title } from "components/Title";
 import { Flex } from "components/Flex";
 import { colors } from "styles/colors";
 import Commands from "./Commands";
-import Sharer from "./Sharer";
 import moment from "moment";
 import FavoriteOutlineIcon from "mdi-react/FavoriteOutlineIcon";
 import ShareVariantIcon from "mdi-react/ShareVariantIcon";
@@ -140,22 +139,59 @@ class Hero extends React.Component {
             </Detail>
           </Details>
         </FlexItem>
-        <Flex flex={1} justify="space-around" align="flex-end">
+        <Flex flex={1} justify="space-evenly" align="flex-end">
           <Flex
             justify="center"
             align="center"
             padding="2%"
+            width="20%"
             margin="0 5px 0"
             style={{
               borderRadius: "20px",
-              color: `${colors.red}`
+              color: `${colors.red}`,
+              backgroundColor: "rgba(0, 0, 0, 0.3)"
             }}
           >
-            <FavoriteOutlineIcon size={30} />
+            <ShareVariantIcon size={20} />
+
+            <span
+              style={{
+                color: "white",
+                fontWeight: "500",
+                marginLeft: "5px",
+                fontSize: "0.8rem"
+              }}
+            >
+              Share
+            </span>
+          </Flex>
+          <Flex
+            justify="center"
+            align="center"
+            padding="2%"
+            width="20%"
+            margin="0 5px 0"
+            style={{
+              borderRadius: "20px",
+              color: `${colors.red}`,
+              backgroundColor: "rgba(0, 0, 0, 0.3)"
+            }}
+          >
+            <FavoriteOutlineIcon size={20} />
+            <span
+              style={{
+                color: "white",
+                fontWeight: "500",
+                marginLeft: "5px",
+                fontSize: "0.8rem"
+              }}
+            >
+              Save
+            </span>
           </Flex>
         </Flex>
         <FlexItem flex={1} justify="flex-end" align="flex-end">
-          <Commands />
+          <Commands length={this.props.length} index={this.props.i} />
         </FlexItem>
       </Container>
     );
