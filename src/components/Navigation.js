@@ -34,7 +34,7 @@ const Container = styled.div`
   transition: all 500ms ease-out;
   backdrop-filter: blur(10px);
   border-top: 0.5px solid rgba(255, 255, 255, 0.2);
-  z-index: 100;
+  z-index: 9;
 `;
 
 const WhiteContainer = styled.div`
@@ -50,7 +50,7 @@ const WhiteContainer = styled.div`
   z-index: 1;
   transition: all 500ms ease-out;
   border-top: 0.5px solid rgba(255, 255, 255, 0.2);
-  z-index: 100;
+  z-index: 9;
   & svg {
     color: rgba(0, 0, 0, 0.5);
   }

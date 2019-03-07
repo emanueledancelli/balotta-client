@@ -121,6 +121,10 @@ class Hero extends React.Component {
     this.setState({ isSaved: !this.state.isSaved });
   };
 
+  createTitle = title => {
+    return { __html: title };
+  };
+
   render() {
     const {
       imageUrl,
@@ -156,7 +160,7 @@ class Hero extends React.Component {
           />
         )}
         <FlexItem flex={5} justify="center" align="flex-end">
-          <Title>{title}</Title>
+          <Title dangerouslySetInnerHTML={this.createTitle(title)} />
           <Details>
             <DetailsDate>
               <DateDay>{getDate[0]}</DateDay>

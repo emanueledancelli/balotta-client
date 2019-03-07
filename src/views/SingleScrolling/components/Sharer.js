@@ -24,6 +24,7 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: space-evenly;
   align-items: flex-start;
+  z-index: 11;
 `;
 
 const Shadow = styled.div`
