@@ -4,10 +4,12 @@ import { Title } from "components/Title";
 import { Flex } from "components/Flex";
 import { colors } from "styles/colors";
 import { addToFavorities } from "utils/saveFavourites";
+import { check } from "utils/check";
+import { removeFromFavourites } from "utils/removeFromFavourites";
 import Sharer from "./Sharer";
-import Commands from "./Commands";
 import moment from "moment";
 import FavoriteOutlineIcon from "mdi-react/FavoriteOutlineIcon";
+import FavoriteIcon from "mdi-react/FavoriteIcon";
 import ShareVariantIcon from "mdi-react/ShareVariantIcon";
 
 /**
@@ -94,8 +96,18 @@ const DateMonth = styled.p`
 
 class Hero extends React.Component {
   state = {
-    isShareOpen: false
+    isShareOpen: false,
+    isSaved: false,
+    isHome: false
   };
+
+  componentDidMount() {
+    let s = check(this.props.id);
+    this.setState({ isSaved: s });
+    if (this.props.location.pathname === "/") {
+      this.setState({ isHome: true });
+    }
+  }
 
   handleShareButton = () => {
     this.setState({ isShareOpen: !this.state.isShareOpen });
@@ -105,6 +117,10 @@ class Hero extends React.Component {
     this.setState({ isShareOpen: false });
   };
 
+  handleSaveButton = () => {
+    this.setState({ isSaved: !this.state.isSaved });
+  };
+
   render() {
     const {
       imageUrl,
@@ -112,10 +128,11 @@ class Hero extends React.Component {
       startDate,
       startTime,
       endTime,
-      place
+      place,
+      i,
+      length
     } = this.props;
-    const { isShareOpen } = this.state;
-    console.log(this.props);
+    const { isSaved, isShareOpen } = this.state;
 
     const getDate = moment(startDate)
       .format("dddd D MMMM")
@@ -138,7 +155,7 @@ class Hero extends React.Component {
             handleClick={this.handleShadowAction}
           />
         )}
-        <FlexItem flex={3} justify="flex-end" align="flex-end">
+        <FlexItem flex={5} justify="center" align="flex-end">
           <Title>{title}</Title>
           <Details>
             <DetailsDate>
@@ -158,62 +175,81 @@ class Hero extends React.Component {
             </Detail>
           </Details>
         </FlexItem>
-        <Flex flex={1} justify="space-evenly" align="flex-end">
-          <Flex
-            justify="center"
-            align="center"
-            padding="2%"
-            width="20%"
-            margin="0 5px 0"
-            style={{
-              borderRadius: "20px",
-              color: `${colors.red}`,
-              backgroundColor: "rgba(0, 0, 0, 0.3)"
-            }}
-            onClick={this.handleShareButton}
-          >
-            <ShareVariantIcon size={20} />
-
-            <span
-              style={{
-                color: "white",
-                fontWeight: "500",
-                marginLeft: "5px",
-                fontSize: "0.8rem"
-              }}
-            >
-              Share
-            </span>
-          </Flex>
-          <Flex
-            justify="center"
-            align="center"
-            padding="2%"
-            width="20%"
-            margin="0 5px 0"
-            style={{
-              borderRadius: "20px",
-              color: `${colors.red}`,
-              backgroundColor: "rgba(0, 0, 0, 0.3)"
-            }}
-            onClick={() => addToFavorities(this.props.id)}
-          >
-            <FavoriteOutlineIcon osize={20} />
-            <span
-              style={{
-                color: "white",
-                fontWeight: "500",
-                marginLeft: "5px",
-                fontSize: "0.8rem"
-              }}
-            >
-              Save
-            </span>
-          </Flex>
-        </Flex>
         <FlexItem flex={1} justify="flex-end" align="flex-end">
-          <Commands length={this.props.length} index={this.props.i} />
+          <Flex justify="space-between" padding="3%">
+            <Flex align="flex-end">
+              <span
+                style={{ fontSize: "0.7rem", color: "rgba(255,255,255,0.9)" }}
+              >
+                {!isNaN(i) ? `${i + 1}` : null}
+              </span>
+              <span
+                style={{ fontSize: "0.7rem", color: "rgba(255,255,255,0.5)" }}
+              >
+                {length >= 1 && `/${length}`}
+              </span>
+            </Flex>
+            <Flex flex={1} justify="flex-end" align="flex-end">
+              <Flex
+                justify="center"
+                align="center"
+                padding="2%"
+                width="40px"
+                height="40px"
+                style={{
+                  color: "white",
+                  borderRadius: "50%",
+                  backgroundColor: "rgba(0, 0, 0, 0.3)"
+                }}
+                onClick={this.handleShareButton}
+              >
+                <ShareVariantIcon size={28} />
+              </Flex>
+              {!isSaved ? (
+                <Flex
+                  justify="center"
+                  align="center"
+                  padding="2%"
+                  width="40px"
+                  height="40px"
+                  style={{
+                    borderRadius: "20px",
+                    marginLeft: "10px",
+                    color: `${colors.red}`,
+                    backgroundColor: "rgba(0, 0, 0, 0.3)"
+                  }}
+                  onClick={() => {
+                    addToFavorities(this.props.id);
+                    this.handleSaveButton();
+                  }}
+                >
+                  <FavoriteOutlineIcon size={28} />
+                </Flex>
+              ) : (
+                <Flex
+                  justify="center"
+                  align="center"
+                  padding="2%"
+                  width="40px"
+                  height="40px"
+                  style={{
+                    marginLeft: "10px",
+                    borderRadius: "20px",
+                    color: `${colors.red}`,
+                    backgroundColor: "rgba(0, 0, 0, 0.3)"
+                  }}
+                  onClick={() => {
+                    removeFromFavourites(this.props.id);
+                    this.handleSaveButton();
+                  }}
+                >
+                  <FavoriteIcon size={28} />
+                </Flex>
+              )}
+            </Flex>
+          </Flex>
         </FlexItem>
+        {this.state.isHome && <div style={{ height: "8vh" }} />}
       </Container>
     );
   }

@@ -34,6 +34,7 @@ class List extends React.Component {
 
     let eventsToMap;
     let listContent;
+    let swipebleIndex = parseInt(match.params.index);
 
     switch (match.params.listname) {
       case "week":
@@ -76,6 +77,7 @@ class List extends React.Component {
             place={e.acf.place.post_title}
             imageUrl={e.acf.image.url}
             description={e.acf.description}
+            location={this.props.location}
           />
         </div>
       );
@@ -86,7 +88,7 @@ class List extends React.Component {
         {!eventsToMap ? (
           <Loader />
         ) : (
-          <SwipeableViews index={match.params.index} enableMouseEvents>
+          <SwipeableViews index={swipebleIndex} enableMouseEvents>
             {listContent}
           </SwipeableViews>
         )}

@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 import ChevronLeftIcon from "mdi-react/ChevronLeftIcon";
 import FilterIcon from "mdi-react/FilterIcon";
 import { withRouter, Link } from "react-router-dom";
-import { Flex } from "components/Flex";
+//import { Flex } from "components/Flex";
 
 const Container = styled.div`
   background-color: rgba(0, 0, 0, 0.3);
@@ -18,13 +18,6 @@ const Container = styled.div`
   flex-direction: row;
   justify-content: ${props => props.justify || "space-between"};
   align-items: center;
-`;
-
-const Item = styled.p`
-  color: rgba(255, 255, 255, 0.8);
-  & a {
-    color: white;
-  }
 `;
 
 const ItemKind = styled.p`
@@ -57,7 +50,7 @@ class Header extends React.Component {
         <Container>
           <ItemKind>
             <Link style={{ color: "rgba(255,255,255, 0.5)" }} to="/search">
-              <ChevronLeftIcon size={45} />
+              <ChevronLeftIcon size={40} />
             </Link>
           </ItemKind>
           <ItemKind>{path[2]}</ItemKind>

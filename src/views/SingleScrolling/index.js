@@ -34,7 +34,6 @@ class SingleScrolling extends React.Component {
 
   render() {
     const { windowHeight } = this.state;
-
     const style = {
       container: {
         height: windowHeight

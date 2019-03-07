@@ -31,6 +31,7 @@ class Single extends React.Component {
             imageUrl={e.acf.image.url}
             key={e.id}
             description={e.acf.description}
+            location={this.props.location}
           />
         )}
       </>

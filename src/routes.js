@@ -59,8 +59,7 @@ class App extends Component {
             <Header location={location} />
             {Routes(location)}
             {location.pathname.startsWith("/saved") ||
-            location.pathname.startsWith("/eventi") ||
-            location.pathname.startsWith("/shared") ? null : (
+            location.pathname.startsWith("/eventi") ? null : (
               <Navigation location={location} />
             )}
           </div>
