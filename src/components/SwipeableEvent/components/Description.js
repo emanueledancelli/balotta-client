@@ -3,38 +3,35 @@ import styled from "@emotion/styled";
 import { Title } from "components/Title";
 import { Flex } from "components/Flex";
 import { colors } from "styles/colors";
+import moment from "moment";
+import "moment/locale/it";
 
 /**
- * DESCR:
- * get props from parent (SingleScrolling/Card)
- * title,
- * place,
- * start_date,
- * start_time,
- * end_time,
- * description
- * then shows them, gets called with a loadable.
+ * TODO:
+ * Update style to reflect hero.
  */
 
 const DescriptionContainer = styled.div`
   width: 100vw;
   min-height: 100vh;
-  padding: 0 3%;
   color: #222;
   background-color: white;
-
   transition: all 200ms ease-out;
   box-sizing: border-box;
   word-break: break-word;
   z-index: 9;
   & a {
-    color: #666;
+    color: #111;
     text-decoration: underline;
   }
 `;
 
 const createDescription = description => {
   return { __html: description };
+};
+
+const createTitle = title => {
+  return { __html: title };
 };
 
 const Description = ({
@@ -46,28 +43,112 @@ const Description = ({
   description
 }) => {
   const descr = createDescription(description);
+  const getDate = moment(startDate)
+    .locale("it")
+    .format("dddd D MMMM")
+    .split(" ");
   return (
     <Flex
       height="100vh"
       position="relative"
       direction="column"
-      align="flex-start"
+      align="Flex-start"
       justify="center"
     >
       <DescriptionContainer>
-        <div style={{ height: "6vh", display: "block" }} />
-        <Title color={colors.black} padding="0">
-          {title}
-        </Title>
-        <Flex>{startTime}</Flex>
-        <Flex>{startDate}</Flex>
-        <Flex>{endTime}</Flex>
-        <Flex>{place}</Flex>
+        <Flex padding="3%" margin="10vh 0 0" align="flex-end">
+          <Title
+            style={{ padding: "0", margin: "0" }}
+            color="#222"
+            size="1.5rem"
+          >
+            {title}
+          </Title>
+        </Flex>
+        <Flex
+          margin="0 0 5vh"
+          padding="3%"
+          direction="row"
+          justify="space-between"
+        >
+          <Flex width="33%" direction="column">
+            <span
+              style={{
+                fontSize: "0.9rem",
+                fontWeight: "500",
+                textTransform: "capitalize"
+              }}
+            >
+              {getDate[0]}
+            </span>
+            <span style={{ fontWeight: "700", fontSize: "1.6rem" }}>
+              {getDate[1]}
+            </span>
+            <span
+              style={{
+                fontSize: "0.9rem",
+                fontWeight: "500",
+                textTransform: "capitalize"
+              }}
+            >
+              {getDate[2]}
+            </span>
+          </Flex>
+          <Flex width="33%" direction="column">
+            <span
+              style={{ opacity: "0.5", fontWeight: "300", fontSize: "0.8rem" }}
+            >
+              from
+            </span>
+            <span style={{ fontSize: "0.9rem", fontWeight: "500" }}>
+              {startTime}
+            </span>
+            <span
+              style={{ opacity: "0.5", fontWeight: "300", fontSize: "0.8rem" }}
+            >
+              to
+            </span>
+            <span style={{ fontSize: "0.9rem", fontWeight: "500" }}>
+              {endTime}
+            </span>
+          </Flex>
+          <Flex width="33%" direction="column">
+            <span style={{ opacity: "0.5", fontWeight: "300" }}>where</span>
+            <span style={{ fontWeight: "500" }}>{place}</span>
+          </Flex>
+        </Flex>
         <div
-          style={{ lineHeight: "160%", fontSize: "0.9rem" }}
-          dangerouslySetInnerHTML={descr}
+          style={{
+            height: "2px",
+            borderBottom: "0.5px solid rgba(0,0,0,0.1)",
+            width: "100vw"
+          }}
         />
-        <div style={{ height: "5vh", backgroundColor: "black" }} />
+        <Flex
+          direction="column"
+          style={{
+            lineHeight: "160%",
+            fontSize: "1rem",
+            padding: "3%",
+            marginTop: "5vh"
+          }}
+        >
+          <span
+            style={{
+              fontWeight: "300",
+              fontSize: "0.8rem",
+              zIndex: "0",
+              opacity: "0.5",
+              marginBottom: "-2vh"
+            }}
+          >
+            Info
+          </span>
+          <div
+            style={{ backgroundColor: "white", fontSize: "1em" }}
+            dangerouslySetInnerHTML={descr}
+          />
+        </Flex>
       </DescriptionContainer>
     </Flex>
   );

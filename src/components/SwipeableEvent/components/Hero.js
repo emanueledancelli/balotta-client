@@ -13,7 +13,8 @@ import FavoriteIcon from "mdi-react/FavoriteIcon";
 import ShareVariantIcon from "mdi-react/ShareVariantIcon";
 
 /**
- * hero component showing all info for event
+ * TODO:
+ * Clean initial styles with Flex component
  */
 
 const Container = styled.div`
@@ -52,7 +53,7 @@ const Detail = styled.div`
 
 const DetailNote = styled.p`
   color: #fff;
-  font-weight: 400;
+  font-weight: 300;
   opacity: 0.5;
   margin: 0;
 `;

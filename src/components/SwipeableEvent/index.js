@@ -3,6 +3,14 @@ import SwipeableViews from "react-swipeable-views";
 import Loadable from "react-loadable";
 import { Loader } from "components/Loader";
 
+/**
+ * TODO:
+ * bug: hard to reproduce.
+ * A ~10vh white margin appears at the bottom on first view render.
+ * Fixes itself after scrolling.
+ * Either try to reproduce or add a scrollToTop on componentDidMount as temporaty fix.
+ */
+
 const Hero = Loadable({
   loader: () => import("./components/Hero"),
   loading: Loader
@@ -35,7 +43,7 @@ class SwipeableEvent extends React.Component {
       },
       scroll: {
         overflowY: "scroll",
-        minHeight: windowHeight
+        minHeight: "100vh"
       }
     };
 
