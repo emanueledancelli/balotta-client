@@ -8,6 +8,11 @@ import ArrowBackIcon from "mdi-react/ArrowBackIcon";
 import { connect } from "react-redux";
 import { setUi, setFav } from "actions/uiActions";
 
+/**
+ * TODO:
+ * remove old code & logic
+ */
+
 const Container = styled.div`
   height: 8vh;
   width: 100vw;
@@ -18,14 +23,10 @@ const Container = styled.div`
   align-items: center;
   flex-direction: row;
   background-color: ${props => {
-    if (props.location.pathname === "/") {
-      return "transparent";
-    } else if (props.location.pathname.startsWith("/list")) {
+    let l = props.location.pathname;
+
+    if (l.startsWith("/list") || l.startsWith("/shared") || l === "/") {
       return "trasparent";
-    } else if (props.location.pathname.startsWith("/eventi")) {
-      return "transparent";
-    } else if (props.location.pathname.startsWith("/single")) {
-      return "transparent";
     } else {
       return "rgba(255,255,255,0.9)";
     }

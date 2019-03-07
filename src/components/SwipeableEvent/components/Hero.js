@@ -98,16 +98,26 @@ class Hero extends React.Component {
   state = {
     isShareOpen: false,
     isSaved: false,
-    isHome: false
+    addMarginForNavigation: false
   };
 
   componentDidMount() {
     let s = check(this.props.id);
-    this.setState({ isSaved: s });
-    if (this.props.location.pathname === "/") {
-      this.setState({ isHome: true });
+    let l = this.props.location.pathname;
+
+    if (l === "/" || l.startsWith("/shared")) {
+      this.handleAddMarginForNavigationState();
     }
+    this.handleSaveButtonState(s);
   }
+
+  handleAddMarginForNavigationState = () => {
+    this.setState({ addMarginForNavigation: true });
+  };
+
+  handleSaveButtonState = s => {
+    this.setState({ isSaved: s });
+  };
 
   handleShareButton = () => {
     this.setState({ isShareOpen: !this.state.isShareOpen });
@@ -253,7 +263,7 @@ class Hero extends React.Component {
             </Flex>
           </Flex>
         </FlexItem>
-        {this.state.isHome && <div style={{ height: "8vh" }} />}
+        {this.state.addMarginForNavigation && <div style={{ height: "8vh" }} />}
       </Container>
     );
   }
