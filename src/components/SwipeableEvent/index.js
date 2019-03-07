@@ -3,11 +3,6 @@ import SwipeableViews from "react-swipeable-views";
 import Loadable from "react-loadable";
 import { Loader } from "components/Loader";
 
-/**
- * PROPS:
- *
- */
-
 const Hero = Loadable({
   loader: () => import("./components/Hero"),
   loading: Loader
@@ -18,7 +13,7 @@ const Description = Loadable({
   loading: Loader
 });
 
-class SingleScrolling extends React.Component {
+class SwipeableEvent extends React.Component {
   state = {
     windowHeight: Number
   };
@@ -63,4 +58,4 @@ class SingleScrolling extends React.Component {
   }
 }
 
-export default SingleScrolling;
+export default SwipeableEvent;

@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "@emotion/styled";
 import { Link } from "react-router-dom";
-import { mq } from "../styles/mediaQueries";
+import { mq } from "styles/mediaQueries";
 
 const Image = styled.div`
   height: 150px;
@@ -56,7 +56,7 @@ const SquareContainer = styled.div`
   }
 `;
 
-const SquaredList = ({ name, list, hasTags }) => {
+const HorizonalScrollingList = ({ name, list, hasTags }) => {
   const stuff = list.map((e, index) => {
     let thumbnail = e.acf.image.sizes.thumbnail;
     let medium = e.acf.image.sizes.medium_large;
@@ -82,4 +82,4 @@ const SquaredList = ({ name, list, hasTags }) => {
   return <SquareContainer>{stuff}</SquareContainer>;
 };
 
-export default SquaredList;
+export default HorizonalScrollingList;

@@ -38,7 +38,7 @@ const Square = styled.div`
   background-color: #eb5757;
 `;
 
-class Favourites extends React.Component {
+class Saved extends React.Component {
   state = {
     eventsToShow: [],
     isLoading: false
@@ -116,4 +116,4 @@ class Favourites extends React.Component {
   }
 }
 
-export default Favourites;
+export default Saved;

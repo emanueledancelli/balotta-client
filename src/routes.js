@@ -3,10 +3,10 @@ import { Route, Switch } from "react-router-dom";
 import { Loader } from "components/Loader";
 import Loadable from "react-loadable";
 import Header from "./components/Header";
-import Navigation from "components/Navigation";
+import Navigation from "./components/Navigation";
 
-const Search = Loadable({
-  loader: () => import("views/Search"),
+const Home = Loadable({
+  loader: () => import("views/Home"),
   loading: Loader
 });
 
@@ -20,22 +20,22 @@ const Single = Loadable({
   loading: Loader
 });
 
-const Home = Loadable({
-  loader: () => import("views/Home"),
+const Best = Loadable({
+  loader: () => import("views/Best"),
   loading: Loader
 });
 
-const Favourites = Loadable({
-  loader: () => import("views/Favourites"),
+const Saved = Loadable({
+  loader: () => import("views/Saved"),
   loading: Loader
 });
 
 const Routes = location => {
   return (
     <Switch location={location}>
-      <Route exact path="/" component={Home} />
-      <Route exact path="/favourites" component={Favourites} />
-      <Route exact path="/search" component={Search} />
+      <Route exact path="/" component={Best} />
+      <Route exact path="/favorite" component={Saved} />
+      <Route exact path="/home" component={Home} />
       <Route
         exact
         path="/eventi/:listname/:id?/:index?"

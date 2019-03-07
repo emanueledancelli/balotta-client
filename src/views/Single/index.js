@@ -1,7 +1,7 @@
 import React from "react";
 import { getSingleEvent } from "api";
 import { Loader } from "components/Loader";
-import SingleScrolling from "views/SingleScrolling";
+import SwipeableEvent from "components/SwipeableEvent";
 
 class Single extends React.Component {
   state = {
@@ -21,7 +21,7 @@ class Single extends React.Component {
         {!e ? (
           <Loader />
         ) : (
-          <SingleScrolling
+          <SwipeableEvent
             id={e.id}
             title={e.title.rendered}
             startDate={e.acf.start_date}

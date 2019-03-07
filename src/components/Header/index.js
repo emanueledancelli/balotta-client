@@ -49,13 +49,13 @@ class Header extends React.Component {
       return (
         <Container>
           <ItemKind>
-            <Link style={{ color: "rgba(255,255,255, 0.5)" }} to="/search">
+            <Link style={{ color: "rgba(255,255,255, 0.5)" }} to="/home">
               <ChevronLeftIcon size={40} />
             </Link>
           </ItemKind>
           <ItemKind>{path[2]}</ItemKind>
           <ItemKind>
-            <Link style={{ opacity: 0 }} to="/search">
+            <Link style={{ opacity: 0 }} to="/home">
               <FilterIcon size={45} />
             </Link>
           </ItemKind>
@@ -66,13 +66,13 @@ class Header extends React.Component {
       return (
         <Container>
           <ItemKind>
-            <Link style={{ color: "rgba(255,255,255, 0.5)" }} to="/favourites">
+            <Link style={{ color: "rgba(255,255,255, 0.5)" }} to="/favorite">
               <ChevronLeftIcon size={45} />
             </Link>
           </ItemKind>
           <ItemKind>{path[1]}</ItemKind>
           <ItemKind>
-            <Link style={{ opacity: 0 }} to="/search">
+            <Link style={{ opacity: 0 }} to="/home">
               <FilterIcon size={45} />
             </Link>
           </ItemKind>
@@ -83,13 +83,13 @@ class Header extends React.Component {
       return (
         <Container>
           <ItemKind>
-            <Link style={{ color: "rgba(255,255,255, 0.5)" }} to="/search">
+            <Link style={{ color: "rgba(255,255,255, 0.5)" }} to="/home">
               <ChevronLeftIcon size={45} />
             </Link>
           </ItemKind>
           <ItemKind>{path[1]}</ItemKind>
           <ItemKind>
-            <Link style={{ opacity: 0 }} to="/search">
+            <Link style={{ opacity: 0 }} to="/home">
               <FilterIcon size={45} />
             </Link>
           </ItemKind>

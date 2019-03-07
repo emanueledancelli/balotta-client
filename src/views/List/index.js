@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import SingleScrolling from "../SingleScrolling";
+import SwipeableEvent from "components/SwipeableEvent";
 import SwipeableViews from "react-swipeable-views";
 import { Loader } from "components/Loader";
 
@@ -66,7 +66,7 @@ class List extends React.Component {
       let l = eventsToMap.length;
       return (
         <div style={{ minHeight: windowHeight, color: "#FFFFFF" }} key={e.id}>
-          <SingleScrolling
+          <SwipeableEvent
             length={l}
             i={i}
             id={e.id}

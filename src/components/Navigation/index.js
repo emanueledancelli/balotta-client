@@ -6,7 +6,7 @@ import WhatshotIcon from "mdi-react/WhatshotIcon";
 import FavoriteOutlineIcon from "mdi-react/FavoriteOutlineIcon";
 import ArrowBackIcon from "mdi-react/ArrowBackIcon";
 import { connect } from "react-redux";
-import { setUi, setFav } from "../actions/uiActions";
+import { setUi, setFav } from "actions/uiActions";
 
 const Container = styled.div`
   height: 8vh;
@@ -33,7 +33,7 @@ const Container = styled.div`
   z-index: 1;
   transition: all 500ms ease-out;
   backdrop-filter: blur(10px);
-  border-top: 0.5px solid rgba(255, 255, 255, 0.2);
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
   z-index: 9;
 `;
 
@@ -133,13 +133,13 @@ class Navigation extends React.Component {
                   <NavHelper>Best</NavHelper>
                 </Item>
               </NavLink>
-              <NavLink to="/search" exact>
+              <NavLink to="/home" exact>
                 <Item>
                   <HomeOutlineIcon size={26} />
                   <NavHelper>Home</NavHelper>
                 </Item>
               </NavLink>
-              <NavLink to="/favourites" activeClassName="active" exact>
+              <NavLink to="/favorite" activeClassName="active" exact>
                 <Item>
                   <FavoriteOutlineIcon size={22} />
                   <NavHelper>Saved</NavHelper>
