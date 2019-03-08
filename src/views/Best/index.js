@@ -47,8 +47,7 @@ const mapStateToProps = state => {
     isLoading,
     shows: today.filter(e =>
       e.acf.tags.includes("Concert" || "Clubbing" || "Culture")
-    ),
-    isOpen: state.ui.isEventOnFocus
+    )
   };
 };
 

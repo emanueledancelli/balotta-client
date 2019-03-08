@@ -7,6 +7,7 @@ import styled from "@emotion/styled";
 export const Flex = styled.div`
   display: flex;
   box-sizing: border-box;
+  color: ${props => props.color};
   position: ${props => props.position || "auto"};
   height: ${props => props.height || "auto"};
   width: ${props => props.width || "auto"};
