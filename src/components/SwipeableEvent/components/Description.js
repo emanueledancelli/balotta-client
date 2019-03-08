@@ -8,13 +8,19 @@ import "moment/locale/it";
 
 /**
  * TODO:
- * Update style to reflect hero.
+ *
+ * Create Text styled component and replace spans.
+ * Change FROM opacity TO color in styles/colors.
+ * Change DATES to be passed from index (DO NOT CALL moment both here and in hero).
+ * PUT DescriptionContainer/Container in its own file.
+ * FIND a way to extrapolate data for dangerouslysetinnerhtml to index
+ *
  */
 
 const Container = styled.div`
   width: 100vw;
   min-height: 100vh;
-  color: #222;
+  color: #222222;
   background-color: white;
   transition: all 200ms ease-out;
   box-sizing: border-box;

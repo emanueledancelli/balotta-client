@@ -24,7 +24,6 @@ const Container = styled.div`
   flex-direction: row;
   background-color: ${props => {
     let l = props.location.pathname;
-
     if (l.startsWith("/list") || l.startsWith("/shared") || l === "/") {
       return "trasparent";
     } else {
