@@ -160,7 +160,8 @@ class Hero extends React.Component {
             "linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(" +
             imageUrl +
             ") center",
-          backgroundSize: "cover"
+          backgroundSize: "cover",
+          backgroundRepeat: "repeat"
         }}
       >
         {isShareOpen && (

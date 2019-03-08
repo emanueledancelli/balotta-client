@@ -11,7 +11,7 @@ import "moment/locale/it";
  * Update style to reflect hero.
  */
 
-const DescriptionContainer = styled.div`
+const Container = styled.div`
   width: 100vw;
   min-height: 100vh;
   color: #222;
@@ -24,6 +24,12 @@ const DescriptionContainer = styled.div`
     color: #111;
     text-decoration: underline;
   }
+`;
+
+const Text = styled.span`
+  opacity: ${props => (props.isLabel ? "0.5" : "1")};
+  font-size: ${props => (props.isLabel ? "0.8rem" : "0.9rem")};
+  font-weight: ${props => (props.isLabel ? "300" : "500")};
 `;
 
 const createDescription = description => {
@@ -55,15 +61,14 @@ const Description = ({
       align="Flex-start"
       justify="center"
     >
-      <DescriptionContainer>
+      <Container>
         <Flex padding="3%" margin="10vh 0 0" align="flex-end">
           <Title
             style={{ padding: "0", margin: "0" }}
             color="#222"
             size="1.5rem"
-          >
-            {title}
-          </Title>
+            dangerouslySetInnerHTML={createTitle(title)}
+          />
         </Flex>
         <Flex
           margin="0 0 5vh"
@@ -113,7 +118,11 @@ const Description = ({
             </span>
           </Flex>
           <Flex width="33%" direction="column">
-            <span style={{ opacity: "0.5", fontWeight: "300" }}>where</span>
+            <span
+              style={{ opacity: "0.5", fontWeight: "300", fontSize: "0.8rem" }}
+            >
+              where
+            </span>
             <span style={{ fontWeight: "500" }}>{place}</span>
           </Flex>
         </Flex>
@@ -149,7 +158,7 @@ const Description = ({
             dangerouslySetInnerHTML={descr}
           />
         </Flex>
-      </DescriptionContainer>
+      </Container>
     </Flex>
   );
 };
