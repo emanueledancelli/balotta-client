@@ -44,7 +44,6 @@ class Saved extends React.Component {
     isLoading: false
   };
   componentDidMount() {
-    console.log(this.props);
     this.setState({ isLoading: true });
     let names = JSON.parse(localStorage.getItem("fav"));
     if (names !== null) {

@@ -2,10 +2,9 @@ import React from "react";
 import styled from "@emotion/styled";
 import ChevronLeftIcon from "mdi-react/ChevronLeftIcon";
 import FilterIcon from "mdi-react/FilterIcon";
-import { withRouter, Link } from "react-router-dom";
-//import { Flex } from "components/Flex";
+import { Link } from "react-router-dom";
 
-const Container = styled.div`
+const HeaderContainer = styled.div`
   background-color: rgba(0, 0, 0, 0.3);
   position: absolute;
   height: 6vh;
@@ -20,7 +19,7 @@ const Container = styled.div`
   align-items: center;
 `;
 
-const ItemKind = styled.p`
+const HeaderItem = styled.p`
   color: rgba(255, 255, 255, 0.8);
   display: flex;
   text-transform: capitalize;
@@ -33,72 +32,70 @@ const ItemKind = styled.p`
   }
 `;
 
-class Header extends React.Component {
-  render() {
-    const { location } = this.props;
+const Header = ({ location }) => {
+  let l = location.pathname;
+  let path = l.split("/");
 
-    let path = location.pathname.split("/");
-    if (location.pathname === "/") {
-      return (
-        <Container justify="center">
-          <ItemKind>Best Today</ItemKind>
-        </Container>
-      );
-    }
-    if (location.pathname.startsWith("/eventi")) {
-      return (
-        <Container>
-          <ItemKind>
-            <Link style={{ color: "rgba(255,255,255, 0.5)" }} to="/home">
-              <ChevronLeftIcon size={40} />
-            </Link>
-          </ItemKind>
-          <ItemKind>{path[2]}</ItemKind>
-          <ItemKind>
-            <Link style={{ opacity: 0 }} to="/home">
-              <FilterIcon size={45} />
-            </Link>
-          </ItemKind>
-        </Container>
-      );
-    }
-    if (location.pathname.startsWith("/saved")) {
-      return (
-        <Container>
-          <ItemKind>
-            <Link style={{ color: "rgba(255,255,255, 0.5)" }} to="/favorite">
-              <ChevronLeftIcon size={45} />
-            </Link>
-          </ItemKind>
-          <ItemKind>{path[1]}</ItemKind>
-          <ItemKind>
-            <Link style={{ opacity: 0 }} to="/home">
-              <FilterIcon size={45} />
-            </Link>
-          </ItemKind>
-        </Container>
-      );
-    }
-    if (location.pathname.startsWith("/shared")) {
-      return (
-        <Container>
-          <ItemKind>
-            <Link style={{ color: "rgba(255,255,255, 0.5)" }} to="/home">
-              <ChevronLeftIcon size={45} />
-            </Link>
-          </ItemKind>
-          <ItemKind>{path[1]}</ItemKind>
-          <ItemKind>
-            <Link style={{ opacity: 0 }} to="/home">
-              <FilterIcon size={45} />
-            </Link>
-          </ItemKind>
-        </Container>
-      );
-    } else {
-      return null;
-    }
+  if (l === "/") {
+    return (
+      <HeaderContainer justify="center">
+        <HeaderItem>Best Today</HeaderItem>
+      </HeaderContainer>
+    );
   }
-}
+  if (l.startsWith("/eventi")) {
+    return (
+      <HeaderContainer>
+        <HeaderItem>
+          <Link style={{ color: "rgba(255,255,255, 0.5)" }} to="/home">
+            <ChevronLeftIcon size={40} />
+          </Link>
+        </HeaderItem>
+        <HeaderItem>{path[2]}</HeaderItem>
+        <HeaderItem>
+          <Link style={{ opacity: 0 }} to="/home">
+            <FilterIcon size={45} />
+          </Link>
+        </HeaderItem>
+      </HeaderContainer>
+    );
+  }
+  if (l.startsWith("/saved")) {
+    return (
+      <HeaderContainer>
+        <HeaderItem>
+          <Link style={{ color: "rgba(255,255,255, 0.5)" }} to="/favorite">
+            <ChevronLeftIcon size={45} />
+          </Link>
+        </HeaderItem>
+        <HeaderItem>{path[1]}</HeaderItem>
+        <HeaderItem>
+          <Link style={{ opacity: 0 }} to="/home">
+            <FilterIcon size={45} />
+          </Link>
+        </HeaderItem>
+      </HeaderContainer>
+    );
+  }
+  if (l.startsWith("/shared")) {
+    return (
+      <HeaderContainer>
+        <HeaderItem>
+          <Link style={{ color: "rgba(255,255,255, 0.5)" }} to="/home">
+            <ChevronLeftIcon size={45} />
+          </Link>
+        </HeaderItem>
+        <HeaderItem>{path[1]}</HeaderItem>
+        <HeaderItem>
+          <Link style={{ opacity: 0 }} to="/home">
+            <FilterIcon size={45} />
+          </Link>
+        </HeaderItem>
+      </HeaderContainer>
+    );
+  } else {
+    return null;
+  }
+};
 
-export default withRouter(Header);
+export default Header;
