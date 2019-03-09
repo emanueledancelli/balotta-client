@@ -13,17 +13,6 @@ import {
 import moment from "moment";
 import "moment/locale/it";
 
-/**
- * TODO:
- *
- * Create Text styled component and replace spans.
- * Change FROM opacity TO color in styles/colors.
- * Change DATES to be passed from index (DO NOT CALL moment both here and in hero).
- * PUT DescriptionContainer/Container in its own file.
- * FIND a way to extrapolate data for dangerouslysetinnerhtml to index
- *
- */
-
 const createDescription = description => {
   return { __html: description };
 };

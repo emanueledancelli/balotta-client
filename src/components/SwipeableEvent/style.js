@@ -5,32 +5,32 @@ import styled from "@emotion/styled";
  */
 
 const Absolute = styled.div`
-  position: absolute;
   width: 100%;
+  position: absolute;
   box-sizing: border-box;
 `;
 
 export const ShareWrapper = styled(Absolute)`
+  height: 100vh;
   bottom: 0;
   left: 0;
-  height: 100vh;
 `;
 
 export const Shadow = styled(Absolute)`
-  top: 0;
   height: 65vh;
+  top: 0;
   background-color: rgba(0, 0, 0, 0.5);
 `;
 
 export const ShareDialog = styled(Absolute)`
   height: 35vh;
-  padding: 3%;
   bottom: 0;
-  background-color: white;
   display: flex;
+  padding: 3%;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: flex-start;
+  background-color: white;
   z-index: 11;
 `;
 
@@ -44,10 +44,13 @@ const Flex = styled.div`
 export const ShareDialogHeader = styled(Flex)`
   justify-content: flex-start;
   align-items: center;
+  margin-top: -25px;
 `;
 
 export const ShareDialogBody = styled(Flex)`
   direction: row;
+  align-items: flex-start;
+  margin-top: 20px;
   justify-content: space-between;
 `;
 
@@ -69,13 +72,14 @@ export const DescrWrapper = styled.div`
 
 export const DescrContainer = styled.div`
   padding: 3%;
-  height: auto;
 `;
 
-export const Title = styled.h1`
+const ResetH1 = styled.h1`
   padding: 0;
   margin: 0;
-  color: #222222;
+`;
+
+export const Title = styled(ResetH1)`
   font-size: 1.5rem;
 `;
 

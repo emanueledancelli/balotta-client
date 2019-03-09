@@ -20,7 +20,6 @@ export const NavContainer = styled.div`
   }};
   transition: background-color 500ms ease-out;
   border-top: 1px solid rgba(255, 255, 255, 0.2);
-  z-index: 9;
   & a {
     transition: all 500ms ease-out;
   }

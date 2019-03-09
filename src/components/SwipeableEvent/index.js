@@ -29,22 +29,20 @@ class SwipeableEvent extends React.Component {
     };
 
     return (
-      <div style={{ minHeight: "100vh" }}>
-        <SwipeableViews
-          enableMouseEvents
-          containerStyle={style.container}
-          axis="y"
-        >
+      <SwipeableViews
+        enableMouseEvents
+        containerStyle={style.container}
+        axis="y"
+      >
+        <div style={style.slide}>
+          <Hero {...this.props} />
+        </div>
+        <div style={style.scroll}>
           <div style={style.slide}>
-            <Hero {...this.props} />
+            <Description {...this.props} />
           </div>
-          <div style={style.scroll}>
-            <div style={style.slide}>
-              <Description {...this.props} />
-            </div>
-          </div>
-        </SwipeableViews>
-      </div>
+        </div>
+      </SwipeableViews>
     );
   }
 }
