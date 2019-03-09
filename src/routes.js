@@ -4,6 +4,7 @@ import { Loader } from "components/Loader";
 import Loadable from "react-loadable";
 import Header from "./components/Header";
 import Navigation from "./components/Navigation";
+import withErrorBoundary from "./hoc/withErrorBoundary";
 
 const Home = Loadable({
   loader: () => import("views/Home"),
@@ -69,4 +70,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default withErrorBoundary(App);

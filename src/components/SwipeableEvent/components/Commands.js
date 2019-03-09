@@ -20,7 +20,6 @@ const Commands = ({ length, index }) => {
             {length >= 1 && `/${length}`}
           </span>
         </Flex>
-        <span>ciaone</span>
       </Flex>
     </>
   );
