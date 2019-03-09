@@ -5,6 +5,10 @@ import DeleteOutlineIcon from "mdi-react/DeleteOutlineIcon";
 import { Flex } from "components/Flex";
 import { Link } from "react-router-dom";
 
+/**
+ * Wait on refactor for new ui
+ */
+
 const Container = styled.div`
   height: 32vh;
   display: flex;

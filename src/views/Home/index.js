@@ -1,31 +1,8 @@
 import React from "react";
-import styled from "@emotion/styled";
 import { connect } from "react-redux";
 import { Title } from "components/Title";
-import HorizontalScrollingList from "./components/HorizonalScrollingList";
-
-const Container = styled.div`
-  height: 32vh;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-`;
-
-const Subtitle = styled.h2`
-  color: #222;
-  font-size: 1.2em;
-  padding-left: 3%;
-`;
-
-const Numbers = styled.span`
-  color: rgba(0, 0, 0, 0.1);
-  font-weight: 500;
-  font-size: 0.9em;
-`;
-
-const Fix = styled.div`
-  height: ${props => props.h};
-`;
+import { Hero } from "./style";
+import SingleList from "./components/singleList";
 
 class Home extends React.Component {
   createTitle = title => {
@@ -43,63 +20,38 @@ class Home extends React.Component {
       culture
     } = this.props;
 
-    const shuffledDay = today;
-    const shuffledWe = weekEnd;
-
     return (
       <>
-        <Container onClick={this.handleHeroClick}>
+        <Hero>
           <Title color="#222222">Events</Title>
           <Title color="rgba(0, 0, 0, 0.2)">Places</Title>
-        </Container>
-
-        <Subtitle>
-          Today <Numbers>&sdot; {today.length}</Numbers>
-        </Subtitle>
-        {today && (
-          <HorizontalScrollingList hasTags list={shuffledDay} name="today" />
+        </Hero>
+        {today && today.length > 0 && (
+          <SingleList title="Today" list={today} name="today" />
         )}
-        <Fix h="5vh" />
-        <Subtitle>
-          On the weekend <Numbers>&sdot; {weekEnd.length}</Numbers>
-        </Subtitle>
-        {weekEnd && (
-          <HorizontalScrollingList hasTags list={shuffledWe} name="weekend" />
+        {weekEnd && weekEnd.length > 0 && (
+          <SingleList title="On the weekend" list={weekEnd} name="weekend" />
         )}
-        <Fix h="5vh" />
-        <Subtitle>
-          Clubbing {clubbing && <Numbers>&sdot; {clubbing.length}</Numbers>}
-        </Subtitle>
-        {clubbing && (
-          <HorizontalScrollingList list={clubbing} name="clubbing" />
+        {clubbing && clubbing.length > 0 && (
+          <SingleList title="Clubbing" list={clubbing} name="clubbing" />
         )}
-        <Fix h="5vh" />
-        <Subtitle>
-          Concerts <Numbers>&sdot; {concert.length}</Numbers>
-        </Subtitle>
-        {concert && <HorizontalScrollingList list={concert} name="concerts" />}
-        <Fix h="5vh" />
-        <Subtitle>
-          Culture <Numbers>&sdot; {culture.length}</Numbers>
-        </Subtitle>
-        {culture && <HorizontalScrollingList list={culture} name="culture" />}
-        <Fix h="5vh" />
-        <Subtitle>
-          {shows.length > 0 &&
-            `Shows ${<Numbers>&sdot; {shows.length}</Numbers>}`}
-        </Subtitle>
+        {concert && concert.length > 0 && (
+          <SingleList title="Concerts" list={concert} name="concerts" />
+        )}
+        {culture && culture.length > 0 && (
+          <SingleList title="Culture" list={culture} name="culture" />
+        )}
         {shows && shows.length > 0 && (
-          <>
-            <HorizontalScrollingList list={shows} name="shows" />
-            <Fix h="5vh" />
-          </>
+          <SingleList title="Shows" list={shows} name="shows" />
         )}
-
-        <Subtitle>
-          Everything this week <Numbers>&sdot; {week.length}</Numbers>
-        </Subtitle>
-        {week && <HorizontalScrollingList list={week} name="week" hasTags />}
-        <Fix h="20vh" />
+        {week && week.length > 0 && (
+          <SingleList
+            isLast
+            title="Everything this week"
+            list={week}
+            name="week"
+          />
+        )}
       </>
     );
   }

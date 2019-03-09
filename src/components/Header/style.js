@@ -15,7 +15,7 @@ export const HeaderContainer = styled.div`
   align-items: center;
 `;
 
-export const HeaderItem = styled.p`
+export const HeaderTitle = styled.p`
   color: rgba(255, 255, 255, 0.8);
   display: flex;
   text-transform: capitalize;

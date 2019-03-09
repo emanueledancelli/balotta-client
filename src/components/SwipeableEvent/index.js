@@ -12,12 +12,12 @@ import { Loader } from "components/Loader";
  */
 
 const Hero = Loadable({
-  loader: () => import("./components/Hero"),
+  loader: () => import("./components/hero"),
   loading: Loader
 });
 
 const Description = Loadable({
-  loader: () => import("./components/Description"),
+  loader: () => import("./components/description"),
   loading: Loader
 });
 

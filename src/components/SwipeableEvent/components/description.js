@@ -1,8 +1,7 @@
 import React from "react";
-import styled from "@emotion/styled";
 import { Title } from "components/Title";
 import { Flex } from "components/Flex";
-import { colors } from "styles/colors";
+import { DescrContainer, Label, Text, Date } from "../style";
 import moment from "moment";
 import "moment/locale/it";
 
@@ -16,27 +15,6 @@ import "moment/locale/it";
  * FIND a way to extrapolate data for dangerouslysetinnerhtml to index
  *
  */
-
-const Container = styled.div`
-  width: 100vw;
-  min-height: 100vh;
-  color: #222222;
-  background-color: white;
-  transition: all 200ms ease-out;
-  box-sizing: border-box;
-  word-break: break-word;
-  z-index: 9;
-  & a {
-    color: #111;
-    text-decoration: underline;
-  }
-`;
-
-const Text = styled.span`
-  opacity: ${props => (props.isLabel ? "0.5" : "1")};
-  font-size: ${props => (props.isLabel ? "0.8rem" : "0.9rem")};
-  font-weight: ${props => (props.isLabel ? "300" : "500")};
-`;
 
 const createDescription = description => {
   return { __html: description };
@@ -67,7 +45,7 @@ const Description = ({
       align="Flex-start"
       justify="center"
     >
-      <Container>
+      <DescrContainer>
         <Flex padding="3%" margin="10vh 0 0" align="flex-end">
           <Title
             style={{ padding: "0", margin: "0" }}
@@ -83,53 +61,19 @@ const Description = ({
           justify="space-between"
         >
           <Flex width="33%" direction="column">
-            <span
-              style={{
-                fontSize: "0.9rem",
-                fontWeight: "500",
-                textTransform: "capitalize"
-              }}
-            >
-              {getDate[0]}
-            </span>
-            <span style={{ fontWeight: "700", fontSize: "1.6rem" }}>
-              {getDate[1]}
-            </span>
-            <span
-              style={{
-                fontSize: "0.9rem",
-                fontWeight: "500",
-                textTransform: "capitalize"
-              }}
-            >
-              {getDate[2]}
-            </span>
+            <Date>{getDate[0]}</Date>
+            <Date isNumber>{getDate[1]}</Date>
+            <Date>{getDate[2]}</Date>
           </Flex>
           <Flex width="33%" direction="column">
-            <span
-              style={{ opacity: "0.5", fontWeight: "300", fontSize: "0.8rem" }}
-            >
-              from
-            </span>
-            <span style={{ fontSize: "0.9rem", fontWeight: "500" }}>
-              {startTime}
-            </span>
-            <span
-              style={{ opacity: "0.5", fontWeight: "300", fontSize: "0.8rem" }}
-            >
-              to
-            </span>
-            <span style={{ fontSize: "0.9rem", fontWeight: "500" }}>
-              {endTime}
-            </span>
+            <Label>from</Label>
+            <Text>{startTime}</Text>
+            <Label>to</Label>
+            <Text>{endTime}</Text>
           </Flex>
           <Flex width="33%" direction="column">
-            <span
-              style={{ opacity: "0.5", fontWeight: "300", fontSize: "0.8rem" }}
-            >
-              where
-            </span>
-            <span style={{ fontWeight: "500" }}>{place}</span>
+            <Label>where</Label>
+            <Text>{place}</Text>
           </Flex>
         </Flex>
         <div
@@ -164,7 +108,7 @@ const Description = ({
             dangerouslySetInnerHTML={descr}
           />
         </Flex>
-      </Container>
+      </DescrContainer>
     </Flex>
   );
 };

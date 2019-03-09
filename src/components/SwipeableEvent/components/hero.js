@@ -6,16 +6,11 @@ import { colors } from "styles/colors";
 import { addToFavorities } from "utils/saveFavourites";
 import { check } from "utils/check";
 import { removeFromFavourites } from "utils/removeFromFavourites";
-import Sharer from "./Sharer";
+import Sharer from "./sharer";
 import moment from "moment";
 import FavoriteOutlineIcon from "mdi-react/FavoriteOutlineIcon";
 import FavoriteIcon from "mdi-react/FavoriteIcon";
 import ShareVariantIcon from "mdi-react/ShareVariantIcon";
-
-/**
- * TODO:
- * Clean initial styles with Flex component
- */
 
 const Container = styled.div`
   height: 100vh;
