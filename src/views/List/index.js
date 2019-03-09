@@ -5,22 +5,7 @@ import SwipeableViews from "react-swipeable-views";
 import { Loader } from "components/Loader";
 
 class List extends React.Component {
-  state = {
-    windowHeight: Number,
-    index: 0
-  };
-
-  componentDidMount() {
-    let h = window.screen.height;
-    this.setWindowHeight(h);
-  }
-
-  setWindowHeight = h => this.setState({ windowHeight: h });
-
-  handleChangeIndex = i => this.setState({ index: i });
-
   render() {
-    const { windowHeight } = this.state;
     const {
       today,
       weekEnd,
@@ -31,6 +16,15 @@ class List extends React.Component {
       culture,
       concert
     } = this.props;
+
+    const style = {
+      container: {
+        height: "100vh"
+      },
+      slide: {
+        minHeight: "100vh"
+      }
+    };
 
     let eventsToMap;
     let listContent;
@@ -65,10 +59,11 @@ class List extends React.Component {
     listContent = eventsToMap.map((e, i) => {
       let l = eventsToMap.length;
       return (
-        <div style={{ minHeight: windowHeight, color: "#FFFFFF" }} key={e.id}>
+        <div style={{ minHeight: "100vh", color: "#FFFFFF" }} key={e.id}>
           <SwipeableEvent
             length={l}
             i={i}
+            style={style.slide}
             id={e.id}
             title={e.title.rendered}
             startDate={e.acf.start_date}
@@ -88,7 +83,11 @@ class List extends React.Component {
         {!eventsToMap ? (
           <Loader />
         ) : (
-          <SwipeableViews index={swipebleIndex} enableMouseEvents>
+          <SwipeableViews
+            containerStyle={style.container}
+            index={swipebleIndex}
+            enableMouseEvents
+          >
             {listContent}
           </SwipeableViews>
         )}

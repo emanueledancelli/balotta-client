@@ -1,7 +1,15 @@
 import React from "react";
-import { Title } from "components/Title";
-import { Flex } from "components/Flex";
-import { DescrContainer, Label, Text, Date } from "../style";
+import {
+  DescrWrapper,
+  DescrContainer,
+  Label,
+  Text,
+  Date,
+  InfoSectionItem,
+  InfoSectionContainer,
+  Title,
+  Hero
+} from "../style";
 import moment from "moment";
 import "moment/locale/it";
 
@@ -38,78 +46,41 @@ const Description = ({
     .format("dddd D MMMM")
     .split(" ");
   return (
-    <Flex
-      height="100vh"
-      position="relative"
-      direction="column"
-      align="Flex-start"
-      justify="center"
-    >
+    <DescrWrapper>
+      <Hero>
+        <Title dangerouslySetInnerHTML={createTitle(title)} />
+      </Hero>
+      <InfoSectionContainer>
+        <InfoSectionItem>
+          <Date>{getDate[0]}</Date>
+          <Date isNumber>{getDate[1]}</Date>
+          <Date>{getDate[2]}</Date>
+        </InfoSectionItem>
+        <InfoSectionItem>
+          <Label>from</Label>
+          <Text>{startTime}</Text>
+          <Label>to</Label>
+          <Text>{endTime}</Text>
+        </InfoSectionItem>
+        <InfoSectionItem>
+          <Label>where</Label>
+          <Text>{place}</Text>
+        </InfoSectionItem>
+      </InfoSectionContainer>
       <DescrContainer>
-        <Flex padding="3%" margin="10vh 0 0" align="flex-end">
-          <Title
-            style={{ padding: "0", margin: "0" }}
-            color="#222"
-            size="1.5rem"
-            dangerouslySetInnerHTML={createTitle(title)}
-          />
-        </Flex>
-        <Flex
-          margin="0 0 5vh"
-          padding="3%"
-          direction="row"
-          justify="space-between"
-        >
-          <Flex width="33%" direction="column">
-            <Date>{getDate[0]}</Date>
-            <Date isNumber>{getDate[1]}</Date>
-            <Date>{getDate[2]}</Date>
-          </Flex>
-          <Flex width="33%" direction="column">
-            <Label>from</Label>
-            <Text>{startTime}</Text>
-            <Label>to</Label>
-            <Text>{endTime}</Text>
-          </Flex>
-          <Flex width="33%" direction="column">
-            <Label>where</Label>
-            <Text>{place}</Text>
-          </Flex>
-        </Flex>
+        <div style={{ height: "5vh" }} />
+        <Label>Info</Label>
         <div
           style={{
-            height: "2px",
-            borderBottom: "0.5px solid rgba(0,0,0,0.1)",
-            width: "100vw"
+            marginTop: "-15px",
+            backgroundColor: "white",
+            fontSize: "1em"
           }}
+          dangerouslySetInnerHTML={descr}
         />
-        <Flex
-          direction="column"
-          style={{
-            lineHeight: "160%",
-            fontSize: "1rem",
-            padding: "3%",
-            marginTop: "5vh"
-          }}
-        >
-          <span
-            style={{
-              fontWeight: "300",
-              fontSize: "0.8rem",
-              zIndex: "0",
-              opacity: "0.5",
-              marginBottom: "-2vh"
-            }}
-          >
-            Info
-          </span>
-          <div
-            style={{ backgroundColor: "white", fontSize: "1em" }}
-            dangerouslySetInnerHTML={descr}
-          />
-        </Flex>
+        <div style={{ height: "10vh" }} />
       </DescrContainer>
-    </Flex>
+    </DescrWrapper>
   );
 };
 

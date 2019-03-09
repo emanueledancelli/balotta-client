@@ -3,14 +3,6 @@ import SwipeableViews from "react-swipeable-views";
 import Loadable from "react-loadable";
 import { Loader } from "components/Loader";
 
-/**
- * TODO:
- * bug: hard to reproduce.
- * A ~10vh white margin appears at the bottom on first view render.
- * Fixes itself after scrolling.
- * Either try to reproduce or add a scrollToTop on componentDidMount as temporaty fix.
- */
-
 const Hero = Loadable({
   loader: () => import("./components/hero"),
   loading: Loader
@@ -22,24 +14,13 @@ const Description = Loadable({
 });
 
 class SwipeableEvent extends React.Component {
-  state = {
-    windowHeight: Number
-  };
-  componentDidMount() {
-    let h = window.screen.height;
-    this.setState({
-      windowHeight: h
-    });
-  }
-
   render() {
-    const { windowHeight } = this.state;
     const style = {
       container: {
-        height: windowHeight
+        height: "100vh"
       },
       slide: {
-        minHeight: windowHeight
+        minHeight: "100vh"
       },
       scroll: {
         overflowY: "scroll",
@@ -48,20 +29,22 @@ class SwipeableEvent extends React.Component {
     };
 
     return (
-      <SwipeableViews
-        enableMouseEvents
-        containerStyle={style.container}
-        axis="y"
-      >
-        <div style={style.slide}>
-          <Hero {...this.props} />
-        </div>
-        <div style={style.scroll}>
+      <div style={{ minHeight: "100vh" }}>
+        <SwipeableViews
+          enableMouseEvents
+          containerStyle={style.container}
+          axis="y"
+        >
           <div style={style.slide}>
-            <Description {...this.props} />
+            <Hero {...this.props} />
           </div>
-        </div>
-      </SwipeableViews>
+          <div style={style.scroll}>
+            <div style={style.slide}>
+              <Description {...this.props} />
+            </div>
+          </div>
+        </SwipeableViews>
+      </div>
     );
   }
 }

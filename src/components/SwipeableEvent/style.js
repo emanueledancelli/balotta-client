@@ -55,18 +55,34 @@ export const ShareDialogBody = styled(Flex)`
  * description
  */
 
-export const DescrContainer = styled.div`
-  width: 100vw;
-  min-height: 100vh;
+export const DescrWrapper = styled.div`
+  height: 100vh;
   color: #222222;
   background-color: white;
   box-sizing: border-box;
   word-break: break-word;
-  z-index: 9;
   & a {
     color: #111;
     text-decoration: underline;
   }
+`;
+
+export const DescrContainer = styled.div`
+  padding: 3%;
+  height: auto;
+`;
+
+export const Title = styled.h1`
+  padding: 0;
+  margin: 0;
+  color: #222222;
+  font-size: 1.5rem;
+`;
+
+export const Hero = styled.div`
+  padding: 3%;
+  margin-top: 10vh;
+  display: flex;
 `;
 
 export const Label = styled.span`
@@ -84,4 +100,27 @@ export const Date = styled.span`
   font-weight: ${props => (props.isNumber ? 700 : 500)};
   font-size: ${props => (props.isNumber ? "1.6rem" : "0.9rem")};
   text-transform: capitalize;
+`;
+
+export const InfoSectionItem = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 33%;
+  flex: initial;
+  margin: 0;
+  height: auto;
+  padding: 0;
+  box-sizing: border-box;
+  justify-content: flex-start;
+  align-items: flex-start;
+`;
+
+export const InfoSectionContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  padding: 3%;
+  padding-bottom: 7vh;
+  box-sizing: border-box;
+  border-bottom: 0.5px solid rgba(0, 0, 0, 0.1);
+  justify-content: space-between;
 `;
