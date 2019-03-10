@@ -1,10 +1,16 @@
 import React from "react";
 import { connect } from "react-redux";
+import { Loader } from "components/Loader";
+import MetaTags from "components/MetaTags";
 import SwipeableEvent from "components/SwipeableEvent";
 import SwipeableViews from "react-swipeable-views";
-import { Loader } from "components/Loader";
 
 class List extends React.Component {
+  stte = {
+    title: "",
+    description: ""
+  };
+
   render() {
     const {
       today,
@@ -26,6 +32,8 @@ class List extends React.Component {
       }
     };
 
+    let title;
+    let description;
     let eventsToMap;
     let listContent;
     let swipebleIndex = parseInt(match.params.index);
@@ -33,24 +41,38 @@ class List extends React.Component {
     switch (match.params.listname) {
       case "week":
         eventsToMap = week;
+        title = "This week - Balotta";
+        description = "I migliori eventi questa settimana";
         break;
       case "today":
         eventsToMap = today;
+        title = "Today - Balotta";
+        description = "I migliori eventi oggi";
         break;
       case "weekend":
         eventsToMap = weekEnd;
+        title = "Weekend - Balotta";
+        description = "I migliori eventi nel weekend";
         break;
       case "culture":
         eventsToMap = culture;
+        title = "Culture - Balotta";
+        description = "I migliori eventi di cultura";
         break;
       case "concerts":
         eventsToMap = concert;
+        title = "Concerts - Balotta";
+        description = "I migliori concerti questa settimana";
         break;
       case "clubbing":
         eventsToMap = clubbing;
+        title = "Clubbing - Balotta";
+        description = "I migliori eventi di vita nottura questa settimana";
         break;
       case "shows":
         eventsToMap = shows;
+        title = "Shows - Balotta";
+        description = "I migliori shows questa settimana";
         break;
       default:
         break;
@@ -80,6 +102,8 @@ class List extends React.Component {
 
     return (
       <>
+        <MetaTags title={title} description={description} />
+
         {!eventsToMap ? (
           <Loader />
         ) : (

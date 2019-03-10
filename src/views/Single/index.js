@@ -1,23 +1,48 @@
 import React from "react";
 import { getSingleEvent } from "api";
 import { Loader } from "components/Loader";
+import MetaTags from "components/MetaTags";
 import SwipeableEvent from "components/SwipeableEvent";
 
 class Single extends React.Component {
   state = {
-    e: ""
+    e: "",
+    title: "",
+    image: "",
+    description: ""
   };
 
   componentDidMount() {
-    getSingleEvent(this.props.match.params.id).then(res =>
-      this.setState({ e: res.data })
-    );
+    getSingleEvent(this.props.match.params.id)
+      .then(r => this.handleState(r.data))
+      .then(() => this.handleTags());
   }
 
+  handleState = d => {
+    this.setState({ e: d });
+  };
+
+  handleTags = () => {
+    let s = this.state.e.acf.description.slice(0, 20);
+    this.setState({
+      title: `${this.state.e.title.rendered} - Balotta`,
+      image: this.state.e.acf.image.url,
+      description: s
+    });
+  };
+
   render() {
-    const { e } = this.state;
+    const { e, title, description, image } = this.state;
+
+    const tags = {
+      title,
+      description,
+      image
+    };
+
     return (
       <>
+        <MetaTags {...tags} />
         {!e ? (
           <Loader />
         ) : (
