@@ -17,15 +17,8 @@ import {
   EmailShareButton
 } from "react-share";
 
-/**
- * FIX:
- * Check console log
- * quotes gets passed an object but needs a string
- */
-
 const Sharer = ({ handleClick, id, title }) => {
   const shareUrl = `https://balotta.co/shared/single/${id}`;
-  const quotes = { title };
 
   return (
     <ShareWrapper>
@@ -35,19 +28,19 @@ const Sharer = ({ handleClick, id, title }) => {
           <span style={{ color: "#222222", fontWeight: "500" }}>Share:</span>
         </ShareDialogHeader>
         <ShareDialogBody>
-          <FacebookShareButton quote={quotes} url={shareUrl}>
+          <FacebookShareButton title={title} url={shareUrl}>
             <FacebookIcon round size={50} />
           </FacebookShareButton>
 
-          <TelegramShareButton quote={quotes} url={shareUrl}>
+          <TelegramShareButton title={title} url={shareUrl}>
             <TelegramIcon round size={50} />
           </TelegramShareButton>
 
-          <WhatsappShareButton quote={quotes} url={shareUrl}>
+          <WhatsappShareButton title={title} url={shareUrl}>
             <WhatsappIcon round size={50} />
           </WhatsappShareButton>
 
-          <EmailShareButton quote={quotes} url={shareUrl}>
+          <EmailShareButton title={title} url={shareUrl}>
             <EmailIcon round size={50} />
           </EmailShareButton>
         </ShareDialogBody>

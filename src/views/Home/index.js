@@ -1,7 +1,13 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Hero, Title } from "./style";
+import MetaTags from "components/MetaTags";
 import SingleList from "./components/singleList";
+
+const tags = {
+  title: "Home - Balotta",
+  description: "Scopri i migliori eventi della settimana"
+};
 
 class Home extends React.Component {
   state = {
@@ -32,10 +38,13 @@ class Home extends React.Component {
 
     return (
       <>
+        <MetaTags {...tags} />
+
         <Hero>
           <Title active>Events</Title>
           <Title>Places</Title>
         </Hero>
+
         {today && today.length > 0 && (
           <SingleList title="Today" list={today} name="today" />
         )}

@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 import { getFavEvents } from "../../api/index";
 import DeleteOutlineIcon from "mdi-react/DeleteOutlineIcon";
 import { Flex } from "components/Flex";
+import MetaTags from "components/MetaTags";
 import { Link } from "react-router-dom";
 
 /**
@@ -41,6 +42,11 @@ const Square = styled.div`
   margin-bottom: 10px;
   background-color: #eb5757;
 `;
+
+const tags = {
+  title: "Saved events - Balotta",
+  description: "Controlla i tuoi eventi salvati"
+};
 
 class Saved extends React.Component {
   state = {
@@ -91,9 +97,12 @@ class Saved extends React.Component {
 
     return (
       <>
+        <MetaTags {...tags} />
+
         <Container>
           <Title>Your saved events</Title>
         </Container>
+
         <Flex
           justify="center"
           align="center"
@@ -110,6 +119,7 @@ class Saved extends React.Component {
             clear
           </span>
         </Flex>
+
         <SquareContainer>
           {isLoading ? <p>Loading...</p> : favEv}
         </SquareContainer>

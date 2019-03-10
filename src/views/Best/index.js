@@ -1,8 +1,14 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Loader } from "components/Loader";
+import MetaTags from "components/MetaTags";
 import SwipeableEvent from "components/SwipeableEvent";
 import SwipeableViews from "react-swipeable-views";
+
+const tags = {
+  title: "Best today - Balotta",
+  description: "Scopri i migliori eventi a Bologna"
+};
 
 class Best extends React.Component {
   render() {
@@ -29,6 +35,8 @@ class Best extends React.Component {
     });
     return (
       <>
+        <MetaTags {...tags} />
+
         {isLoading ? (
           <Loader />
         ) : (
