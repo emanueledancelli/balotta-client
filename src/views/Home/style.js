@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import { mq } from "styles/mediaQueries";
+import { colors } from "styles/colors";
 
 export const Hero = styled.div`
   height: 32vh;
@@ -8,14 +9,20 @@ export const Hero = styled.div`
   align-items: center;
 `;
 
-export const Section = styled.section`
-  margin-bottom: ${props => (props.isLast ? "20vh" : "5vh")};
+export const Title = styled.h1`
+  color: ${props => (props.active ? colors.primary : colors.secondary)};
+  letter-spacing: -1px;
+  padding-left: 3%;
 `;
 
 export const Subtitle = styled.h2`
-  color: #222;
+  color: ${colors.primary};
   font-size: 1.2em;
   padding-left: 3%;
+`;
+
+export const Section = styled.section`
+  margin-bottom: ${props => (props.isLast ? "20vh" : "5vh")};
 `;
 
 export const Numbers = styled.span`

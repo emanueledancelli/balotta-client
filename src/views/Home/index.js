@@ -1,12 +1,20 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Title } from "components/Title";
-import { Hero } from "./style";
+import { Hero, Title } from "./style";
 import SingleList from "./components/singleList";
 
 class Home extends React.Component {
-  createTitle = title => {
-    return { __html: title };
+  state = {
+    day: ""
+  };
+
+  componentDidMount() {
+    this.setDay();
+  }
+
+  setDay = () => {
+    let d = new Date().getDay();
+    this.setState({ day: d });
   };
 
   render() {
@@ -20,16 +28,18 @@ class Home extends React.Component {
       culture
     } = this.props;
 
+    const { day } = this.state;
+
     return (
       <>
         <Hero>
-          <Title color="#222222">Events</Title>
-          <Title color="rgba(0, 0, 0, 0.2)">Places</Title>
+          <Title active>Events</Title>
+          <Title>Places</Title>
         </Hero>
         {today && today.length > 0 && (
           <SingleList title="Today" list={today} name="today" />
         )}
-        {weekEnd && weekEnd.length > 0 && (
+        {day !== 0 && weekEnd && weekEnd.length > 0 && (
           <SingleList title="On the weekend" list={weekEnd} name="weekend" />
         )}
         {clubbing && clubbing.length > 0 && (
