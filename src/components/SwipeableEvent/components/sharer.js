@@ -80,7 +80,9 @@ const Sharer = ({ handleClick, id, title }) => {
               style={{
                 display: "flex",
                 alignItems: "center",
-                flexDirection: "column"
+                flexDirection: "column",
+                height: "68px",
+                justifyContent: "space-between"
               }}
             >
               <EmailIcon round size={50} />

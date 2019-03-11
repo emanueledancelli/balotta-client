@@ -40,6 +40,7 @@ export const Shadow = styled(Absolute)`
   height: 65vh;
   background-color: rgba(0, 0, 0, 0.5);
   top: 0;
+  left: 0;
   z-index: 1;
   ${mq[2]} {
     height: 100vh;

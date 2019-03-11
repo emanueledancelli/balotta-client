@@ -40,7 +40,7 @@ const SwipeableEvent = props => {
     );
   }
   return (
-    <SwipeableViews enableMouseEvents containerStyle={style.container} axis="y">
+    <SwipeableViews containerStyle={style.container} axis="y">
       <div style={style.slide}>
         <Hero {...props} />
       </div>
