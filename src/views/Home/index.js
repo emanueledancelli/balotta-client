@@ -42,7 +42,6 @@ class Home extends React.Component {
 
         <Hero>
           <Title active>Events</Title>
-          <Title>Places</Title>
         </Hero>
 
         {today && today.length > 0 && (

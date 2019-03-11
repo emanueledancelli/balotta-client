@@ -5,7 +5,6 @@ import DeleteOutlineIcon from "mdi-react/DeleteOutlineIcon";
 import { Flex } from "components/Flex";
 import { mq } from "styles/mediaQueries";
 import MetaTags from "components/MetaTags";
-import SingleList from "views/Home/components/singleList";
 import { Link } from "react-router-dom";
 
 /**
