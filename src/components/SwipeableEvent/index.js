@@ -13,38 +13,32 @@ const Description = Loadable({
   loading: Loader
 });
 
-class SwipeableEvent extends React.Component {
-  render() {
-    const style = {
-      container: {
-        height: "100vh"
-      },
-      slide: {
-        minHeight: "100vh"
-      },
-      scroll: {
-        overflowY: "scroll",
-        minHeight: "100vh"
-      }
-    };
+const SwipeableEvent = props => {
+  const style = {
+    container: {
+      height: "100vh"
+    },
+    slide: {
+      minHeight: "100vh"
+    },
+    scroll: {
+      overflowY: "scroll",
+      minHeight: "100vh"
+    }
+  };
 
-    return (
-      <SwipeableViews
-        enableMouseEvents
-        containerStyle={style.container}
-        axis="y"
-      >
+  return (
+    <SwipeableViews enableMouseEvents containerStyle={style.container} axis="y">
+      <div style={style.slide}>
+        <Hero {...props} />
+      </div>
+      <div style={style.scroll}>
         <div style={style.slide}>
-          <Hero {...this.props} />
+          <Description {...props} />
         </div>
-        <div style={style.scroll}>
-          <div style={style.slide}>
-            <Description {...this.props} />
-          </div>
-        </div>
-      </SwipeableViews>
-    );
-  }
-}
+      </div>
+    </SwipeableViews>
+  );
+};
 
 export default SwipeableEvent;

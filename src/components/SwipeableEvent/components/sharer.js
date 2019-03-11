@@ -4,7 +4,8 @@ import {
   Shadow,
   ShareDialog,
   ShareDialogHeader,
-  ShareDialogBody
+  ShareDialogBody,
+  ShareAppName
 } from "../style";
 import {
   FacebookIcon,
@@ -30,18 +31,22 @@ const Sharer = ({ handleClick, id, title }) => {
         <ShareDialogBody>
           <FacebookShareButton title={title} url={shareUrl}>
             <FacebookIcon round size={50} />
+            <ShareAppName>Facebook</ShareAppName>
           </FacebookShareButton>
 
           <TelegramShareButton title={title} url={shareUrl}>
             <TelegramIcon round size={50} />
+            <ShareAppName>Telegram</ShareAppName>
           </TelegramShareButton>
 
           <WhatsappShareButton title={title} url={shareUrl}>
             <WhatsappIcon round size={50} />
+            <ShareAppName>Whatsapp</ShareAppName>
           </WhatsappShareButton>
 
           <EmailShareButton title={title} url={shareUrl}>
             <EmailIcon round size={50} />
+            <ShareAppName>Email</ShareAppName>
           </EmailShareButton>
         </ShareDialogBody>
       </ShareDialog>

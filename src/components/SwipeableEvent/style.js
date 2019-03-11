@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { colors } from "styles/colors";
 
 /**
  * Sharer
@@ -18,8 +19,9 @@ export const ShareWrapper = styled(Absolute)`
 
 export const Shadow = styled(Absolute)`
   height: 65vh;
-  top: 0;
   background-color: rgba(0, 0, 0, 0.5);
+  top: 0;
+  z-index: 1;
 `;
 
 export const ShareDialog = styled(Absolute)`
@@ -52,6 +54,13 @@ export const ShareDialogBody = styled(Flex)`
   align-items: flex-start;
   margin-top: 20px;
   justify-content: space-between;
+`;
+
+export const ShareAppName = styled.span`
+  font-weight: 300;
+  text-align: center;
+  font-size: 0.7rem;
+  color: ${colors.primary};
 `;
 
 /**

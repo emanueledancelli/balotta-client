@@ -2,6 +2,7 @@ import React from "react";
 import styled from "@emotion/styled";
 import { Title } from "components/Title";
 import { Flex } from "components/Flex";
+import Modal from "components/Modal";
 import { colors } from "styles/colors";
 import { addToFavorities } from "utils/saveFavourites";
 import { check } from "utils/check";
@@ -160,11 +161,13 @@ class Hero extends React.Component {
         }}
       >
         {isShareOpen && (
-          <Sharer
-            title={title}
-            id={this.props.id}
-            handleClick={this.handleShadowAction}
-          />
+          <Modal>
+            <Sharer
+              title={title}
+              id={this.props.id}
+              handleClick={this.handleShadowAction}
+            />
+          </Modal>
         )}
         <FlexItem flex={5} justify="center" align="flex-end">
           <Title dangerouslySetInnerHTML={this.createTitle(title)} />
