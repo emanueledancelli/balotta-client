@@ -4,6 +4,7 @@ import { Loader } from "components/Loader";
 import Loadable from "react-loadable";
 import Header from "./components/Header";
 import Navigation from "./components/Navigation";
+import NavBar from "components/NavBar";
 import withErrorBoundary from "./hoc/withErrorBoundary";
 
 const Home = Loadable({
@@ -44,7 +45,7 @@ const Routes = location => {
       />
       <Route
         exact
-        path="/:origin/single/:id/"
+        path="/:origin?/single/:id/"
         render={routeProps => <Single {...routeProps} />}
       />
     </Switch>
@@ -58,6 +59,7 @@ class App extends Component {
         render={({ location }) => (
           <div className="App">
             <Header location={location} />
+            <NavBar />
             {Routes(location)}
             {location.pathname.startsWith("/saved") ||
             location.pathname.startsWith("/eventi") ? null : (

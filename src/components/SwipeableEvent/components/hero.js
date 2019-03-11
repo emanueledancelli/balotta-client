@@ -23,7 +23,7 @@ const Container = styled.div`
 
 const FlexItem = styled.div`
   display: flex;
-  width: ${props => props.width || "100vw"};
+  width: ${props => props.width || "100%"};
   flex-direction: ${props => props.direction || "column"};
   flex: ${props => props.flex || 1};
   align-content: ${props => props.align || "auto"};
@@ -33,7 +33,7 @@ const FlexItem = styled.div`
 const Details = styled.div`
   display: flex;
   box-sizing: border-box;
-  width: 100vw;
+  width: 100%;
   flex-direction: row;
   justify-content: flex-start;
   padding: 3%;
@@ -42,7 +42,7 @@ const Details = styled.div`
 
 const Detail = styled.div`
   display: flex;
-  width: 30vw;
+  width: 30%;
   flex-direction: column;
   justify-content: flex-start;
 `;
@@ -145,6 +145,8 @@ class Hero extends React.Component {
     } = this.props;
     const { isSaved, isShareOpen } = this.state;
 
+    const iw = window.innerWidth;
+
     const getDate = moment(startDate)
       .format("dddd D MMMM")
       .split(" ");
@@ -156,11 +158,10 @@ class Hero extends React.Component {
             "linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(" +
             imageUrl +
             ") center",
-          backgroundSize: "cover",
-          backgroundRepeat: "repeat"
+          backgroundSize: "cover"
         }}
       >
-        {isShareOpen && (
+        {isShareOpen && iw < 940 && (
           <Modal>
             <Sharer
               title={title}
@@ -204,30 +205,63 @@ class Hero extends React.Component {
               </span>
             </Flex>
             <Flex flex={1} justify="flex-end" align="flex-end">
-              <Flex
-                justify="center"
-                align="center"
-                padding="2%"
-                width="40px"
-                height="40px"
-                style={{
-                  color: "white",
-                  borderRadius: "50%",
-                  backgroundColor: "rgba(0, 0, 0, 0.3)"
-                }}
-                onClick={this.handleShareButton}
-              >
-                <ShareVariantIcon size={28} />
-              </Flex>
+              {isShareOpen ? (
+                <Flex
+                  justify="center"
+                  align="center"
+                  padding="2%"
+                  width={iw > 940 ? "60px" : "40px"}
+                  height={iw > 940 ? "60px" : "40px"}
+                  style={{
+                    color: "white",
+                    borderRadius: "50%"
+                  }}
+                  onClick={this.handleShareButton}
+                >
+                  {isShareOpen ? (
+                    <Sharer
+                      title={title}
+                      id={this.props.id}
+                      handleClick={this.handleShadowAction}
+                    />
+                  ) : (
+                    <ShareVariantIcon size={28} />
+                  )}
+                </Flex>
+              ) : (
+                <Flex
+                  justify="center"
+                  align="center"
+                  padding="2%"
+                  width={iw > 940 ? "60px" : "40px"}
+                  height={iw > 940 ? "60px" : "40px"}
+                  style={{
+                    color: "white",
+                    borderRadius: "50%",
+                    backgroundColor: "rgba(0, 0, 0, 0.3)"
+                  }}
+                  onClick={this.handleShareButton}
+                >
+                  {isShareOpen ? (
+                    <Sharer
+                      title={title}
+                      id={this.props.id}
+                      handleClick={this.handleShadowAction}
+                    />
+                  ) : (
+                    <ShareVariantIcon size={28} />
+                  )}
+                </Flex>
+              )}
               {!isSaved ? (
                 <Flex
                   justify="center"
                   align="center"
                   padding="2%"
-                  width="40px"
-                  height="40px"
+                  width={iw > 940 ? "60px" : "40px"}
+                  height={iw > 940 ? "60px" : "40px"}
                   style={{
-                    borderRadius: "20px",
+                    borderRadius: "50%",
                     marginLeft: "10px",
                     color: `${colors.red}`,
                     backgroundColor: "rgba(0, 0, 0, 0.3)"
@@ -244,11 +278,11 @@ class Hero extends React.Component {
                   justify="center"
                   align="center"
                   padding="2%"
-                  width="40px"
-                  height="40px"
+                  width={iw > 940 ? "60px" : "40px"}
+                  height={iw > 940 ? "60px" : "40px"}
                   style={{
                     marginLeft: "10px",
-                    borderRadius: "20px",
+                    borderRadius: "50%",
                     color: `${colors.red}`,
                     backgroundColor: "rgba(0, 0, 0, 0.3)"
                   }}

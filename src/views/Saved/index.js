@@ -3,7 +3,9 @@ import styled from "@emotion/styled";
 import { getFavEvents } from "../../api/index";
 import DeleteOutlineIcon from "mdi-react/DeleteOutlineIcon";
 import { Flex } from "components/Flex";
+import { mq } from "styles/mediaQueries";
 import MetaTags from "components/MetaTags";
+import SingleList from "views/Home/components/singleList";
 import { Link } from "react-router-dom";
 
 /**
@@ -41,6 +43,10 @@ const Square = styled.div`
   margin-right: 10px;
   margin-bottom: 10px;
   background-color: #eb5757;
+  ${mq[2]} {
+    width: 350px;
+    height: 350px;
+  }
 `;
 
 const tags = {
@@ -76,10 +82,11 @@ class Saved extends React.Component {
   render() {
     const { eventsToShow, isLoading } = this.state;
     let favEv;
+    let iw = window.innerHeight;
 
     if (eventsToShow.length >= 1) {
       favEv = eventsToShow.map(e => {
-        let thumbnail = e.data.acf.image.sizes.thumbnail;
+        let thumbnail = e.data.acf.image.sizes.medium;
         return (
           <Link to={`saved/single/${e.data.id}`} key={e.data.id}>
             <Square
@@ -104,12 +111,12 @@ class Saved extends React.Component {
         </Container>
 
         <Flex
-          justify="center"
+          justify={iw > 940 ? "center" : "flex-start"}
           align="center"
-          padding="2%"
           width="20%"
+          padding="0 3% 5%"
           margin="0 5px 0"
-          style={{ borderRadius: "20px", border: "1px solid #222222" }}
+          style={{ borderRadius: "20px" }}
         >
           <DeleteOutlineIcon />
           <span
@@ -119,7 +126,6 @@ class Saved extends React.Component {
             clear
           </span>
         </Flex>
-
         <SquareContainer>
           {isLoading ? <p>Loading...</p> : favEv}
         </SquareContainer>

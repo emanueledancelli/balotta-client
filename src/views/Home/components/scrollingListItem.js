@@ -12,10 +12,11 @@ const scrollingListItem = ({
   thumbnail,
   medium
 }) => {
+  const iw = window.innerWidth;
   return (
     <Link
       style={{ display: "inline-block" }}
-      to={`/eventi/${listName}/${id}/${index}`}
+      to={iw > 940 ? `/single/${id}` : `/eventi/${listName}/${id}/${index}`}
       key={id}
     >
       <HorizontalContainer>

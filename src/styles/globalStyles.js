@@ -33,8 +33,16 @@ export const globalStyles = css`
     opacity: 1;
   }
 
-  .active-home span {
-    color: ${colors.pureWhite};
+  .active-desktop span {
+    color: ${colors.red};
+  }
+
+  .active-desktop {
+    color: ${colors.red};
+  }
+
+  .active-desktop p {
+    color: ${colors.black};
   }
 
   a {

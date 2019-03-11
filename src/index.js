@@ -10,17 +10,20 @@ import { fetchEvents } from "./actions/eventsActions";
 import createBrowserHistory from "history/createBrowserHistory";
 import { Global } from "@emotion/core";
 import { globalStyles } from "styles";
+import LayoutProvider from "components/LayoutProvider";
 export const history = createBrowserHistory();
 
 store.dispatch(fetchEvents());
 
 ReactDOM.render(
-  <Provider store={store}>
-    <Global styles={globalStyles} />
-    <Router history={history}>
-      <App />
-    </Router>
-  </Provider>,
+  <LayoutProvider>
+    <Provider store={store}>
+      <Global styles={globalStyles} />
+      <Router history={history}>
+        <App />
+      </Router>
+    </Provider>
+  </LayoutProvider>,
   document.getElementById("root")
 );
 

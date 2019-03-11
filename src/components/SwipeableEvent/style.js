@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import { colors } from "styles/colors";
+import { mq } from "styles/mediaQueries";
 
 /**
  * Sharer
@@ -9,12 +10,30 @@ const Absolute = styled.div`
   width: 100%;
   position: absolute;
   box-sizing: border-box;
+  ${mq[2]} {
+    display: flex;
+    flex-direction: center;
+    align-items: center;
+    bottom: 0;
+  }
+`;
+
+export const DesktopSharer = styled.div`
+  height: 70px;
+  display: flex;
+  align-items: center;
+  margin-right: 150px;
 `;
 
 export const ShareWrapper = styled(Absolute)`
   height: 100vh;
   bottom: 0;
-  left: 0;
+  ${mq[2]} {
+    display: flex;
+    flex-direction: center;
+    align-items: center;
+    top: 0;
+  }
 `;
 
 export const Shadow = styled(Absolute)`
@@ -22,6 +41,15 @@ export const Shadow = styled(Absolute)`
   background-color: rgba(0, 0, 0, 0.5);
   top: 0;
   z-index: 1;
+  ${mq[2]} {
+    height: 100vh;
+    width: 940px;
+    margin: 0 auto;
+
+    display: flex;
+    flex-direction: center;
+    align-items: center;
+  }
 `;
 
 export const ShareDialog = styled(Absolute)`
@@ -34,6 +62,10 @@ export const ShareDialog = styled(Absolute)`
   align-items: flex-start;
   background-color: white;
   z-index: 11;
+  ${mq[2]} {
+    max-width: 940px;
+    margin: 0 auto;
+  }
 `;
 
 const Flex = styled.div`

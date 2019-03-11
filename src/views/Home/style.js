@@ -40,6 +40,7 @@ export const Image = styled.div`
   align-items: flex-end;
   background: url(${props => props.thumb});
   background-size: cover;
+
   ${mq[2]} {
     height: 350px;
     width: 350px;
@@ -54,14 +55,20 @@ export const CardTitle = styled.p`
   font-size: 0.9em;
   margin-top: 0.6em;
   color: #666;
+  ${mq[2]} {
+    font-size: 1.2rem;
+  }
 `;
 
 export const HorizontalContainer = styled.div`
   display: flex;
   flex-direction: column;
   word-wrap: break-word;
-  width: 150px;
   margin-right: 10px;
+  width: 150px;
+  ${mq[2]} {
+    width: 350px;
+  }
 `;
 
 export const Tag = styled.p`
@@ -79,7 +86,4 @@ export const SquareContainer = styled.div`
   overflow-x: auto;
   overflow-y: hidden;
   -webkit-overflow-scrolling: touch;
-  &::-webkit-scrollbar {
-    display: none;
-  }
 `;

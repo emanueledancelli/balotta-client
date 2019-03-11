@@ -63,7 +63,8 @@ const Description = ({
           style={{
             marginTop: "-15px",
             backgroundColor: "white",
-            fontSize: "1em"
+            fontSize: "1em",
+            lineHeight: "150%"
           }}
           dangerouslySetInnerHTML={descr}
         />

@@ -1,9 +1,16 @@
 import styled from "@emotion/styled";
 import { colors } from "styles/colors";
+import { mq } from "styles/mediaQueries";
 
-export const NavContainer = styled.div`
+const withMediaQueries = styled.div`
+  ${mq[2]} {
+    display: none;
+  }
+`;
+
+export const NavContainer = styled(withMediaQueries)`
   height: 8vh;
-  width: 100vw;
+  width: 100%;
   display: flex;
   position: fixed;
   bottom: 0;

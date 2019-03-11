@@ -22,7 +22,7 @@ export const LoaderContainer = styled.div`
   justify-content: center;
   align-items: center;
   height: 100vh;
-  width: 100vw;
+  width: 100%;
 `;
 
 export const LoaderText = styled.p`
