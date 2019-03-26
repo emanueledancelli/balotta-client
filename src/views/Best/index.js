@@ -53,7 +53,7 @@ const mapStateToProps = state => {
 
   return {
     isLoading,
-    shows: today.filter(e => e.acf.tags.includes("Concert"))
+    shows: today.filter(e => e.acf.tags.includes("Clubbing"))
   };
 };
 
