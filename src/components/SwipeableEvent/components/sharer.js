@@ -4,9 +4,7 @@ import {
   Shadow,
   ShareDialog,
   ShareDialogHeader,
-  ShareDialogBody,
-  ShareAppName,
-  DesktopSharer
+  ShareDialogBody
 } from "../style";
 import {
   FacebookIcon,
@@ -25,7 +23,7 @@ const Sharer = ({ handleClick, id, title }) => {
 
   if (iw > 940) {
     return (
-      <DesktopSharer>
+      <div>
         <FacebookShareButton title={title} url={shareUrl}>
           <FacebookIcon round size={50} />
         </FacebookShareButton>
@@ -49,7 +47,7 @@ const Sharer = ({ handleClick, id, title }) => {
             <EmailIcon round size={50} />
           </div>
         </EmailShareButton>
-      </DesktopSharer>
+      </div>
     );
   }
   return (
@@ -62,32 +60,18 @@ const Sharer = ({ handleClick, id, title }) => {
         <ShareDialogBody>
           <FacebookShareButton title={title} url={shareUrl}>
             <FacebookIcon round size={50} />
-            <ShareAppName>Facebook</ShareAppName>
           </FacebookShareButton>
 
           <TelegramShareButton title={title} url={shareUrl}>
             <TelegramIcon round size={50} />
-            <ShareAppName>Telegram</ShareAppName>
           </TelegramShareButton>
 
           <WhatsappShareButton title={title} url={shareUrl}>
             <WhatsappIcon round size={50} />
-            <ShareAppName>Whatsapp</ShareAppName>
           </WhatsappShareButton>
 
           <EmailShareButton title={title} url={shareUrl}>
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                flexDirection: "column",
-                height: "68px",
-                justifyContent: "space-between"
-              }}
-            >
-              <EmailIcon round size={50} />
-              <ShareAppName>Email</ShareAppName>
-            </div>
+            <EmailIcon round size={50} />
           </EmailShareButton>
         </ShareDialogBody>
       </ShareDialog>
