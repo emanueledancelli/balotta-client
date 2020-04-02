@@ -2,7 +2,6 @@ import React from "react";
 import SwipeableViews from "react-swipeable-views";
 import Loadable from "react-loadable";
 import { Loader } from "components/Loader";
-import ScrollToTop from "components/ScrollToTop";
 
 const Hero = Loadable({
   loader: () => import("./components/hero"),
