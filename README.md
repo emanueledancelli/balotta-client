@@ -1,35 +1,21 @@
 # Balo
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
+
 > A react PWA MVP
 
 This is the Progressive web app for project 'balo'. This is an MVP.
 
-## Highlights
+&nbsp;
+
+## Features
 
 - Fetches data from the REST Api.
 - Filters and sorts data received.
 - Lets users save and retrieve saved data using localStorage() api
 - TikTok style UI
 
-## Getting started
-
-Be sure to have [Node](https://nodejs.org/en/), [npm](https://www.npmjs.com/) and [Git](https://git-scm.com/) installed on your machine before starting.
-
-Download or clone this repository:
-
-`https://github.com/emanueledancelli/balotta-client`
-
-cd into project folder and install dependecies
-
-`cd balotta-client`
-
-`npm i`
-
-Develop locally with
-
-`npm run start`
-
-Balotta uses create-react-app scripts, for more info [create-react-app](https://github.com/facebook/create-react-app)
+&nbsp;
 
 ## Built with:
 
@@ -44,7 +30,9 @@ The App is made with [React](https://reactjs.org/) and it uses a few other libra
 - Utilities [Lodash](https://github.com/lodash/lodash), [Moment](https://github.com/moment/moment/)
 - Styling CSS-in-js [Emotion](https://emotion.sh)
 
-## Author
+&nbsp;
+
+## Credits
 
 Emanuele Dancelli - emanueledancelli@gmail.com
 
